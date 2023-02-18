@@ -1,0 +1,12 @@
+Django
+django-cloudinary-storage
+django-cors-headers
+djangorestframework
+djangorestframework-simplejwt
+drf-yasg
+gunicorn
+Pillow
+psycopg2
+python-dotenv
+six
+whitenoise
