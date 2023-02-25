@@ -3,6 +3,7 @@ django-cloudinary-storage
 django-cors-headers
 djangorestframework
 djangorestframework-simplejwt
+docutils
 drf-yasg
 gunicorn
 Pillow

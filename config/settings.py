@@ -1,14 +1,18 @@
 import os
 
-from django.core.management.utils import get_random_secret_key
 from pathlib import Path
+from dotenv import load_dotenv
+
+from django.core.management.utils import get_random_secret_key
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load = load_dotenv(os.path.join(BASE_DIR, '.env'))
+
 DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
 
-DEFAULT_SECRET_KEY = get_random_secret_key()+get_random_secret_key()+get_random_secret_key()
+DEFAULT_SECRET_KEY = get_random_secret_key() + get_random_secret_key() + get_random_secret_key()
 SECRET_KEY = os.environ.get('SECRET_KEY', DEFAULT_SECRET_KEY)
 
 DEBUG = DJANGO_ENV != 'production'
@@ -17,21 +21,21 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', "127.0.0.1 localhost").split(" "
 
 
 # Application definition
-
-
 DJANGO_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
+    'apps.users.appsAuthConfig.AuthConfigApps',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admindocs',
 ]
 
 THIRD_PARTY_APPS = []
 
 LOCAL_APPS = [
     'apps.home',
+    'apps.users',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -45,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.admindocs.middleware.XViewMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -125,3 +130,5 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'
