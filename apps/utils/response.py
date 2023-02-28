@@ -23,9 +23,9 @@ def succesMessage() -> Dict[str, str]:
             msgFR = "Votre compte a été enregistré avec succès.",
             msgEN = "Your account has been successfully registered."
         ),
-        "YOUR_ACCOUNT_HAS_BEEN_SUCCESSFULLY_CREATED_AND_ACTIVATED": toggleLangMsg(
-            msgFR = "Votre compte a été créé et activé avec succès.",
-            msgEN = "Your account has been successfully created and activated."
+        "YOUR_ACCOUNT_HAS_BEEN_SUCCESSFULLY_ACTIVATED": toggleLangMsg(
+            msgFR = "votre compte a été activé avec succès.",
+            msgEN = "Your account has been successfully activated."
         ),
         "LOGIN_SUCCESS": toggleLangMsg(
             msgFR = "Connexion réussie.",
@@ -39,10 +39,14 @@ def succesMessage() -> Dict[str, str]:
             msgFR = "Réinitialisation du mot de passe réussie.",
             msgEN = "Password reset successfully."
         ),
-        "PASSWORD_RESET_LINK_SEND": toggleLangMsg(
+        "THE_PASSWORD_RESET_LINK_HAS_BEEN_SENT": toggleLangMsg(
             msgFR = "Le lien de réinitialisation du mot de passe a été envoyé. Veuillez vérifier votre e-mail.",
             msgEN = "The password reset link has been sent. Please check your e-mail."
         ),
+        "LOGOUT_SUCCESS": toggleLangMsg(
+            msgFR = "Déconnexion réussie.",
+            msgEN = "Logout success."
+        )
     }
 
 

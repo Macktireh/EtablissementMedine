@@ -1,14 +1,11 @@
 from typing import Any
 
-from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.utils.encoding import force_str
-from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.http import urlsafe_base64_encode
-from django.utils.encoding import force_bytes
 from django.utils import timezone
+from django.utils.encoding import force_str
+from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import gettext as _
 
 from rest_framework import serializers
@@ -76,6 +73,9 @@ class SignupSerializer(serializers.ModelSerializer):
         fields = ['firstName', 'lastName', 'phoneNumber', 'email', 'password', 'confirmPassword',]
 
     def validate(self, attrs) -> Any:
+        print()
+        print(type(attrs))
+        print()
         password = attrs.get('password')
         confirm_password = attrs.get('confirmPassword')
         if password and confirm_password and password != confirm_password:
@@ -87,6 +87,7 @@ class SignupSerializer(serializers.ModelSerializer):
         return User.objects.create_user(**validate_data)
 
 
+
 class ActivationAccountSerializer(serializers.Serializer):
 
     uidb64 = serializers.CharField(write_only=True)
@@ -96,33 +97,33 @@ class ActivationAccountSerializer(serializers.Serializer):
         fields = ['uidb64', 'token',]
 
     def validate(self, attrs):
-        request = self.context.get('request', None)
+        request = self.context.get('request')
         uidb64 = attrs.get('uidb64')
         token = attrs.get('token')
+        domain = get_current_site(request)
         try:
             uid = force_str(urlsafe_base64_decode(uidb64))
             user = User.objects.get(public_id=uid)
         except Exception as e:
             user = None
-        if user and tokenGenerator().check_token(user, token):
+        if user and tokenGenerator.check_token(user, token):
             if not user.is_verified_email:
-                user.is_verified_email = True
+                user.is_active = True
                 user.save()
                 context = {
                     'user': user,
-                    'domain': get_current_site(request),
-                    # 'uid': urlsafe_base64_encode(force_bytes(user.public_id)) or None,
-                    # 'token': token
+                    'domain': domain,
                 }
                 sendEmail(
-                    subject=f"{settings.DOMAIN_FRONTEND} - Your account has been successfully created and activated!", 
+                    subject=f"{domain} - Your account has been successfully created and activated!", 
                     context=context,
                     to=[user.email],
-                    template_name='authentication/mail/activate_success.html', 
+                    template_name='user/mail/activate_success.html', 
                 )
         else:
             raise serializers.ValidationError(failMsg["THE_TOKEN_IS_NOT_VALID_OR_HAS_EXPIRED"])
         return attrs
+
 
 
 class LoginSerializer(serializers.ModelSerializer):
@@ -146,6 +147,7 @@ class LoginSerializer(serializers.ModelSerializer):
         fields = ['email', 'password',]
 
 
+
 class RequestResetPasswordSerializer(serializers.Serializer):
 
     email = serializers.EmailField(
@@ -160,21 +162,25 @@ class RequestResetPasswordSerializer(serializers.Serializer):
         fields = ['email']
 
     def validate(self, attrs):
+        request = self.context.get('request')
+        domain = get_current_site(request)
         email = attrs.get('email')
-        current_site = self.context.get('current_site')
         if User.objects.filter(email=email).exists():
             user = User.objects.get(email=email)
             token = PasswordResetTokenGenerator().make_token(user)
+            context = {
+                'user': user,
+                'domain': domain,
+                'token': token
+            }
             sendEmail(
-                subject=f"Réinitialisation du mot de passe sur {current_site}",
-                template_name='authentication/mail/send_email_reset_password.html',
-                user=user,
-                token=token,
-                domain=settings.DOMAIN_FRONTEND
+                subject=f"Réinitialisation du mot de passe sur {domain}",
+                context=context,
+                to=[user.email],
+                template_name='users/mail/send_email_reset_password.html',
             )
-        # else:
-        #     raise serializers.ValidationError(failMsg["THE_EMAIL_ADDRESS_DOES_NOT_EXIST"])
         return attrs
+
 
 
 class ResetPasswordSerializer(serializers.Serializer):
@@ -189,7 +195,7 @@ class ResetPasswordSerializer(serializers.Serializer):
             "required": errorMessages('required', 'Mot de passe'),
         },
     )
-    confirm_password = serializers.CharField(
+    confirmPassword = serializers.CharField(
         max_length=128, 
         style={'input_type': 'password'}, 
         write_only=True,
@@ -200,32 +206,39 @@ class ResetPasswordSerializer(serializers.Serializer):
     )
 
     class Meta:
-        fields = ['password', 'confirm_password']
+        fields = ['password', 'confirmPassword']
 
     def validate(self, attrs):
         password = attrs.get('password')
-        confirm_password = attrs.get('confirm_password')
+        confirm_password = attrs.get('confirmPassword')
         uid = self.context.get('uid')
         token = self.context.get('token')
+        request = self.context.get('request')
+        domain = get_current_site(request)
         if password != confirm_password:
             raise serializers.ValidationError(failMsg["THE_PASSWORD_AND_PASSWORD_CONFIRMATION_DO_NOT_MATCH"])
         try:
             uid = force_str(urlsafe_base64_decode(uid))
             user = User.objects.get(public_id=uid)
-        except Exception as e:
+        except:
             user = None
         if user and PasswordResetTokenGenerator().check_token(user, token):
             user.set_password(password)
             user.save()
+            context = {
+                'user': user,
+                'domain': domain,
+            }
             sendEmail(
-                subject=f"{settings.DOMAIN_FRONTEND} - Votre mot de passe a été changé avec succès !", 
-                template_name='authentication/mail/password_rest_success.html', 
-                user=user, 
-                domain=settings.DOMAIN_FRONTEND
+                subject=f"{domain} - Votre mot de passe a été changé avec succès !", 
+                context=context,
+                to=[user.email],
+                template_name='users/mail/password_rest_success.html', 
             )
         else:
             raise serializers.ValidationError(failMsg["THE_TOKEN_IS_NOT_VALID_OR_HAS_EXPIRED"])
         return attrs
+
 
 
 class LogoutSerializer(serializers.Serializer):
