@@ -14,14 +14,7 @@ class User(AbstractUser):
     public_id = models.CharField(max_length=64, unique=True, null=False, blank=False)
     email = models.EmailField(_('email address'), max_length=255, unique=True)
     phone_number = models.CharField(_('phone number'), max_length=16, unique=True)
-    is_active = models.BooleanField(
-        _("active"),
-        default=False,
-        help_text=_(
-            "Designates whether this user should be treated as active. "
-            "Unselect this instead of deleting accounts."
-        ),
-    )
+    # is_verified = models.BooleanField(_("verified"), default=False, help_text=_("Designates whether this user has been verified."))
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
@@ -31,7 +24,7 @@ class User(AbstractUser):
     def __str__(self) -> str:
         return self.email
 
-    def save(self, *args: Any, **kwargs: dict[str, Any]) -> None:
+    def save(self, *args: Any, **kwargs: Any) -> None:
         if not self.public_id:
             self.public_id = uidGenerator()
         super().save(*args, **kwargs)
