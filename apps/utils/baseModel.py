@@ -12,7 +12,6 @@ class AbstractPublicIdMixin(models.Model):
 
     class Meta:
         abstract = True
-        indexes = [models.Index(fields=['public_id', ])]
     
     def save(self, *args: Any, **kwargs: Any) -> None:
         if not self.public_id:
@@ -27,4 +26,3 @@ class AbstractCreatedUpdatedMixin(models.Model):
     class Meta:
         abstract = True
         ordering = ('-created_at',)
-        indexes = [models.Index(fields=['-created_at', ]), models.Index(fields=['-updated_at', ])]

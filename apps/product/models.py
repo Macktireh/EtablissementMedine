@@ -15,7 +15,6 @@ class Category(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
         verbose_name = _('Category')
         verbose_name_plural = _('Categories')
         db_table = 'categories'
-        indexes = AbstractPublicIdMixin.Meta.indexes + AbstractCreatedUpdatedMixin.Meta.indexes
 
     def __str__(self) -> str:
         return self.name
@@ -34,7 +33,6 @@ class Product(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
         verbose_name = _('Product')
         verbose_name_plural = _('Products')
         db_table = 'products'
-        indexes = AbstractPublicIdMixin.Meta.indexes + AbstractCreatedUpdatedMixin.Meta.indexes
 
     def __str__(self) -> str:
         return self.name
