@@ -52,6 +52,14 @@ def succesMessage() -> Dict[str, str]:
 
 def failMessage() -> Dict[str, str]:
     return {
+        "PLEASE_ENTER_A_VALID_DJIBOUTIAN_TELEPHONE_NUMBER": toggleLangMsg(
+            msgFR = "Veuillez entrer un numéro de télépnone Djiboutien valide.",
+            msgEN = "Please enter a valid Djiboutian telephone number."
+        ),
+        "THE_TELEPHONE_NUMBER_ALREADY_EXISTS": toggleLangMsg(
+            msgFR = "Le numéro de télépnone existe déjà.",
+            msgEN = "The telephone number already exists."
+        ),
         "THE_EMAIL_ADDRESS_DOES_NOT_EXIST": toggleLangMsg(
             msgFR = "L'adresse e-mail n'existe pas.",
             msgEN = "The email address does not exist."
@@ -104,6 +112,10 @@ def failMessage() -> Dict[str, str]:
             msgFR = "Quelque chose a mal tourné.",
             msgEN = "Something went wrong."
         ),
+        "USER_DOES_NOT_EXIST": toggleLangMsg(
+            msgFR = "L'utilisateur n'existe pas.",
+            msgEN = "The user does not exist."
+        )
     }
 
 

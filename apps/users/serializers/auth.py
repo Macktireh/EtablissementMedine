@@ -14,7 +14,7 @@ from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from apps.users.tokens import tokenGenerator
 from apps.utils.email import sendEmail
 from apps.utils.response import errorMessages, failMsg
-from apps.utils.validators import emailValidator, passwordValidator
+from apps.utils.validators import emailValidator, passwordValidator, phoneNumverValidator
 
 
 User = get_user_model()
@@ -24,28 +24,29 @@ class SignupSerializer(serializers.ModelSerializer):
 
     firstName = serializers.CharField(
         source='first_name', 
-        errorMessages={
+        error_messages={
             "blank": errorMessages('blank', 'Prénom'),
             "required": errorMessages('required', 'Prénom'),
         },
     )
     lastName = serializers.CharField(
         source='last_name', 
-        errorMessages={
+        error_messages={
             "blank": errorMessages('blank', 'Nom'),
             "required": errorMessages('required', 'Nom'),
         },
     )
     phoneNumber = serializers.CharField(
-        source='phone_number', 
-        errorMessages={
+        source='phone_number',
+        validators=[phoneNumverValidator],
+        error_messages={
             "blank": errorMessages('blank', 'Numéro de téléphone'),
             "required": errorMessages('required', 'Numéro de téléphone'),
         },
     )
     email = serializers.CharField(
         validators=[emailValidator],
-        errorMessages={
+        error_messages={
             "blank": errorMessages('blank', 'email'),
             "required": errorMessages('required', 'email'),
         },
@@ -53,7 +54,7 @@ class SignupSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
         validators=[passwordValidator], 
         write_only=True, 
-        errorMessages={
+        error_messages={
             "blank": errorMessages('blank', 'Mot de passe'),
             "required": errorMessages('required', 'Mot de passe'),
         },
@@ -62,7 +63,7 @@ class SignupSerializer(serializers.ModelSerializer):
         max_length=128, 
         style={'input_type': 'password'}, 
         write_only=True,
-        errorMessages={
+        error_messages={
             "blank": errorMessages('blank', 'Confirmation mot de passe'),
             "required": errorMessages('required', 'Confirmation mot de passe'),
         },
@@ -88,7 +89,7 @@ class SignupSerializer(serializers.ModelSerializer):
 
 
 
-class ActivationAccountSerializer(serializers.Serializer):
+class ActivationSerializer(serializers.Serializer):
 
     uidb64 = serializers.CharField(write_only=True)
     token = serializers.CharField(write_only=True)
@@ -104,10 +105,12 @@ class ActivationAccountSerializer(serializers.Serializer):
         try:
             uid = force_str(urlsafe_base64_decode(uidb64))
             user = User.objects.get(public_id=uid)
-        except Exception as e:
+        except User.DoesNotExist:
+            raise serializers.ValidationError(failMsg["USER_DOES_NOT_EXIST"])
+        except (TypeError, ValueError, OverflowError):
             user = None
         if user and tokenGenerator.check_token(user, token):
-            if not user.is_verified_email:
+            if not user.is_active:
                 user.is_active = True
                 user.save()
                 context = {
@@ -115,10 +118,10 @@ class ActivationAccountSerializer(serializers.Serializer):
                     'domain': domain,
                 }
                 sendEmail(
-                    subject=f"{domain} - Your account has been successfully created and activated!", 
+                    subject=f"{domain} - Votre compte a est activer", 
                     context=context,
                     to=[user.email],
-                    template_name='user/mail/activate_success.html', 
+                    template_name='users/mail/activation-success.html', 
                 )
         else:
             raise serializers.ValidationError(failMsg["THE_TOKEN_IS_NOT_VALID_OR_HAS_EXPIRED"])
@@ -130,13 +133,13 @@ class LoginSerializer(serializers.ModelSerializer):
 
     email = serializers.EmailField(
         max_length=255,
-        errorMessages={
+        error_messages={
             "blank": errorMessages('blank', 'email'),
             "required": errorMessages('required', 'email'),
         },
     )
     password = serializers.CharField(
-        errorMessages={
+        error_messages={
             "blank": errorMessages('blank', 'Mot de passe'),
             "required": errorMessages('required', 'Mot de passe'),
         },
@@ -152,7 +155,7 @@ class RequestResetPasswordSerializer(serializers.Serializer):
 
     email = serializers.EmailField(
         max_length=255,
-        errorMessages={
+        error_messages={
             "blank": errorMessages('blank', 'email'),
             "required": errorMessages('required', 'email'),
         },
@@ -177,7 +180,7 @@ class RequestResetPasswordSerializer(serializers.Serializer):
                 subject=f"Réinitialisation du mot de passe sur {domain}",
                 context=context,
                 to=[user.email],
-                template_name='users/mail/send_email_reset_password.html',
+                template_name='users/mail/request-rest-password.html',
             )
         return attrs
 
@@ -190,7 +193,7 @@ class ResetPasswordSerializer(serializers.Serializer):
         style={'input_type': 'password'}, 
         write_only=True, 
         validators=[passwordValidator],
-        errorMessages={
+        error_messages={
             "blank": errorMessages('blank', 'Mot de passe'),
             "required": errorMessages('required', 'Mot de passe'),
         },
@@ -199,7 +202,7 @@ class ResetPasswordSerializer(serializers.Serializer):
         max_length=128, 
         style={'input_type': 'password'}, 
         write_only=True,
-        errorMessages={
+        error_messages={
             "blank": errorMessages('blank', 'Comfirmation mot de passe'),
             "required": errorMessages('required', 'Confirmation mot de passe'),
         },
@@ -215,28 +218,30 @@ class ResetPasswordSerializer(serializers.Serializer):
         token = self.context.get('token')
         request = self.context.get('request')
         domain = get_current_site(request)
+
         if password != confirm_password:
             raise serializers.ValidationError(failMsg["THE_PASSWORD_AND_PASSWORD_CONFIRMATION_DO_NOT_MATCH"])
         try:
             uid = force_str(urlsafe_base64_decode(uid))
             user = User.objects.get(public_id=uid)
-        except:
-            user = None
-        if user and PasswordResetTokenGenerator().check_token(user, token):
-            user.set_password(password)
-            user.save()
-            context = {
-                'user': user,
-                'domain': domain,
-            }
-            sendEmail(
-                subject=f"{domain} - Votre mot de passe a été changé avec succès !", 
-                context=context,
-                to=[user.email],
-                template_name='users/mail/password_rest_success.html', 
-            )
-        else:
+        except User.DoesNotExist:
+            raise serializers.ValidationError(failMsg["USER_DOES_NOT_EXIST"])
+        if not PasswordResetTokenGenerator().check_token(user, token):
             raise serializers.ValidationError(failMsg["THE_TOKEN_IS_NOT_VALID_OR_HAS_EXPIRED"])
+        
+        user.set_password(password)
+        user.save()
+        context = {
+            'user': user,
+            'domain': domain,
+        }
+
+        sendEmail(
+            subject=f"{domain} - Votre mot de passe a été changé avec succès !", 
+            context=context,
+            to=[user.email],
+            template_name='users/mail/rest-password-success.html', 
+        )
         return attrs
 
 
@@ -245,14 +250,14 @@ class LogoutSerializer(serializers.Serializer):
     
     public_id = serializers.CharField(
         write_only=True,
-        errorMessages={
+        error_messages={
             "blank": "Le champ public_id ne doit pas être vide.",
             "required": "Le champ public_id est obligatoire.",
         },
     )
     refresh = serializers.CharField(
         write_only=True,
-        errorMessages={
+        error_messages={
             "blank": "Le champ refresh ne doit pas être vide.",
             "required": "Le champ refresh est obligatoire.",
         },
