@@ -5,7 +5,7 @@ from django.utils.translation import gettext as _
 
 from rest_framework import serializers
 
-from apps.utils.response import failMsg
+from apps.base.response import failMsg
 
 
 User = get_user_model()

@@ -13,8 +13,8 @@ from rest_framework.response import Response
 
 from apps.users.serializers import auth as serializers
 from apps.users.tokens import tokenGenerator, getTokensUser
-from apps.utils.email import sendEmail
-from apps.utils.response import succesMsg, failMsg
+from apps.base.email import sendEmail
+from apps.base.response import succesMsg, failMsg
 
 
 User = get_user_model()

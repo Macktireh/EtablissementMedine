@@ -28,4 +28,4 @@ class UserAdmin(BaseUserAdmin):
     )
     readonly_fields = ('public_id', 'date_joined', 'last_login')
     search_fields = ('email', 'first_name', 'last_name', 'phone_number',)
-    ordering = ('-date_joined',)
+    ordering = ('date_joined',)

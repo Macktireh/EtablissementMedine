@@ -12,9 +12,9 @@ from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 
 from apps.users.tokens import tokenGenerator
-from apps.utils.email import sendEmail
-from apps.utils.response import errorMessages, failMsg
-from apps.utils.validators import emailValidator, passwordValidator, phoneNumverValidator
+from apps.base.email import sendEmail
+from apps.base.response import errorMessages, failMsg
+from apps.base.validators import emailValidator, passwordValidator, phoneNumverValidator
 
 
 User = get_user_model()
