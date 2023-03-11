@@ -2,7 +2,7 @@ from django.urls import path
 
 from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 
-from apps.users.views.auth import SignupView, ActivationView, LoginView, RequestResetPasswordView, ResetPasswordView
+from apps.auth.views import SignupView, ActivationView, LoginView, RequestResetPasswordView, ResetPasswordView
 from apps.base.method import postCreate
 
 

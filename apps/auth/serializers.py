@@ -11,7 +11,7 @@ from django.utils.translation import gettext as _
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 
-from apps.users.tokens import tokenGenerator
+from apps.auth.tokens import tokenGenerator
 from apps.base.email import sendEmail
 from apps.base.response import errorMessages, failMsg
 from apps.base.validators import emailValidator, passwordValidator, phoneNumverValidator

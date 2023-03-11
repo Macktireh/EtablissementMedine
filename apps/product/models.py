@@ -32,7 +32,7 @@ class Product(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
     stock = models.IntegerField(_('stock quantity'), null=False, blank=False, default=0)
     description = models.TextField(_('description'), null=True, blank=True)
     thumbnail = models.ImageField(_('thumbnail'), null=True, blank=True, upload_to='products/thumbnails')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='products', null=True, blank=True)
 
     class Meta(AbstractPublicIdMixin.Meta, AbstractCreatedUpdatedMixin.Meta):
         verbose_name = _('Product')

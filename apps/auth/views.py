@@ -11,8 +11,8 @@ from django.utils.translation import gettext as _
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 
-from apps.users.serializers import auth as serializers
-from apps.users.tokens import tokenGenerator, getTokensUser
+from apps.auth import serializers
+from apps.auth.tokens import tokenGenerator, getTokensUser
 from apps.base.email import sendEmail
 from apps.base.response import succesMsg, failMsg
 

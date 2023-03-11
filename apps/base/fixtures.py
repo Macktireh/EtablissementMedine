@@ -6,7 +6,7 @@ from apps.base.functions import uidGenerator
 
 users_data = [
     {
-        "model": "users.User",
+        "model": "authUser.User",
         "pk": 2,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -19,7 +19,7 @@ users_data = [
         }
     },
     {
-        "model": "users.User",
+        "model": "authUser.User",
         "pk": 3,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -32,7 +32,7 @@ users_data = [
         }
     },
     {
-        "model": "users.User",
+        "model": "authUser.User",
         "pk": 4,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -45,7 +45,7 @@ users_data = [
         }
     },
     {
-        "model": "users.User",
+        "model": "authUser.User",
         "pk": 5,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -58,7 +58,7 @@ users_data = [
         }
     },
     {
-        "model": "users.User",
+        "model": "authUser.User",
         "pk": 6,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -71,7 +71,7 @@ users_data = [
         }
     },
     {
-        "model": "users.User",
+        "model": "authUser.User",
         "pk": 7,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -84,7 +84,7 @@ users_data = [
         }
     },
     {
-        "model": "users.User",
+        "model": "authUser.User",
         "pk": 8,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -97,7 +97,7 @@ users_data = [
         }
     },
     {
-        "model": "users.User",
+        "model": "authUser.User",
         "pk": 9,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -110,7 +110,7 @@ users_data = [
         }
     },
     {
-        "model": "users.User",
+        "model": "authUser.User",
         "pk": 10,
         "fields": {
             "public_id": f"{uidGenerator()}",

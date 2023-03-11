@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.shopping.models import Cart, CartHistory, OrderItem
+from apps.shopping.models import Order, OrderHistory, OrderItem
 
 
 @admin.register(OrderItem)
@@ -9,7 +9,7 @@ class OrderItemAdmin(admin.ModelAdmin):
     list_filter = ('is_ordered', 'order_date',)
 
 
-@admin.register(Cart)
+@admin.register(Order)
 class CartAdmin(admin.ModelAdmin):
     list_display = ('customer_name', '_orders', 'status', 'order_date',)
     list_filter = ('status', 'order_date',)
@@ -21,7 +21,7 @@ class CartAdmin(admin.ModelAdmin):
         return obj.orders.count()
 
 
-@admin.register(CartHistory)
+@admin.register(OrderHistory)
 class CartHistoryAdmin(admin.ModelAdmin):
     list_display = ('customer_name', '_orders', 'status', 'order_date',)
     list_filter = ('status', 'order_date',)
@@ -32,11 +32,11 @@ class CartHistoryAdmin(admin.ModelAdmin):
     def _orders(self, obj) -> str:
         return obj.orders.count()
 
-    def has_add_permission(self, request):
+    def has_add_permission(self, request) -> bool:
         return False
     
-    def has_delete_permission(self, request, obj=None):
+    def has_delete_permission(self, request, obj=None) -> bool:
         return False
     
-    def has_change_permission(self, request, obj=None):
+    def has_change_permission(self, request, obj=None) -> bool:
         return False

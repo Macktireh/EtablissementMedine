@@ -18,7 +18,6 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'price', 'stock', 'description', 'created_at', 'updated_at',)
-    list_filter = ('price', 'stock',)
     fieldsets = (
         (None, {
             'fields': ('public_id', 'name', 'slug', 'price', 'stock', 'description', 'thumbnail', 'category',)

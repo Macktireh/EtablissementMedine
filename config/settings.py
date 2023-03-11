@@ -24,7 +24,7 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', "127.0.0.1 localhost").split(" "
 # Application definition
 DJANGO_APPS = [
     'django.contrib.admin',
-    'apps.users.appsAuthConfig.AuthConfigApps',
+    'apps.auth.apps.AuthConfig', # django.contrib.auth
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -37,15 +37,16 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    'django_extensions',
     'drf_yasg',
 ]
 
 LOCAL_APPS = [
-    'apps.base',
-    'apps.home',
-    'apps.users',
-    'apps.product',
-    'apps.shopping',
+    'apps.base.apps.BaseConfig',
+    'apps.home.apps.HomeConfig',
+    'apps.auth.apps.AuthUserConfig',
+    'apps.product.apps.ProductConfig',
+    'apps.shopping.apps.ShoppingConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -150,7 +151,7 @@ FIXTURE_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'authUser.User'
 
 
 # Email settings

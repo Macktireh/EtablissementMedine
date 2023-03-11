@@ -29,6 +29,6 @@ class Command(loaddata.Command):
 
         try:
             os.remove(f"{FIXTURE_DIR}/initial_data.json")
-            os.rmdir(FIXTURE_DIR)
+            # os.rmdir(FIXTURE_DIR)
         except:
             pass
