@@ -47,6 +47,7 @@ LOCAL_APPS = [
     'apps.auth.apps.AuthUserConfig',
     'apps.product.apps.ProductConfig',
     'apps.shopping.apps.ShoppingConfig',
+    'apps.customer.apps.CustomerConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -161,6 +162,7 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT= os.environ.get('EMAIL_PORT')
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
 
 # Django REST Framework
@@ -175,9 +177,8 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'apps.base.renderers.CustomJSONRenderer',
     ],
-    # 'NON_FIELD_ERRORS_KEY': 'error',
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    # 'PAGE_SIZE': 2
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 2
 }
 
 
@@ -203,3 +204,9 @@ SIMPLE_JWT = {
 
 # the list of origins authorized to make HTTP requests
 CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', "http://localhost:3000 http://127.0.0.1:3000").split(" ")
+
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}

@@ -2,16 +2,17 @@ from django.urls import path
 
 from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 
-from apps.auth.views import SignupView, ActivationView, LoginView, RequestResetPasswordView, ResetPasswordView
-from apps.base.method import postCreate
+from apps.auth.views import SignUpView, ActivationView, SignInView, RequestResetPasswordView, ResetPasswordView
 
+
+app_name = 'auth'
 
 urlpatterns = [
-    path('signup/', SignupView.as_view(postCreate), name='signup'),
-    path('account/activation/', ActivationView.as_view(postCreate), name='activate'),
-    path('login/', LoginView.as_view(postCreate), name='login'),
-    path('request/reset-password/', RequestResetPasswordView.as_view(postCreate), name='reset-password-send-email'),
-    path('reset-password/<uidb64>/<token>/', ResetPasswordView.as_view(postCreate), name='reset-password'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
-    path('jwt/verify/', TokenVerifyView.as_view(), name='verify-jwt'),
+    path('signup/', SignUpView.as_view(), name='signup'),
+    path('activation/', ActivationView.as_view(), name='activation'),
+    path('login/', SignInView.as_view(), name='login'),
+    path('request/reset-password/', RequestResetPasswordView.as_view(), name='request-reset-password'),
+    path('reset-password/<uidb64>/<token>/', ResetPasswordView.as_view(), name='reset-password'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='refresh'),
+    path('jwt/verify/', TokenVerifyView.as_view(), name='verify'),
 ]

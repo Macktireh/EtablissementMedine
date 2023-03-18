@@ -8,18 +8,20 @@ from apps.base.functions import uidGenerator
 
 
 class AbstractPublicIdMixin(models.Model):
-    public_id = models.CharField(max_length=64, unique=True, null=False, blank=False)
+
+    public_id = models.CharField(max_length=64, unique=True, null=False, blank=False, editable=False, db_index=True)
 
     class Meta:
         abstract = True
     
-    def save(self, *args: Any, **kwargs: Any) -> None:
+    def save(self, *args, **kwargs) -> None:
         if not self.public_id:
             self.public_id = uidGenerator()
         super().save(*args, **kwargs)
 
 
 class AbstractCreatedUpdatedMixin(models.Model):
+
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
     updated_at = models.DateTimeField(_('updated at'), auto_now=True)
 

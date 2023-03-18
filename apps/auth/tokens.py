@@ -22,7 +22,7 @@ def getTokensUser(user) -> TokenType:
 
 class TokenGenerator(PasswordResetTokenGenerator):
     def _make_hash_value(self, user, timestamp) -> str:
-        return (six.text_type(user.public_id) + six.text_type(timestamp) + six.text_type(user.is_active))
+        return (six.text_type(user.public_id) + six.text_type(timestamp) + six.text_type(user.verified))
 
 
 tokenGenerator = TokenGenerator()

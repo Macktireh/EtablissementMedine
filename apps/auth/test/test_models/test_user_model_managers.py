@@ -12,7 +12,7 @@ class UserModelTestCase(TestCase):
             'password': 'password',
         }
 
-    def test_create_user(self):
+    def test_create_user(self) -> None:
         User = get_user_model()
         user = User.objects.create_user(**self.user_data)
         self.assertEqual(user.email, self.user_data['email'])
@@ -20,7 +20,7 @@ class UserModelTestCase(TestCase):
         self.assertEqual(user.first_name, self.user_data['first_name'])
         self.assertEqual(user.last_name, self.user_data['last_name'])
         self.assertTrue(user.is_active)
-        self.assertFalse(user.is_verified)
+        self.assertFalse(user.verified)
         self.assertFalse(user.is_staff)
         self.assertFalse(user.is_superuser)
 
@@ -41,7 +41,7 @@ class UserModelTestCase(TestCase):
         self.assertEqual(superuser.first_name, self.user_data['first_name'])
         self.assertEqual(superuser.last_name, self.user_data['last_name'])
         self.assertTrue(superuser.is_active)
-        self.assertTrue(superuser.is_verified)
+        self.assertTrue(superuser.verified)
         self.assertTrue(superuser.is_staff)
         self.assertTrue(superuser.is_superuser)
 
