@@ -1,0 +1,51 @@
+@function color($color-name) {
+  @return var(--color-#{$color-name});
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex($direction, $jc, $at) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $jc;
+  align-items: $at;
+}
+
+@mixin position-abs($top, $right, $bottom, $left, $x, $y) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  transform: translate($x, $y);
+}
+
+@mixin hr($m-t, $m-b, $width, $color) {
+  margin: $m-t auto $m-b;
+  width: $width;
+  background-color: $color;
+  border: none;
+  outline: none;
+}
+
+@mixin srolled() {
+  ::-webkit-scrollbar {
+    width: 8px;
+    @media (max-width: 900px) {
+      width: 0px;
+    }
+    
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: $color5;
+    border-radius: 10px;
+  }
+}

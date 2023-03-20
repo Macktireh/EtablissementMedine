@@ -1,0 +1,36 @@
+:root {
+  --color-primary: #1d9bf0;
+  --color-bg: #333;
+  --color-font: #ebeeee;
+}
+
+[data-theme=light] {
+  --color-primary: #1d9bf0;
+  --color-bg: #ebeeee;
+  --color-font: #333;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-font);
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-font);
+}
+
+/*# sourceMappingURL=style.css.map */

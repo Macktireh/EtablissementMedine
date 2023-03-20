@@ -1,0 +1,22 @@
+$font1: 'Roboto', sans-serif;
+
+$black: #333;
+$white: #ebeeee;
+$blue: #1d9bf0;
+$red: #F4212E;
+$orange: orange;
+$green: #23ad5c;
+$green: #aeaeae;
+
+
+:root {
+  --color-primary: #{$blue};
+  --color-bg: #{$black};
+  --color-font: #{$white};
+}
+
+[data-theme="light"] {
+  --color-primary: #{$blue};
+  --color-bg: #{$white};
+  --color-font: #{$black};
+}

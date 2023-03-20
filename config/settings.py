@@ -24,7 +24,7 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', "127.0.0.1 localhost").split(" "
 # Application definition
 DJANGO_APPS = [
     'django.contrib.admin',
-    'apps.users.appsAuthConfig.AuthConfigApps',
+    'apps.auth.apps.AuthConfig', # django.contrib.auth
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -37,13 +37,17 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    'django_extensions',
     'drf_yasg',
 ]
 
 LOCAL_APPS = [
-    'apps.home',
-    'apps.users',
-    'apps.product',
+    'apps.base.apps.BaseConfig',
+    'apps.home.apps.HomeConfig',
+    'apps.auth.apps.AuthUserConfig',
+    'apps.product.apps.ProductConfig',
+    'apps.shopping.apps.ShoppingConfig',
+    'apps.customer.apps.CustomerConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -139,12 +143,16 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/mediafiles/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles/')
 
+FIXTURE_DIRS = [
+    os.path.join(BASE_DIR, 'fixtures'),
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'authUser.User'
 
 
 # Email settings
@@ -154,6 +162,7 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT= os.environ.get('EMAIL_PORT')
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
 
 # Django REST Framework
@@ -166,11 +175,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated'
     ],
     'DEFAULT_RENDERER_CLASSES': [
-        'apps.utils.renderers.CustomJSONRenderer',
+        'apps.base.renderers.CustomJSONRenderer',
     ],
-    # 'NON_FIELD_ERRORS_KEY': 'error',
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    # 'PAGE_SIZE': 2
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 2
 }
 
 
@@ -196,3 +204,9 @@ SIMPLE_JWT = {
 
 # the list of origins authorized to make HTTP requests
 CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', "http://localhost:3000 http://127.0.0.1:3000").split(" ")
+
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}

@@ -13,6 +13,10 @@
 
 {% block header %}
 <h1>Welcom to Etablissement Medine</h1>
+<nav style="margin-top: 30px; display: flex; gap: 1rem">
+  <a href="{% url 'schema-redoc' %}">API Docs</a>
+  <a href="{% url 'admin:index' %}">Admin</a>
+</nav>
 {% endblock header %}
 
 

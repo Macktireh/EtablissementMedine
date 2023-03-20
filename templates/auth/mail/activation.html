@@ -1,0 +1,11 @@
+Hé, {{user.first_name}} !
+
+Merci de votre inscription sur Mackdin ! Vous devez suivre ce lien pour activer votre compte :
+
+http://{{domain}}{% url 'auth:activation' uidb64=uidb64 token=token %}
+
+Si vous rencontrez un problème, veuillez nous contacter.
+
+
+L'équipe EtablissementMedine
+https://{{domain}}

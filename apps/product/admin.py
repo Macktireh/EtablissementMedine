@@ -5,6 +5,7 @@ from apps.product.models import Category, Product
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+
     list_display = ('name', 'slug', 'created_at', 'updated_at')
     fieldsets = (
         (None, {
@@ -17,8 +18,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'price', 'stock', 'description', 'created_at', 'updated_at',)
-    list_filter = ('price', 'stock',)
+
+    list_display = ('name', 'slug', 'price', 'stock', 'category', 'description', 'created_at', 'updated_at',)
     fieldsets = (
         (None, {
             'fields': ('public_id', 'name', 'slug', 'price', 'stock', 'description', 'thumbnail', 'category',)
