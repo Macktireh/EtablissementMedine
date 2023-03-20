@@ -1,0 +1,89 @@
+:root {
+  --color-primary: #1d9bf0;
+  --color-bg: #333;
+  --color-font: #ebeeee;
+}
+
+[data-theme=light] {
+  --color-primary: #1d9bf0;
+  --color-bg: #ebeeee;
+  --color-font: #333;
+}
+
+.flex-center, .Error404 #error404 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Error404 {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(45deg, #8500ff, #5acaff);
+}
+.Error404 #error404 {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  bottom: 10%;
+  left: 10%;
+  transform: translate(, );
+  border-radius: 10px;
+  background: url("/static/global/images/404.png") #151729;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  padding: 30px;
+}
+@media screen and (max-width: 460px) {
+  .Error404 #error404 {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translate(, );
+  }
+}
+.Error404 #error404 .content {
+  text-align: center;
+}
+@media screen and (max-width: 460px) {
+  .Error404 #error404 .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+.Error404 #error404 .content h2 {
+  font-size: 18vw;
+  color: var(--color-font);
+  line-height: 1em;
+  margin-bottom: 1.5rem;
+}
+.Error404 #error404 .content h4 {
+  font-size: 1.5em;
+  color: var(--color-bg);
+  background: var(--color-font);
+  margin-bottom: 20px;
+  position: relative;
+  font-weight: 300;
+  padding: 10px 20px;
+  display: inline-block;
+  border-radius: 8px;
+}
+.Error404 #error404 .content p {
+  font-size: 1.2em;
+}
+.Error404 #error404 .content span {
+  position: relative;
+  display: inline-block;
+  padding: 10px 25px;
+  background: #ff0562;
+  margin-top: 25px;
+  border-radius: 25px;
+}
+
+/*# sourceMappingURL=style.css.map */

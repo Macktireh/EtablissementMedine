@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Error 404 Not Found {% endblock title %}
+
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'error/css/style.css' %}">
+{% endblock style %}
+
+
+{% block content %}
+
+<div class="Error404">
+  <div id="error404">
+    <div class="content">
+      <h2></h2>
+      <h4>Votre compte a été créé et activé avec succès !</h4>
+      <p>Vous pouvez continuer et vous connecter maintenant.</p>
+      <a href="{% url 'home' %}">
+        <span>Retour à l'application</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+
+
+{% block js %}
+<script src="{% static 'error/js/script.js' %}" defer></script>
+{% endblock js %}

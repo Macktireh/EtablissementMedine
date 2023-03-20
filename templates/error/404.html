@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Error 404 Not Found {% endblock title %}
+
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'error/css/style.css' %}">
+{% endblock style %}
+
+
+{% block content %}
+
+<div class="Error404">
+  <div id="error404">
+    <div class="content">
+      <h2>404</h2>
+      <h4>Opps! page not found</h4>
+      <p>
+        La page que vous recherchez n'existe pas. Il se peut que vous ayez mal saisi l'adresse
+        ou que la page ait été déplacée.
+      </p>
+      <a href="{% url 'home' %}">
+        <span>Retour à l'accueil</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+
+
+{% block js %}
+<script src="{% static 'error/js/script.js' %}" defer></script>
+{% endblock js %}
