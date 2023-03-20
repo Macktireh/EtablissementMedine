@@ -122,7 +122,7 @@ class ActivationSerializer(serializers.Serializer):
                 subject=f"{domain} - Votre compte a est activer", 
                 context=context,
                 to=[user.email],
-                template_name='users/mail/activation-success.html', 
+                template_name='auth/mail/activation-success.html', 
             )         
         return attrs
 
@@ -179,7 +179,7 @@ class RequestResetPasswordSerializer(serializers.Serializer):
                 subject=f"Password reset on {domain}",
                 context=context,
                 to=[user.email],
-                template_name='users/mail/request-rest-password.html',
+                template_name='auth/mail/request-rest-password.html',
             )
         return attrs
 
@@ -239,7 +239,7 @@ class ResetPasswordSerializer(serializers.Serializer):
             subject=f"{domain} - Votre mot de passe a été changé avec succès !", 
             context=context,
             to=[user.email],
-            template_name='users/mail/rest-password-success.html', 
+            template_name='auth/mail/rest-password-success.html', 
         )
         return attrs
 

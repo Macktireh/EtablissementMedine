@@ -1,4 +1,4 @@
-from typing import Any, Dict, Mapping, Tuple
+from typing import Any, Mapping
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render

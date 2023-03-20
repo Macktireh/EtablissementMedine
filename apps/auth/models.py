@@ -1,4 +1,5 @@
 from typing import Union
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.encoding import force_str
@@ -28,8 +29,8 @@ class User(AbstractPublicIdMixin, AbstractUser):
     @classmethod
     def get_user_by_uidb64(cls, uidb64: str) -> Union['User', None]:
         try:
-            uid = force_str(urlsafe_base64_decode(uidb64))
-            return cls.objects.get(public_id=uid)
+            public_id = force_str(urlsafe_base64_decode(uidb64))
+            return cls.objects.get(public_id=public_id)
         except cls.DoesNotExist:
             return None
     
@@ -38,12 +39,7 @@ class User(AbstractPublicIdMixin, AbstractUser):
         user = cls.get_user_by_uidb64(uidb64)
         if user is None:
             return None, False, False
-        if tokenGenerator.check_token(user, token):
-            if not user.verified:
-                user.verified = True
-                user.save()
-                return user, True, True
-        return user, True, False
+        return user, tokenGenerator.check_token(user, token), user.verified
 
     def __str__(self) -> str:
         return self.email
