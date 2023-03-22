@@ -106,11 +106,8 @@ class ActivationSerializer(serializers.Serializer):
         domain = get_current_site(request)
 
         user, check, send = User.activate_user(uidb64, token)
-
-        if user is None:
-            raise serializers.ValidationError(failMsg["USER_DOES_NOT_EXIST"])
         
-        if not check:
+        if user is None or not check:
             raise serializers.ValidationError(failMsg["THE_TOKEN_IS_NOT_VALID_OR_HAS_EXPIRED"])
         
         if send:
