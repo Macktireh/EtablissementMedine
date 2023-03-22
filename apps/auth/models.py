@@ -15,7 +15,7 @@ class User(AbstractPublicIdMixin, AbstractUser):
 
     username = None
     email = models.EmailField(_('email address'), max_length=255, unique=True, db_index=True)
-    phone_number = models.CharField(_('phone number'), max_length=16, unique=True, db_index=True)
+    phone_number = models.CharField(_('phone number'), max_length=24, unique=True, db_index=True)
     verified = models.BooleanField(_("verified"), default=False, help_text=_("Designates whether this user has been verified."))
 
     USERNAME_FIELD = 'email'
@@ -42,7 +42,7 @@ class User(AbstractPublicIdMixin, AbstractUser):
         return user, tokenGenerator.check_token(user, token), user.verified
 
     def __str__(self) -> str:
-        return self.email
+        return f'{self.get_full_name()} <{self.email}>'
 
 
 class Codes(models.Model):
