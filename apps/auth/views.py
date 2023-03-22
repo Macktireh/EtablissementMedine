@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.views import View
 
 from apps.auth.models import User
-from apps.base.email import sendEmail
+from apps.base.mail import sendEmail
 
 
 class ActivationView(View):

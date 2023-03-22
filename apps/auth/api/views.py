@@ -16,7 +16,7 @@ from drf_yasg import openapi
 
 from apps.auth.api import serializers
 from apps.auth.tokens import tokenGenerator, getTokensUser
-from apps.base.email import sendEmail
+from apps.base.mail import sendEmail
 from apps.base.response import succesMsg, failMsg
 
 

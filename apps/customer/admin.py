@@ -8,7 +8,7 @@ from .models import Address
 @admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
 
-    list_display = ('name', 'email', 'phone_number', 'address', 'city', 'zipcode', 'country')
+    list_display = ('name', 'email', 'phone_number', 'street_address', 'city', 'zipcode', 'country')
 
     def name(self, obj: Address) -> str:
         return obj.user.get_full_name()
