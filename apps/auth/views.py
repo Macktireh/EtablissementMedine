@@ -14,7 +14,7 @@ class ActivationView(View):
     template_name: str = "auth/activation-success.html"
     context: Mapping[str, Any] = {}
 
-    def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+    def get(self, request: HttpRequest ,*args: Any, **kwargs: Any) -> HttpResponse:
         uidb64: str = kwargs.get('uidb64')
         token: str = kwargs.get('token')
         domain = get_current_site(request)

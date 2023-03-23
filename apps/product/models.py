@@ -21,7 +21,7 @@ class Category(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
     def __str__(self) -> str:
         return self.name
 
-    def save(self, *args, **kwargs) -> None:
+    def save(self ,*args: Any, **kwargs: Any) -> None:
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
@@ -56,7 +56,7 @@ class Product(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
         # return ""
         return mark_safe(f'<img src="{"https://picsum.photos/100/100"}" width="100" height="100" />')
 
-    def save(self, *args, **kwargs) -> None:
+    def save(self ,*args: Any, **kwargs: Any) -> None:
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)

@@ -646,8 +646,3 @@ products_data = [
 
 
 data = users_data + address_data + categories_data + products_data
-
-# print()
-# print(data)
-# print(len(data))
-# print()

@@ -1,12 +1,27 @@
 from django.db import models
-from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
-from apps.product.models import Product
+from apps.auth.models import User
 from apps.base.models import AbstractPublicIdMixin, AbstractCreatedUpdatedMixin
+from apps.product.models import Product
 
 
-User = get_user_model()
+class OrderStatusChoices(models.TextChoices):
+
+    PENDING = 'pending', _('Pending')
+    PROCESSING = 'processing', _('Processing')
+    DELIVERED = 'delivered', _('Delivered')
+    RETURNED = 'returned', _('Returned')
+    CANCELLED = 'cancelled', _('Cancelled')
+
+
+class PaymentStatusChoices(models.TextChoices):
+
+    PENDING = 'pending', _('Pending')
+    COMPLETED = 'completed', _('Completed')
+    AWAITING_PAYMENT = 'awaiting_payment', _('Awaiting payment')
+    REFUNDED = 'refunded', _('Refunded')
+    CANCELLED = 'cancelled', _('Cancelled')
 
 
 class OrderItem(AbstractPublicIdMixin):
@@ -28,20 +43,6 @@ class OrderItem(AbstractPublicIdMixin):
 
 
 class Order(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
-
-    class OrderStatusChoices(models.TextChoices):
-        PENDING = 'pending', _('Pending')
-        PROCESSING = 'processing', _('Processing')
-        DELIVERED = 'delivered', _('Delivered')
-        RETURNED = 'returned', _('Returned')
-        CANCELLED = 'cancelled', _('Cancelled')
-
-    class PaymentStatusChoices(models.TextChoices):
-        PENDING = 'pending', _('Pending')
-        COMPLETED = 'completed', _('Completed')
-        AWAITING_PAYMENT = 'awaiting_payment', _('Awaiting payment')
-        REFUNDED = 'refunded', _('Refunded')
-        CANCELLED = 'cancelled', _('Cancelled')
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     order_items = models.ManyToManyField(OrderItem, related_name='orders')
