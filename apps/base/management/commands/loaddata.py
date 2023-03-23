@@ -5,11 +5,10 @@ from django.core.management.base import CommandError
 from django.core.management.commands import loaddata
 from django.conf import settings
 
-from apps.base.fixtures import users_data, products_data, categories_data
+from apps.base.fixtures import data
 
 
 FIXTURE_DIR = os.path.join(settings.BASE_DIR, 'fixtures')
-data = users_data + products_data + categories_data
 
 
 class Command(loaddata.Command):

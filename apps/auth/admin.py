@@ -29,6 +29,7 @@ class UserAdmin(BaseUserAdmin):
     readonly_fields = ('public_id', 'date_joined', 'last_login')
     search_fields = ('email', 'first_name', 'last_name', 'phone_number',)
     ordering = ('date_joined',)
+    list_per_page = 20
 
     def has_delete_permission(self, request: HttpRequest, obj: User = None) -> bool:
         return request.user.is_superuser

@@ -2,6 +2,7 @@ from typing import Any
 
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.utils.html import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 from apps.base.models import AbstractPublicIdMixin, AbstractCreatedUpdatedMixin
@@ -47,6 +48,13 @@ class Product(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
 
     def __str__(self) -> str:
         return self.name
+    
+    @property
+    def thumbnail_preview(self):
+        # if self.thumbnail:
+        #     return mark_safe(f'<img src="{"https://fastly.picsum.photos/id/845/200/200.jpg?hmac=KMGSD70gM0xozvpzPM3kHIwwA2TRlVQ6d2dLW_b1vDQ"}" width="200" height="200" />')
+        # return ""
+        return mark_safe(f'<img src="{"https://picsum.photos/100/100"}" width="100" height="100" />')
 
     def save(self, *args, **kwargs) -> None:
         if not self.slug:
