@@ -9,7 +9,7 @@ User = get_user_model()
 class Address(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='addresses')
-    address = models.CharField(_('address'), max_length=256, blank=True, null=True)
+    street_address = models.CharField(_('street address'), max_length=256, blank=True, null=True)
     city = models.CharField(_('City or neighborhood'), max_length=128, blank=True, null=True)
     zipcode = models.CharField(_('Zip / Postal code'), max_length=12, blank=True, null=True)
     country = models.CharField(_('Country'), max_length=64, blank=True, null=True)

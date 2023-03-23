@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Union
 
 from django.conf.global_settings import LANGUAGE_CODE
 
@@ -6,7 +6,7 @@ from django.conf.global_settings import LANGUAGE_CODE
 LANG = "fr" if "fr" in LANGUAGE_CODE else "en"
 toggleLangMsg = lambda msgFR, msgEN: msgFR if LANG == 'fr' else msgEN
 
-def errorMessages(type: str, field: str) -> str | None:
+def errorMessages(type: str, field: str) -> Union[str, None]:
     if type == "blank":
         if LANG == 'fr':
             return f"Le champ {field} ne doit pas être vide !"

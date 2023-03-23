@@ -19,12 +19,18 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
 
-    list_display = ('name', 'slug', 'price', 'stock', 'category', 'description', 'created_at', 'updated_at',)
+    list_display = ('name', 'thumbnail_preview', 'slug', 'price', 'stock', '_description', 'category', 'created_at', 'updated_at',)
     fieldsets = (
         (None, {
-            'fields': ('public_id', 'name', 'slug', 'price', 'stock', 'description', 'thumbnail', 'category',)
+            'fields': ('public_id', 'name', 'slug', 'price', 'stock', 'description', 'thumbnail', 'thumbnail_preview', 'category',)
         }),
     )
     search_fields = ('name', 'description')
     prepopulated_fields = {'slug': ('name',)}
-    readonly_fields = ('public_id',)
+    readonly_fields = ('public_id', 'thumbnail_preview',)
+    list_per_page = 10
+
+    def _description(self, obj):
+        if len(obj.description) > 90:
+            return obj.description[:90] + '...'
+        return obj.description

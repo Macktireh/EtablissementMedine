@@ -15,7 +15,7 @@ class User(AbstractPublicIdMixin, AbstractUser):
 
     username = None
     email = models.EmailField(_('email address'), max_length=255, unique=True, db_index=True)
-    phone_number = models.CharField(_('phone number'), max_length=16, unique=True, db_index=True)
+    phone_number = models.CharField(_('phone number'), max_length=24, unique=True, db_index=True)
     verified = models.BooleanField(_("verified"), default=False, help_text=_("Designates whether this user has been verified."))
 
     USERNAME_FIELD = 'email'
@@ -27,22 +27,19 @@ class User(AbstractPublicIdMixin, AbstractUser):
         db_table = 'users'
     
     @classmethod
-    def get_user_by_uidb64(cls, uidb64: str) -> Union['User', None]:
-        try:
-            public_id = force_str(urlsafe_base64_decode(uidb64))
-            return cls.objects.get(public_id=public_id)
-        except cls.DoesNotExist:
-            return None
-    
-    @classmethod
     def activate_user(cls, uidb64: str, token: str) -> tuple[Union['User', None], bool, bool]:
-        user = cls.get_user_by_uidb64(uidb64)
-        if user is None:
+        try:
+            _public_id = force_str(urlsafe_base64_decode(uidb64))
+            _user = cls.objects.get(public_id=_public_id)
+        except cls.DoesNotExist:
+            _user = None
+        
+        if _user is None:
             return None, False, False
-        return user, tokenGenerator.check_token(user, token), user.verified
+        return _user, tokenGenerator.check_token(_user, token), _user.verified
 
     def __str__(self) -> str:
-        return self.email
+        return f'{self.get_full_name()} <{self.email}>'
 
 
 class Codes(models.Model):
