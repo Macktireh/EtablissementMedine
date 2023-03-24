@@ -8,6 +8,7 @@ urlpatterns_api_v1 = [
     path('api/v1/docs/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('api/v1/auth/user/', include("apps.auth.api.urls")),
     path('api/v1/products/', include("apps.product.api.urls")),
+    path('api/v1/shopping/', include("apps.shopping.api.urls")),
 ]
 
 urlpatterns = [

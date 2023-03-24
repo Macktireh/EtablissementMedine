@@ -4,10 +4,11 @@ import json
 from django.core.management.base import CommandError
 from django.core.management.commands import loaddata
 from django.conf import settings
+from django.contrib.auth import get_user_model
 
 from apps.base.fixtures import data
 
-
+User = get_user_model()
 FIXTURE_DIR = os.path.join(settings.BASE_DIR, 'fixtures')
 
 
@@ -25,6 +26,11 @@ class Command(loaddata.Command):
             json.dump(data, f, ensure_ascii=False)
         
         super().handle(*args, **options)
+
+        for user in User.objects.all():
+            if not user.is_superuser:
+                user.set_password(user.password)
+                user.save()
 
         try:
             os.remove(f"{FIXTURE_DIR}/initial_data.json")

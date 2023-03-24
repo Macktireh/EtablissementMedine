@@ -35,7 +35,7 @@ class Product(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
 
     name = models.CharField(_('name'), max_length=255, unique=True, db_index=True)
     slug = models.SlugField(_('slug'), max_length=255, unique=True, db_index=True)
-    price = models.FloatField(_('price'), null=False, blank=False, default=0.0)
+    price = models.DecimalField(_('price'), max_digits=10, decimal_places=2, null=False, blank=False, default=0.00)
     stock = models.IntegerField(_('stock quantity'), null=False, blank=False, default=0)
     description = models.TextField(_('description'), null=True, blank=True)
     thumbnail = models.ImageField(_('thumbnail'), null=True, blank=True, upload_to=thumbnail_path)
