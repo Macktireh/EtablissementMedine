@@ -21,7 +21,7 @@ class Category(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
     def __str__(self) -> str:
         return self.name
 
-    def save(self, *args, **kwargs) -> None:
+    def save(self ,*args: Any, **kwargs: Any) -> None:
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
@@ -35,7 +35,7 @@ class Product(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
 
     name = models.CharField(_('name'), max_length=255, unique=True, db_index=True)
     slug = models.SlugField(_('slug'), max_length=255, unique=True, db_index=True)
-    price = models.FloatField(_('price'), null=False, blank=False, default=0.0)
+    price = models.DecimalField(_('price'), max_digits=10, decimal_places=2, null=False, blank=False, default=0.00)
     stock = models.IntegerField(_('stock quantity'), null=False, blank=False, default=0)
     description = models.TextField(_('description'), null=True, blank=True)
     thumbnail = models.ImageField(_('thumbnail'), null=True, blank=True, upload_to=thumbnail_path)
@@ -56,7 +56,7 @@ class Product(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
         # return ""
         return mark_safe(f'<img src="{"https://picsum.photos/100/100"}" width="100" height="100" />')
 
-    def save(self, *args, **kwargs) -> None:
+    def save(self ,*args: Any, **kwargs: Any) -> None:
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)

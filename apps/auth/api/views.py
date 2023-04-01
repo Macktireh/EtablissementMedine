@@ -1,13 +1,15 @@
+from typing import Any
+
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpRequest
-from django.urls import reverse
 from django.utils import timezone
-from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import gettext as _
 
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -15,8 +17,8 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
 from apps.auth.api import serializers
-from apps.auth.tokens import tokenGenerator, getTokensUser
 from apps.base.mail import sendEmail
+from apps.auth.tokens import tokenGenerator, getTokensUser
 from apps.base.response import succesMsg, failMsg
 
 
@@ -25,7 +27,7 @@ User = get_user_model()
 
 class SignUpView(APIView):
 
-    permission_classes = []
+    permission_classes = [AllowAny]
     
     @swagger_auto_schema(
         request_body=serializers.SignupSerializer,
@@ -43,7 +45,7 @@ class SignUpView(APIView):
             status.HTTP_400_BAD_REQUEST: "Validation error."
         },
     )
-    def post(self, request: HttpRequest, *args, **kwargs) -> Response:
+    def post(self, request: HttpRequest ,*args: Any, **kwargs: Any) -> Response:
         serializer = serializers.SignupSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
@@ -57,9 +59,6 @@ class SignUpView(APIView):
             'uidb64': urlsafe_base64_encode(force_bytes(user.public_id)) or None,
             'token': token
         }
-        print()
-        print(reverse('auth:activation', kwargs={'uidb64': urlsafe_base64_encode(force_bytes(user.public_id)) or None, 'token': token}))
-        print()
         sendEmail(subject=subject, context=context, to=[user.email], template_name="auth/mail/activation.html")
 
         return Response({
@@ -71,7 +70,7 @@ class SignUpView(APIView):
 
 class ActivationView(APIView):
 
-    permission_classes = []
+    permission_classes = [AllowAny]
 
     @swagger_auto_schema(
         request_body=serializers.ActivationSerializer,
@@ -90,7 +89,7 @@ class ActivationView(APIView):
             status.HTTP_400_BAD_REQUEST: "Validation error."
         },
     )
-    def post(self, request: HttpRequest, *args, **kwargs) -> Response:
+    def post(self, request: HttpRequest ,*args: Any, **kwargs: Any) -> Response:
         serializer = serializers.SignupSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
@@ -102,7 +101,7 @@ class ActivationView(APIView):
 
 class SignInView(APIView):
 
-    permission_classes = []
+    permission_classes = [AllowAny]
 
     @swagger_auto_schema(
         request_body=serializers.LoginSerializer,
@@ -138,8 +137,8 @@ class SignInView(APIView):
             )
         },
     )
-    def post(self, request: HttpRequest, *args, **kwargs) -> Response:
-        serializer = self.serializer_class(data=request.data)
+    def post(self, request: HttpRequest ,*args: Any, **kwargs: Any) -> Response:
+        serializer = serializers.LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         email = serializer.validated_data['email']
@@ -172,7 +171,7 @@ class SignInView(APIView):
 
 class RequestResetPasswordView(APIView):
 
-    permission_classes = []
+    permission_classes = [AllowAny]
 
     @swagger_auto_schema(
         request_body=serializers.RequestResetPasswordSerializer,
@@ -191,7 +190,7 @@ class RequestResetPasswordView(APIView):
             status.HTTP_400_BAD_REQUEST: "Validation error."
         },
     )
-    def post(self, request: HttpRequest, *args, **kwargs) -> Response:
+    def post(self, request: HttpRequest ,*args: Any, **kwargs: Any) -> Response:
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
 
@@ -204,7 +203,7 @@ class RequestResetPasswordView(APIView):
 
 class ResetPasswordView(APIView):
 
-    permission_classes = []
+    permission_classes = [AllowAny]
 
     @swagger_auto_schema(
         request_body=serializers.ResetPasswordSerializer,
@@ -223,7 +222,7 @@ class ResetPasswordView(APIView):
             status.HTTP_400_BAD_REQUEST: "Validation error."
         },
     )
-    def post(self, request: HttpRequest, *args, **kwargs) -> Response:
+    def post(self, request: HttpRequest ,*args: Any, **kwargs: Any) -> Response:
         uidb64 = kwargs.get('uidb64')
         token = kwargs.get('token')
 
@@ -255,7 +254,7 @@ class LogoutView(APIView):
             ),
         },
     )
-    def post(self, request: HttpRequest, *args, **kwargs) -> Response:
+    def post(self, request: HttpRequest ,*args: Any, **kwargs: Any) -> Response:
         return Response({
             "status": "success",
             'message': succesMsg["LOGOUT_SUCCESS"], 

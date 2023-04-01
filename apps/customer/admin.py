@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db.models import QuerySet
 from django.http import HttpRequest
 
-from .models import Address
+from apps.customer.models import Address
 
 
 @admin.register(Address)
