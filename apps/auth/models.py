@@ -7,8 +7,8 @@ from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import gettext_lazy as _
 
 from apps.auth.managers import UserManager
-from apps.base.models import AbstractPublicIdMixin
 from apps.auth.tokens import tokenGenerator
+from apps.base.models import AbstractPublicIdMixin
 
 
 class User(AbstractPublicIdMixin, AbstractUser):

@@ -1,6 +1,5 @@
 from collections import OrderedDict
 
-from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils import timezone
@@ -15,9 +14,6 @@ from apps.auth.models import User
 from apps.base.mail import sendEmail
 from apps.base.response import errorMessages, failMsg
 from apps.base.validators import emailValidator, passwordValidator, phoneNumverValidator
-
-
-# User = get_user_model()
 
 
 class SignupSerializer(serializers.ModelSerializer):

@@ -19,7 +19,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
 
-    list_display = ('name', 'thumbnail_preview', 'slug', 'price', 'stock', '_description', 'category', 'created_at', 'updated_at',)
+    list_display = ('name', 'thumbnail_preview', 'price', 'stock', '_description', 'category', 'created_at', 'updated_at',)
     fieldsets = (
         (None, {
             'fields': ('public_id', 'name', 'slug', 'price', 'stock', 'description', 'thumbnail', 'thumbnail_preview', 'category',)

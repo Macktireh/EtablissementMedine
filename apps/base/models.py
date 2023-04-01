@@ -14,7 +14,7 @@ class AbstractPublicIdMixin(models.Model):
     class Meta:
         abstract = True
     
-    def save(self, *args, **kwargs) -> None:
+    def save(self ,*args: Any, **kwargs: Any) -> None:
         if not self.public_id:
             self.public_id = uidGenerator()
         super().save(*args, **kwargs)
