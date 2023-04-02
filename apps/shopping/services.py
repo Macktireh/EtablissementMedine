@@ -20,3 +20,16 @@ class ShoppingService:
             order.quantity += 1
             order.save()
 
+    @staticmethod
+    def update_order(orderPublicId: str, actionQuantity: int) -> None:
+        order = get_object_or_404(Order, public_id=orderPublicId)
+        if actionQuantity == "increase":
+            order.quantity += 1
+        elif actionQuantity == "reduce":
+            order.quantity -= 1
+        order.save()
+    
+    @staticmethod
+    def delete_order(orderPublicId: str) -> None:
+        order = get_object_or_404(Order, public_id=orderPublicId)
+        order.delete()

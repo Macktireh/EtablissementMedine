@@ -18,7 +18,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', DEFAULT_SECRET_KEY)
 
 DEBUG = DJANGO_ENV != 'production'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', "127.0.0.1 localhost").split(" ")
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', "127.0.0.1 localhost 10.0.2.2").split(" ")
 
 
 # Application definition

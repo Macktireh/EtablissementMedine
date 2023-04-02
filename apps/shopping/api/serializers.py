@@ -9,8 +9,8 @@ class OerderSerializer(serializers.ModelSerializer):
     publicId = serializers.CharField(source='public_id', read_only=True)
     user = UserSerializer()
     productPubliId = serializers.CharField(source='product.public_id', read_only=True)
-    quantity = serializers.IntegerField(source='quantity', read_only=True)
-    ordered = serializers.BooleanField(source='ordered', read_only=True)
+    quantity = serializers.IntegerField(read_only=True)
+    ordered = serializers.BooleanField(read_only=True)
     orderDate = serializers.DateTimeField(source='order_date', read_only=True)
 
     class Meta:
@@ -33,3 +33,5 @@ class CartSerializer(serializers.ModelSerializer):
         model = Cart
         fields = ['publicId', 'user', 'orders', 'orderStatus', 'paymentStatus', 'orderDate', 'paymentDate', 'deliveryDate']
         
+
+

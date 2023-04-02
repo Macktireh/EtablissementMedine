@@ -42,7 +42,7 @@ class Order(AbstractPublicIdMixin):
         ordering = ['-order_date']
 
     def __str__(self) -> str:
-        return f"{self.product.name} ({self.quantity})"
+        return f"{self.product.name} ({self.quantity}) <{self.user.get_full_name()}>"
     
     def save(self, *args: Any, **kwargs: Any) -> None:
         self.price = self.product.price * self.quantity
