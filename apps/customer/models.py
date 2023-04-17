@@ -13,10 +13,10 @@ class Address(models.Model):
     country = models.CharField(_('Country'), max_length=64, blank=True, null=True)
 
     class Meta:
-        db_table = 'addresses'
+        db_table = 'address'
         verbose_name = _('Customer')
         verbose_name_plural = _('Customers')
         ordering = ['-user__date_joined']
 
     def __str__(self) -> str:
-        return self.user.get_full_name()
+        return self.user.name

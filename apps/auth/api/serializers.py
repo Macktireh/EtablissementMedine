@@ -13,7 +13,7 @@ from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from apps.auth.models import User
 from apps.base.mail import sendEmail
 from apps.base.response import errorMessages, failMsg
-from apps.base.validators import emailValidator, passwordValidator, phoneNumverValidator
+from apps.auth.validators import emailValidator, passwordValidator, phoneNumverValidator
 
 
 class SignupSerializer(serializers.ModelSerializer):

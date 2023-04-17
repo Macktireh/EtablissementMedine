@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from pathlib import Path
 
 from django.core.management.utils import get_random_secret_key
+from django.utils.translation import gettext_lazy as _
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -50,7 +51,7 @@ LOCAL_APPS = [
     'apps.customer.apps.CustomerConfig',
 ]
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + LOCAL_APPS
 
 
 MIDDLEWARE = [
@@ -122,13 +123,24 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_TZ = True
+
+LANGUAGES = (
+    ('fr', _('French')),
+    ('en', _('English')),
+)
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale/',
+]
+
+MODELTRANSLATION_LANGUAGES = ('en', 'fr', 'ar', 'es')
 
 
 # Static files (CSS, JavaScript, Images)
