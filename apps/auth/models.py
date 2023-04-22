@@ -12,14 +12,15 @@ from apps.base.models import AbstractPublicIdMixin
 
 
 class User(AbstractPublicIdMixin, AbstractUser):
+
     username = None
     fisrt_name = None
     last_name = None
-    name = models.EmailField(_("name"), max_length=128, blank=True, null=True)
+    name = models.CharField(_("name"), max_length=128, blank=True, null=True)
     email = models.EmailField(
         _("email address"), max_length=255, unique=True, db_index=True
     )
-    phonenumber = models.CharField(
+    phone_number = models.CharField(
         _("phone number"), max_length=24, unique=True, db_index=True
     )
     verified = models.BooleanField(
@@ -29,7 +30,7 @@ class User(AbstractPublicIdMixin, AbstractUser):
     )
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["first_name", "last_name"]
+    REQUIRED_FIELDS = ["name", "phone_number"]
 
     objects = UserManager()
 
@@ -37,7 +38,7 @@ class User(AbstractPublicIdMixin, AbstractUser):
         db_table = "user"
 
     @classmethod
-    def activate_user(cls, uidb64: str, token: str) -> tuple["User" | None, bool, bool]:
+    def activate_user(cls, uidb64: str, token: str) -> tuple[Union["User", None], bool, bool]:
         try:
             public_id = force_str(urlsafe_base64_decode(uidb64))
             user = cls.objects.get(public_id=public_id)
@@ -51,6 +52,7 @@ class User(AbstractPublicIdMixin, AbstractUser):
 
 
 class Code(models.Model):
+
     code = models.CharField(max_length=255, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     verified = models.BooleanField(_("verified"), default=False, db_index=True)

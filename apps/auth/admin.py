@@ -11,8 +11,7 @@ from apps.auth.models import Code, User
 class UserAdmin(BaseUserAdmin):
     list_display = (
         "email",
-        "first_name",
-        "last_name",
+        "name",
         "is_active",
         "verified",
         "is_staff",
@@ -38,7 +37,7 @@ class UserAdmin(BaseUserAdmin):
         ),
         (
             _("Personal info"),
-            {"fields": ("public_id", "first_name", "last_name", "phone_number")},
+            {"fields": ("public_id", "name", "phone_number")},
         ),
         (
             _("Permissions"),
@@ -69,8 +68,7 @@ class UserAdmin(BaseUserAdmin):
             {
                 "classes": ("wide",),
                 "fields": (
-                    "first_name",
-                    "last_name",
+                    "name",
                     "phone_number",
                     "email",
                     "password1",
@@ -85,8 +83,7 @@ class UserAdmin(BaseUserAdmin):
     readonly_fields = ("public_id", "date_joined", "last_login")
     search_fields = (
         "email",
-        "first_name",
-        "last_name",
+        "name",
         "phone_number",
     )
     ordering = ("date_joined",)

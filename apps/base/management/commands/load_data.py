@@ -1,6 +1,8 @@
 import os
 import json
 
+from tqdm import tqdm
+
 from django.core.management.base import CommandError
 from django.core.management.commands import loaddata
 from django.conf import settings
@@ -24,10 +26,14 @@ class Command(loaddata.Command):
 
         with open(f"{FIXTURE_DIR}/initial_data.json", "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False)
+
+        print("Initial data generated")
+        print("Initial data generated")
+        print("Initial data generated")
         
         super().handle(*args, **options)
 
-        for user in User.objects.all():
+        for user in tqdm(User.objects.all()):
             if not user.is_superuser:
                 user.set_password(user.password)
                 user.save()

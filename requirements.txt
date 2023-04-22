@@ -3,14 +3,17 @@ django-cloudinary-storage
 django-cors-headers
 django-extensions
 django-modeltranslation
+django_resized
 django-rosetta
 djangorestframework
 djangorestframework-simplejwt
 docutils
 drf-yasg
+faker
 gunicorn
 Pillow
 psycopg2-binary
 python-dotenv
 six
+tqdm
 whitenoise

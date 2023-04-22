@@ -14,7 +14,6 @@ class AbstractPublicIdMixin(models.Model):
         blank=False,
         editable=False,
         db_index=True,
-        editable=False,
     )
 
     class Meta:

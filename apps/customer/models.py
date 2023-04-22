@@ -6,7 +6,7 @@ from apps.auth.models import User
 
 class Address(models.Model):
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='addresses')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='address')
     street_address = models.CharField(_('street address'), max_length=256, blank=True, null=True)
     city = models.CharField(_('City or neighborhood'), max_length=128, blank=True, null=True)
     zipcode = models.CharField(_('Zip / Postal code'), max_length=12, blank=True, null=True)

@@ -1,4 +1,3 @@
-from decimal import Decimal
 from typing import Any, Dict, Tuple
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -37,7 +36,7 @@ class Order(AbstractPublicIdMixin):
 
     class Meta:
         db_table = 'orders'
-        verbose_name = _('  Order')
+        verbose_name = _('Order')
         verbose_name_plural = _('  Orders')
         ordering = ['-order_date']
 
@@ -61,7 +60,7 @@ class Cart(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
 
     class Meta:
         db_table = 'cart'
-        verbose_name = _(' Cart')
+        verbose_name = _('Cart')
         verbose_name_plural = _(' Carts')
         ordering = ['-order_date']
 
