@@ -12,13 +12,14 @@ User = get_user_model()
 
 
 regexEmail = r"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+regexPhoneNumber = r"^77\d{6}$"
+regexPassword = r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
 
 
-class UserValidators:
-    
+class AuthUserValidators:
     @staticmethod
     def phoneValidator(value: str) -> str:
-        if not re.match(r"^77\d{6}$", value):
+        if not re.match(regexPhoneNumber, value):
             raise serializers.ValidationError(
                 failMsg["PLEASE_ENTER_A_VALID_DJIBOUTIAN_TELEPHONE_NUMBER"]
             )
@@ -42,8 +43,6 @@ class UserValidators:
 
     @staticmethod
     def passwordValidator(value: str) -> str:
-        if not re.match(
-            "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", value
-        ):
+        if not re.match(regexPassword, value):
             raise serializers.ValidationError(failMsg["INVALID_PASSWORD"])
         return value

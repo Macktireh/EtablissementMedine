@@ -1,13 +1,8 @@
-from typing import Union
-
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.utils.encoding import force_str
-from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import gettext_lazy as _
 
 from apps.auth.managers import UserManager
-from apps.auth.tokens import tokenGenerator
 from apps.base.models import AbstractPublicIdMixin
 
 
@@ -16,7 +11,7 @@ class User(AbstractPublicIdMixin, AbstractUser):
     username = None
     fisrt_name = None
     last_name = None
-    name = models.CharField(_("name"), max_length=128, blank=True, null=True)
+    name = models.CharField(_("name"), max_length=128)
     email = models.EmailField(
         _("email address"), max_length=255, unique=True, db_index=True
     )
@@ -36,16 +31,11 @@ class User(AbstractPublicIdMixin, AbstractUser):
 
     class Meta(AbstractUser.Meta, AbstractPublicIdMixin.Meta):
         db_table = "user"
-
-    @classmethod
-    def activate_user(cls, uidb64: str, token: str) -> tuple[Union["User", None], bool, bool]:
-        try:
-            public_id = force_str(urlsafe_base64_decode(uidb64))
-            user = cls.objects.get(public_id=public_id)
-        except cls.DoesNotExist:
-            user = None
-
-        return user, tokenGenerator.check_token(user, token), user.verified
+    
+    def save(self, *args, **kwargs) -> None:
+        if not self.phone_number.startswith("+253") or not self.phone_number.startswith("00253"):
+            self.phone_number = "+253" + self.phone_number
+        super().save(*args, **kwargs)
 
     def __str__(self) -> str:
         return f"{self.get_full_name()} <{self.email}>"
@@ -53,7 +43,7 @@ class User(AbstractPublicIdMixin, AbstractUser):
 
 class Code(models.Model):
 
-    code = models.CharField(max_length=255, unique=True)
+    code = models.CharField(max_length=6)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     verified = models.BooleanField(_("verified"), default=False, db_index=True)
     timestamp_requested = models.DateTimeField(

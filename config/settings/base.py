@@ -111,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "fr"
+LANGUAGE_CODE = "en"
 
 TIME_ZONE = "UTC"
 
@@ -120,15 +120,15 @@ USE_I18N = True
 USE_TZ = True
 
 LANGUAGES = (
-    ("fr", _("French")),
     ("en", _("English")),
+    ("fr", _("French")),
 )
 
 LOCALE_PATHS = [
     BASE_DIR / "locale/",
 ]
 
-MODELTRANSLATION_LANGUAGES = ("fr", "en")
+MODELTRANSLATION_LANGUAGES = ("en", "fr")
 
 
 # Static files (CSS, JavaScript, Images)
@@ -161,6 +161,12 @@ EMAIL_HOST_PASSWORD = get_env_variable("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = get_env_variable("EMAIL_PORT")
 EMAIL_USE_TLS = get_env_variable("EMAIL_USE_TLS")
 DEFAULT_FROM_EMAIL = get_env_variable("EMAIL_HOST_USER")
+
+# SMS
+CLICKSEND_URL = "https://rest.clicksend.com/v3/sms/send"
+CLICKSEND_USERNAME = get_env_variable("CLICKSEND_USERNAME")
+CLICKSEND_PASSWORD = get_env_variable("CLICKSEND_PASSWORD")
+CLICKSEND_FROM = get_env_variable("CLICKSEND_FROM")
 
 
 # the list of origins authorized to make HTTP requests
