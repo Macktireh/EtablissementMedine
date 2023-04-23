@@ -1,4 +1,5 @@
 from django.test import TestCase, RequestFactory
+from django.urls import reverse
 
 
 class HomeViewTestCase(TestCase):
@@ -6,6 +7,6 @@ class HomeViewTestCase(TestCase):
         self.factory = RequestFactory()
 
     def test_home_view_get(self) -> None:
-        response = self.client.get("/")
+        response = self.client.get(reverse('home:index'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "home/index.html")

@@ -25,13 +25,13 @@ class ActivationView(View):
         if not verified:
             user.verified = True
             user.save()
-            context = {
+            mail_context = {
                 "user": user,
                 "domain": domain,
             }
             sendEmail(
                 subject=f"{domain} - Votre compte a est activer",
-                context=context,
+                context=mail_context,
                 to=[user.email],
                 template_name="auth/mail/activation-success.html",
             )

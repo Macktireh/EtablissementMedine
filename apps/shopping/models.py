@@ -31,7 +31,7 @@ class Order(AbstractPublicIdMixin):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_items')
     quantity = models.PositiveIntegerField(_('quantity'), default=1)
     price = models.DecimalField(_('price'), max_digits=10, decimal_places=2, default=0.00)
-    ordered = models.BooleanField(_('status ordered'), default=False, db_index=True)
+    ordered = models.BooleanField(_('ordered'), default=False, db_index=True)
     order_date = models.DateTimeField(_('order date'), blank=True, null=True, db_index=True)
 
     class Meta:

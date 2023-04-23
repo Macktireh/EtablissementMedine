@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-22 05:08+0200\n"
+"POT-Creation-Date: 2023-04-23 01:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: apps/auth/admin.py:40
+
+#: apps/auth/admin.py:39
 msgid "Personal info"
 msgstr ""
 
-#: apps/auth/admin.py:44
+#: apps/auth/admin.py:43
 msgid "Permissions"
 msgstr ""
 
-#: apps/auth/admin.py:57
+#: apps/auth/admin.py:56
 msgid "Important dates"
 msgstr ""
 
@@ -222,7 +223,7 @@ msgid "quantity"
 msgstr ""
 
 #: apps/shopping/models.py:34
-msgid "status ordered"
+msgid "ordered"
 msgstr ""
 
 #: apps/shopping/models.py:35 apps/shopping/models.py:57
@@ -265,10 +266,10 @@ msgstr ""
 msgid "Cart history"
 msgstr ""
 
-#: config/settings/base.py:116
+#: config/settings/base.py:123
 msgid "French"
 msgstr ""
 
-#: config/settings/base.py:117
+#: config/settings/base.py:124
 msgid "English"
 msgstr ""

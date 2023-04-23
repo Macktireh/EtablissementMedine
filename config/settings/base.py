@@ -6,82 +6,87 @@ from django.utils.translation import gettext_lazy as _
 from config.settings.utils import BASE_DIR, get_env_variable
 
 
-DEFAULT_SECRET_KEY = get_random_secret_key() + get_random_secret_key() + get_random_secret_key()
-SECRET_KEY = get_env_variable('SECRET_KEY', DEFAULT_SECRET_KEY)
+DEFAULT_SECRET_KEY = (
+    get_random_secret_key() + get_random_secret_key() + get_random_secret_key()
+)
+SECRET_KEY = get_env_variable("SECRET_KEY", DEFAULT_SECRET_KEY)
 
-ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS').split(" ")
+ALLOWED_HOSTS = get_env_variable("ALLOWED_HOSTS").split(" ")
 
-ADMINS = [tuple(map(str.strip, i.split("/"))) for i in get_env_variable('ADMINS', "").split("%%")]
+ADMINS = [
+    tuple(map(str.strip, i.split("/")))
+    for i in get_env_variable("ADMINS", "").split("%%")
+]
 
 
 # Application definition
 DJANGO_APPS = [
-    'django.contrib.admin',
-    'apps.auth.apps.AuthConfig', # django.contrib.auth
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.admindocs',
+    "django.contrib.admin",
+    "apps.auth.apps.AuthConfig",  # django.contrib.auth
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "django.contrib.admindocs",
 ]
 
 THIRD_PARTY_APPS = [
-    'corsheaders',
-    'rest_framework',
-    'rest_framework_simplejwt',
-    'rest_framework_simplejwt.token_blacklist',
-    'drf_yasg',
-    'modeltranslation',
-    'rosetta',
+    "corsheaders",
+    "rest_framework",
+    "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",
+    "drf_yasg",
+    "modeltranslation",
+    "rosetta",
 ]
 
 LOCAL_APPS = [
-    'apps.base.apps.BaseConfig',
-    'apps.home.apps.HomeConfig',
-    'apps.auth.apps.AuthUserConfig',
-    'apps.customer.apps.CustomerConfig',
-    'apps.product.apps.ProductConfig',
-    'apps.shopping.apps.ShoppingConfig',
+    "apps.base.apps.BaseConfig",
+    "apps.home.apps.HomeConfig",
+    "apps.auth.apps.AuthUserConfig",
+    "apps.customer.apps.CustomerConfig",
+    "apps.product.apps.ProductConfig",
+    "apps.shopping.apps.ShoppingConfig",
 ]
 
 INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + LOCAL_APPS
 
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware", # Whitenoise Middleware
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware', # CORS Middleware
-    'django.middleware.locale.LocaleMiddleware', # Locale Middleware
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.contrib.admindocs.middleware.XViewMiddleware', # django admin docs middleware
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # Whitenoise Middleware
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",  # CORS Middleware
+    "django.middleware.locale.LocaleMiddleware",  # Locale Middleware
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.contrib.admindocs.middleware.XViewMiddleware",  # django admin docs middleware
 ]
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates"),
         ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Password validation
@@ -89,16 +94,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -106,70 +111,69 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'fr'
+LANGUAGE_CODE = "fr"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
 USE_TZ = True
 
 LANGUAGES = (
-    ('fr', _('French')),
-    ('en', _('English')),
+    ("fr", _("French")),
+    ("en", _("English")),
 )
 
 LOCALE_PATHS = [
-    BASE_DIR / 'locale/',
+    BASE_DIR / "locale/",
 ]
 
-MODELTRANSLATION_LANGUAGES = ('fr', 'en')
+MODELTRANSLATION_LANGUAGES = ("fr", "en")
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, "static"),
 ]
 
 
 FIXTURE_DIRS = [
-    os.path.join(BASE_DIR, 'fixtures'),
+    os.path.join(BASE_DIR, "fixtures"),
 ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = 'authUser.User'
+AUTH_USER_MODEL = "authUser.User"
 
 
 # Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = get_env_variable('EMAIL_HOST')
-EMAIL_HOST_USER = get_env_variable('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = get_env_variable('EMAIL_HOST_PASSWORD')
-EMAIL_PORT= get_env_variable('EMAIL_PORT')
-EMAIL_USE_TLS = get_env_variable('EMAIL_USE_TLS')
-DEFAULT_FROM_EMAIL = get_env_variable('EMAIL_HOST_USER')
-
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = get_env_variable("EMAIL_HOST")
+EMAIL_HOST_USER = get_env_variable("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = get_env_variable("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = get_env_variable("EMAIL_PORT")
+EMAIL_USE_TLS = get_env_variable("EMAIL_USE_TLS")
+DEFAULT_FROM_EMAIL = get_env_variable("EMAIL_HOST_USER")
 
 
 # the list of origins authorized to make HTTP requests
-CORS_ALLOWED_ORIGINS = get_env_variable('CORS_ALLOWED_ORIGINS').split(" ")
+CORS_ALLOWED_ORIGINS = get_env_variable("CORS_ALLOWED_ORIGINS").split(" ")
 
 
 GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
+    "all_applications": True,
+    "group_models": True,
 }
 
 
 DJANGORESIZED_DEFAULT_SIZE = [400, 400]
 DJANGORESIZED_DEFAULT_QUALITY = 90
-DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'JPEG'
-DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'JPEG': ".jpg"}
+DJANGORESIZED_DEFAULT_FORCE_FORMAT = "JPEG"
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {"JPEG": ".jpg"}

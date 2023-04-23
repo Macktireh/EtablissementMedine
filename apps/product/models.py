@@ -29,7 +29,7 @@ class Category(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
     @property
     def thumbnail_preview(self) -> Any:
         if self.thumbnail:
-            return mark_safe(f'<img src="/mediafiles/{self.thumbnail}" width="40" height="40" />')
+            return mark_safe(f'<img src="{self.thumbnail.url}" width="40" height="40" />')
         return ""
 
     def save(self ,*args: Any, **kwargs: Any) -> None:

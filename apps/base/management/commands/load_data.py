@@ -27,10 +27,6 @@ class Command(loaddata.Command):
         with open(f"{FIXTURE_DIR}/initial_data.json", "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False)
 
-        print("Initial data generated")
-        print("Initial data generated")
-        print("Initial data generated")
-        
         super().handle(*args, **options)
 
         for user in tqdm(User.objects.all()):

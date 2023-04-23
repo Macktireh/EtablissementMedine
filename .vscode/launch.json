@@ -48,6 +48,15 @@
       "args": ["load_data", "initial_data.json"],
       "django": true,
       "justMyCode": true
+    },
+    {
+      "name": "django run test",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": ["test", "-v 2"],
+      "django": true,
+      "justMyCode": true
     }
   ]
 }
