@@ -17,6 +17,7 @@ from apps.auth.api.drf_schema import (
     signup_responses,
     activation_responses,
     login_responses,
+    request_reset_passwoard_responses,
 )
 from apps.auth.services import AuthService
 from apps.base.exceptions import EmailOrPasswordIncorrectError, UserNotVerifiedError
@@ -31,7 +32,7 @@ class SignUpView(APIView):
 
     @swagger_auto_schema(
         request_body=serializers.SignupSerializer,
-        # operation_description="Create a new user account.",
+        operation_description="Create a new user account.",
         responses=signup_responses,
     )
     def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Response:
@@ -51,13 +52,12 @@ class SignUpView(APIView):
         )
 
 
-class ActivationView(APIView):
+class ActivationWithLinkView(APIView):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
         request_body=serializers.ActivationSerializer,
-        # operation_description="Activate a user account.",
-        operation_id="activation",
+        operation_id="activation_with_link",
         responses=activation_responses,
     )
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Response:
@@ -65,7 +65,36 @@ class ActivationView(APIView):
         token: str = kwargs.get("token")
 
         try:
-            AuthService.activate_user(request, uidb64, token)
+            AuthService.activate_user_link(request, uidb64, token)
+        except:
+            return Response(
+                {
+                    "status": _("fail"),
+                    "message": failMsg["THE_TOKEN_IS_NOT_VALID_OR_HAS_EXPIRED"],
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        return Response(
+            {
+                "status": "success",
+                "message": succesMsg["YOUR_ACCOUNT_HAS_BEEN_SUCCESSFULLY_ACTIVATED"],
+            },
+            status=status.HTTP_200_OK,
+        )
+
+
+class ActivationWithTokenView(APIView):
+    permission_classes = [AllowAny]
+
+    @swagger_auto_schema(
+        request_body=serializers.ActivationSerializer,
+        operation_id="activation_with_token",
+        responses=activation_responses,
+    )
+    def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Response:
+        try:
+            AuthService.activate_user_token(request, payload=request.data)
         except:
             return Response(
                 {
@@ -130,27 +159,17 @@ class LoginView(APIView):
 
 
 class RequestResetPasswordView(APIView):
+
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
         request_body=serializers.RequestResetPasswordSerializer,
         operation_description="Request a password reset.",
         operation_id="request_reset_password",
-        responses={
-            status.HTTP_200_OK: openapi.Response(
-                description="Requested password reset successfully.",
-                examples={
-                    "application/json": {
-                        "status": "success",
-                        "message": succesMsg["THE_PASSWORD_RESET_LINK_HAS_BEEN_SENT"],
-                    }
-                },
-            ),
-            status.HTTP_400_BAD_REQUEST: "Validation error.",
-        },
+        responses=request_reset_passwoard_responses,
     )
     def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Response:
-        serializer = self.serializer_class(data=request.data)
+        serializer = serializers.RequestResetPasswordSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         return Response(

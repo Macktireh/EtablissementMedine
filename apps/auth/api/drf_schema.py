@@ -61,3 +61,17 @@ login_responses = {
         },
     ),
 }
+
+
+request_reset_passwoard_responses = {
+    status.HTTP_200_OK: openapi.Response(
+        description="Requested password reset successfully.",
+        examples={
+            "application/json": {
+                "status": "success",
+                "message": succesMsg["THE_PASSWORD_RESET_LINK_HAS_BEEN_SENT"],
+            }
+        },
+    ),
+    status.HTTP_400_BAD_REQUEST: "Validation error.",
+}

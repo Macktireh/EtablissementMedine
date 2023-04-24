@@ -4,7 +4,7 @@ from django.db.models import QuerySet
 from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _
 
-from apps.auth.models import Code, User
+from apps.auth.models import PhoneNumberCheck, User
 
 
 @admin.register(User)
@@ -93,10 +93,10 @@ class UserAdmin(BaseUserAdmin):
         return request.user.is_superuser
 
 
-@admin.register(Code)
+@admin.register(PhoneNumberCheck)
 class CodeAdmin(admin.ModelAdmin):
     list_display = (
-        "code",
+        "token",
         "name",
         "phone_number",
         "verified",
@@ -104,27 +104,33 @@ class CodeAdmin(admin.ModelAdmin):
         "timestamp_verified",
     )
     search_fields = (
-        "code",
+        "token",
         "name",
     )
 
-    def name(self, obj: Code) -> str:
+    def name(self, obj: PhoneNumberCheck) -> str:
         return obj.user.get_full_name()
 
-    def phone_number(self, obj: Code) -> str:
+    def phone_number(self, obj: PhoneNumberCheck) -> str:
         return obj.user.phone_number
 
     def get_queryset(self, request: HttpRequest) -> QuerySet:
         return super().get_queryset(request).select_related("user")
 
-    def has_view_permission(self, request: HttpRequest, obj: Code = None) -> bool:
+    def has_view_permission(
+        self, request: HttpRequest, obj: PhoneNumberCheck = None
+    ) -> bool:
         return request.user.is_superuser
 
     def has_add_permission(self, request: HttpRequest) -> bool:
         return False
 
-    def has_change_permission(self, request: HttpRequest, obj: Code = None) -> bool:
+    def has_change_permission(
+        self, request: HttpRequest, obj: PhoneNumberCheck = None
+    ) -> bool:
         return False
 
-    def has_delete_permission(self, request: HttpRequest, obj: Code = None) -> bool:
+    def has_delete_permission(
+        self, request: HttpRequest, obj: PhoneNumberCheck = None
+    ) -> bool:
         return False

@@ -1,14 +1,10 @@
 import six
-from typing import TypedDict
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
 from rest_framework_simplejwt.tokens import RefreshToken
 
-
-class TokenType(TypedDict):
-    access: str
-    refresh: str
+from apps.auth.types import TokenType
 
 
 def getTokensUser(user) -> TokenType:

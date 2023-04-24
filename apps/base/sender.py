@@ -56,7 +56,7 @@ class SmsService:
         self.body = body
         self.to = to
 
-    def send(self) -> None:
+    def send(self) -> requests.Response | None:
         payload = {
             "messages": [
                 {
@@ -72,8 +72,8 @@ class SmsService:
         auth = requests.auth.HTTPBasicAuth(
             settings.CLICKSEND_USERNAME, settings.CLICKSEND_PASSWORD
         )
-
-        response = requests.post(settings.CLICKSEND_URL, json.dumps(payload), auth=auth)
+        if not settings.EVV == "development":
+            return requests.post(settings.CLICKSEND_URL, json.dumps(payload), auth=auth)
 
 
 # send sms aysnc

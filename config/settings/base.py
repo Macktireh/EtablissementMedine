@@ -163,6 +163,7 @@ EMAIL_USE_TLS = get_env_variable("EMAIL_USE_TLS")
 DEFAULT_FROM_EMAIL = get_env_variable("EMAIL_HOST_USER")
 
 # SMS
+PHONENUMBER_EXPIRATION = 5
 CLICKSEND_URL = "https://rest.clicksend.com/v3/sms/send"
 CLICKSEND_USERNAME = get_env_variable("CLICKSEND_USERNAME")
 CLICKSEND_PASSWORD = get_env_variable("CLICKSEND_PASSWORD")
