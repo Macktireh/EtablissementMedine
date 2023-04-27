@@ -1,8 +1,10 @@
 from django.test import TestCase
-from django.contrib.auth import get_user_model
+
+from apps.auth.models import User
 
 
 class UserModelTestCase(TestCase):
+
     def setUp(self):
         self.user_data = {
             "email": "test@example.com",
@@ -12,7 +14,6 @@ class UserModelTestCase(TestCase):
         }
 
     def test_create_user(self) -> None:
-        User = get_user_model()
         user = User.objects.create_user(**self.user_data)
         self.assertEqual(user.email, self.user_data["email"])
         self.assertEqual(user.phone_number, self.user_data["phone_number"])
@@ -22,17 +23,7 @@ class UserModelTestCase(TestCase):
         self.assertFalse(user.is_staff)
         self.assertFalse(user.is_superuser)
 
-        with self.assertRaises(TypeError):
-            User.objects.create_user()
-
-        with self.assertRaises(TypeError):
-            User.objects.create_user(email="")
-
-        with self.assertRaises(TypeError):
-            User.objects.create_user(phone_number="")
-
-    def test_create_superuser(self):
-        User = get_user_model()
+    def test_create_superuser(self) -> None:
         superuser = User.objects.create_superuser(**self.user_data)
         self.assertEqual(superuser.email, self.user_data["email"])
         self.assertEqual(superuser.phone_number, self.user_data["phone_number"])

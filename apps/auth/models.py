@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from random import randint
 
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, AbstractBaseUser
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
@@ -12,7 +12,6 @@ from config import settings
 
 
 class User(AbstractPublicIdMixin, AbstractUser):
-
     username = None
     fisrt_name = None
     last_name = None
@@ -38,7 +37,9 @@ class User(AbstractPublicIdMixin, AbstractUser):
         db_table = "user"
 
     def save(self, *args, **kwargs) -> None:
-        if not self.phone_number.startswith("+253") or not self.phone_number.startswith("00253"):
+        if not self.phone_number.startswith("+253") or not self.phone_number.startswith(
+            "00253"
+        ):
             self.phone_number = "+253" + self.phone_number
         super().save(*args, **kwargs)
 
@@ -47,7 +48,6 @@ class User(AbstractPublicIdMixin, AbstractUser):
 
 
 class PhoneNumberCheck(models.Model):
-
     token = models.CharField(max_length=6)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     verified = models.BooleanField(_("verified"), default=False, db_index=True)
@@ -66,7 +66,11 @@ class PhoneNumberCheck(models.Model):
 
     @classmethod
     def create_token(cls, phone_number: str) -> str:
-        token = "123456" if settings.ENV == "developement" else randint(100000, 1000000)
+        token = (
+            "123456"
+            if settings.ENV == "developement"
+            else str(randint(100000, 1000000))
+        )
         obj, _ = cls.objects.get_or_create(user__phone_number=phone_number)
         obj.token = token
         obj.timestamp_requested = timezone.now()

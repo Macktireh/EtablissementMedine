@@ -5,19 +5,24 @@ from django.shortcuts import render
 from django.views import View
 
 from apps.auth.services import AuthService
+from apps.auth.types import ActivationLinkPayloadType
 
 
 class ActivationView(View):
-
     template_name: str = "auth/activation-success.html"
     context: Mapping[str, Any] = {}
 
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
-        uidb64: str = kwargs.get("uidb64")
-        token: str = kwargs.get("token")
+        uidb64 = kwargs.get("uidb64")
+        token = kwargs.get("token")
+
+        if not uidb64 or not token:
+            return render(request, "error/404.html", self.context)
+
+        payload = ActivationLinkPayloadType(uidb64=uidb64, token=token)
 
         try:
-            AuthService.activate_user(request, uidb64, token)
+            AuthService.activate_user_link(request, payload)
         except:
             return render(request, "error/404.html", self.context)
 

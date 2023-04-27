@@ -1,6 +1,7 @@
 import json
 import requests
 
+from requests.auth import HTTPBasicAuth
 from threading import Thread
 from typing import Any, Dict, List
 
@@ -26,20 +27,21 @@ def sendAsyncEmail(eamil: EmailMessage) -> None:
         raise TemplateDoesNotExist(failMsg["THE_TEMPLATE_EMAIL_HAS_NOT_BEEN_FOUND"])
 
 
-def sendEmail(
+def send_email(
     subject: str,
     context: Dict[str, Any],
     to: List[str],
-    body: str = None,
-    template_name: str = None,
+    template_name: str | None = None,
     _from: str = settings.EMAIL_HOST_USER,
 ) -> None:
     try:
+        if template_name is None:
+            raise TemplateDoesNotExist(failMsg["THE_TEMPLATE_EMAIL_HAS_NOT_BEEN_FOUND"])
         ext = template_name.split(".")[-1]
         htmlContent = get_template(template_name).render(context)
         email = EmailMessage(
             subject=subject,
-            body=htmlContent if ext == "html" else body,
+            body=htmlContent,
             from_email=_from,
             to=to,
         )
@@ -51,7 +53,6 @@ def sendEmail(
 
 
 class SmsService:
-
     def __init__(self, body: str, to: str) -> None:
         self.body = body
         self.to = to
@@ -69,7 +70,7 @@ class SmsService:
             ]
         }
 
-        auth = requests.auth.HTTPBasicAuth(
+        auth = HTTPBasicAuth(
             settings.CLICKSEND_USERNAME, settings.CLICKSEND_PASSWORD
         )
         if not settings.EVV == "development":
@@ -77,10 +78,12 @@ class SmsService:
 
 
 # send sms aysnc
-def sendAsyncSMS(sms: SmsService) -> None:
+def sendAsyncSMS(sms: SmsService) -> Any | None:
     try:
         response = sms.send()
-        response.raise_for_status()  # raise an exception if status code is not 2xx
+        if response is None:
+            return
+        response.raise_for_status()
         return response.json()
     except requests.exceptions.HTTPError as errh:
         print("HTTP Error:", errh)
@@ -93,6 +96,6 @@ def sendAsyncSMS(sms: SmsService) -> None:
 
 
 # send sms
-def sendSMS(body: str, to: str) -> None:
+def send_sms(body: str, to: str) -> None:
     sms = SmsService(body, to)
     Thread(target=sendAsyncSMS, args=(sms,)).start()

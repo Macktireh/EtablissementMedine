@@ -33,9 +33,3 @@ class Command(loaddata.Command):
             if not user.is_superuser:
                 user.set_password(user.password)
                 user.save()
-
-        try:
-            os.remove(f"{FIXTURE_DIR}/initial_data.json")
-            # os.rmdir(FIXTURE_DIR)
-        except:
-            pass

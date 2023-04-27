@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, cast
 
 from django.contrib.auth import get_user_model
 from django.http import HttpRequest
@@ -8,6 +8,7 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.utils.serializer_helpers import ReturnDict
 
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
@@ -20,6 +21,11 @@ from apps.auth.api.drf_schema import (
     request_reset_passwoard_responses,
 )
 from apps.auth.services import AuthService
+from apps.auth.types import (
+    ActivationLinkPayloadType,
+    ActivationTokenPayloadType,
+    LoginPayloadType,
+)
 from apps.base.exceptions import EmailOrPasswordIncorrectError, UserNotVerifiedError
 from apps.base.response import succesMsg, failMsg
 
@@ -56,16 +62,26 @@ class ActivationWithLinkView(APIView):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
-        request_body=serializers.ActivationSerializer,
         operation_id="activation_with_link",
         responses=activation_responses,
     )
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Response:
-        uidb64: str = kwargs.get("uidb64")
-        token: str = kwargs.get("token")
+        uidb64 = kwargs.get("uidb64")
+        token = kwargs.get("token")
+
+        if not uidb64 or not token:
+            return Response(
+                {
+                    "status": _("fail"),
+                    "message": failMsg["MISSING_PARAMETER"],
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        payload = ActivationLinkPayloadType(uidb64=uidb64, token=token)
 
         try:
-            AuthService.activate_user_link(request, uidb64, token)
+            AuthService.activate_user_link(request, payload)
         except:
             return Response(
                 {
@@ -88,13 +104,20 @@ class ActivationWithTokenView(APIView):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
-        request_body=serializers.ActivationSerializer,
+        request_body=serializers.ActivationTokenSerializer,
         operation_id="activation_with_token",
         responses=activation_responses,
     )
     def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Response:
+        serializer = serializers.ActivationTokenSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        token = cast(ReturnDict, serializer.validated_data)["token"]
+        phone_number = cast(ReturnDict, serializer.validated_data)["phoneNumber"]
+        payload = ActivationTokenPayloadType(token=token, phone_number=phone_number)
+
         try:
-            AuthService.activate_user_token(request, payload=request.data)
+            AuthService.activate_user_token(request, payload)
         except:
             return Response(
                 {
@@ -126,11 +149,12 @@ class LoginView(APIView):
         serializer = serializers.LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        email = serializer.validated_data["email"]
-        password = serializer.validated_data["password"]
+        email = cast(ReturnDict, serializer.validated_data)["email"]
+        password = cast(ReturnDict, serializer.validated_data)["password"]
+        payload = LoginPayloadType(email=email, password=password)
 
         try:
-            tokens = AuthService.login(request, email, password)
+            tokens = AuthService.login(request, payload)
         except EmailOrPasswordIncorrectError:
             return Response(
                 {
@@ -159,7 +183,6 @@ class LoginView(APIView):
 
 
 class RequestResetPasswordView(APIView):
-
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
@@ -171,6 +194,9 @@ class RequestResetPasswordView(APIView):
     def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Response:
         serializer = serializers.RequestResetPasswordSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+
+        email = cast(ReturnDict, serializer.validated_data)["email"]
+        AuthService.request_reset_password_with_link(request, email)
 
         return Response(
             {
