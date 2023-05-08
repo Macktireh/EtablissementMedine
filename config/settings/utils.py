@@ -13,7 +13,9 @@ load = load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 def get_env_variable(var_name: str, default: None | str = None) -> str:
     try:
-        return os.environ[var_name] if os.environ[var_name] else default
+        if os.environ[var_name]:
+            return os.environ[var_name]
+        raise KeyError
     except KeyError:
         if default is not None:
             return default
