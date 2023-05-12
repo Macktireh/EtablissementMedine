@@ -24,7 +24,7 @@ class CartView(viewsets.ModelViewSet):
 
 class ShoppingCartView(APIView):
 
-    def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Response:
+    def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
         """
         Add to cart a product
         """
@@ -40,7 +40,7 @@ class ShoppingCartView(APIView):
 
 class OrderDetailView(APIView):
 
-    def patch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Response:
+    def patch(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
         """
         Update quatity of orderd product
         """
@@ -53,7 +53,7 @@ class OrderDetailView(APIView):
             "message": "Updated quantity",
         }, status=status.HTTP_200_OK)
     
-    def delete(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Response:
+    def delete(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
         """
         Delete order
         """

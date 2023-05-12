@@ -1,12 +1,12 @@
 from typing import cast
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import authenticate
+from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpRequest
 from django.utils import timezone
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.translation import gettext as _
 
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError as JWTTokenError
@@ -21,13 +21,13 @@ from apps.auth.types import (
     ResetPwdTokenPayloadType,
     JWTTokenType,
 )
-from apps.base.exceptions import (
+from apps.core.exceptions import (
     EmailOrPasswordIncorrectError,
     TokenError,
     UserNotFoundError,
     UserNotVerifiedError,
 )
-from apps.base.sender import send_email, send_sms
+from apps.core.sender import send_email, send_sms
 
 
 class AuthService:

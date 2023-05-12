@@ -3,7 +3,7 @@ from django.utils.translation import gettext as _
 from rest_framework import status
 from drf_yasg import openapi
 
-from apps.base.response import succesMsg, failMsg
+from apps.core.response import succesMsg, failMsg
 
 
 signup_responses = {

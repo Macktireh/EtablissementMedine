@@ -4,7 +4,7 @@ from random import randint
 from django.utils import timezone
 from faker import Faker
 
-from apps.base.utils import uidGenerator
+from apps.core.utils import uidGenerator
 
 
 fake = Faker(locale="fr_FR")

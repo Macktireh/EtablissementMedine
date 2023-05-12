@@ -3,7 +3,7 @@ from typing import Any
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from apps.base.utils import uidGenerator
+from apps.core.utils import uidGenerator
 
 
 class AbstractPublicIdMixin(models.Model):
@@ -19,7 +19,7 @@ class AbstractPublicIdMixin(models.Model):
     class Meta:
         abstract = True
 
-    def save(self, *args: Any, **kwargs: Any) -> None:
+    def save(self, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> None:
         if not self.public_id:
             self.public_id = uidGenerator()
         super().save(*args, **kwargs)

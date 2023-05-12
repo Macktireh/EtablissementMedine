@@ -1,6 +1,6 @@
 from django.urls import path
 
-from apps.base.method import getList
+from apps.core.method import getList
 from apps.shopping.api.views import CartView, OrderDetailView, ShoppingCartView
 
 

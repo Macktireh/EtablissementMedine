@@ -1,14 +1,27 @@
 from typing import cast
+
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.admin import (
+    GroupAdmin as BaseGroupAdmin,
+    UserAdmin as BaseUserAdmin,
+)
+from django.contrib.auth.models import Group
 from django.db.models import QuerySet
 from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _
 
-from apps.auth.models import PhoneNumberCheck, User
+from apps.auth.models import GroupProxy, PhoneNumberCheck, UserProxy
 
 
-@admin.register(User)
+admin.site.unregister(Group)
+
+
+@admin.register(GroupProxy)
+class GroupAdmin(BaseGroupAdmin):
+    pass
+
+
+@admin.register(UserProxy)
 class UserAdmin(BaseUserAdmin):
     list_display = (
         "email",
@@ -90,10 +103,23 @@ class UserAdmin(BaseUserAdmin):
     ordering = ("date_joined",)
     list_per_page = 20
 
-    def has_delete_permission(
-        self, request: HttpRequest, obj: User | None = None
+    def has_view_permission(
+        self, request: HttpRequest, obj: PhoneNumberCheck | None = None
     ) -> bool:
-        return cast(User, request.user).is_superuser
+        return cast(UserProxy, request.user).is_superuser
+
+    def has_add_permission(self, request: HttpRequest) -> bool:
+        return cast(UserProxy, request.user).is_superuser
+
+    def has_change_permission(
+        self, request: HttpRequest, obj: PhoneNumberCheck | None = None
+    ) -> bool:
+        return cast(UserProxy, request.user).is_superuser
+
+    def has_delete_permission(
+        self, request: HttpRequest, obj: UserProxy | None = None
+    ) -> bool:
+        return cast(UserProxy, request.user).is_superuser
 
 
 @admin.register(PhoneNumberCheck)
@@ -123,7 +149,7 @@ class CodeAdmin(admin.ModelAdmin):
     def has_view_permission(
         self, request: HttpRequest, obj: PhoneNumberCheck | None = None
     ) -> bool:
-        return cast(User, request.user).is_superuser
+        return cast(UserProxy, request.user).is_superuser
 
     def has_add_permission(self, request: HttpRequest) -> bool:
         return False

@@ -1,7 +1,7 @@
 from django.urls import path
 
 from apps.product.api.views import CategoryView, ProductView
-from apps.base.method import getList
+from apps.core.method import getList
 
 
 urlpatterns = [

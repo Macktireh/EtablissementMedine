@@ -12,7 +12,7 @@ from django.template.exceptions import TemplateDoesNotExist
 from django.template.loader import get_template
 from django.utils.translation import gettext_lazy as _
 
-from apps.base.response import failMsg
+from apps.core.response import failMsg
 
 
 User = get_user_model()

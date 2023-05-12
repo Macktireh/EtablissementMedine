@@ -22,7 +22,7 @@ ADMINS = [
 # Application definition
 DJANGO_APPS = [
     "django.contrib.admin",
-    "apps.auth.apps.AuthConfig",  # django.contrib.auth
+    "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
@@ -41,8 +41,9 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "apps.base.apps.BaseConfig",
+    "apps.core.apps.CoreConfig",
     "apps.home.apps.HomeConfig",
+    "apps.users.apps.UsersConfig",
     "apps.auth.apps.AuthUserConfig",
     "apps.customer.apps.CustomerConfig",
     "apps.product.apps.ProductConfig",
@@ -150,7 +151,7 @@ FIXTURE_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = "authUser.User"
+AUTH_USER_MODEL = "users.User"
 
 
 # Email settings
@@ -167,7 +168,7 @@ PHONENUMBER_EXPIRATION = 5
 CLICKSEND_URL = "https://rest.clicksend.com/v3/sms/send"
 CLICKSEND_USERNAME = get_env_variable("CLICKSEND_USERNAME")
 CLICKSEND_PASSWORD = get_env_variable("CLICKSEND_PASSWORD")
-CLICKSEND_FROM = get_env_variable("CLICKSEND_FROM")
+CLICKSEND_FROM = "EtabMedine"
 
 
 # the list of origins authorized to make HTTP requests

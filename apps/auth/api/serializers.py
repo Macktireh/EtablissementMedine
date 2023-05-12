@@ -6,7 +6,7 @@ from rest_framework import serializers
 
 from apps.auth.models import User
 from apps.auth.validators import AuthUserValidators
-from apps.base.response import failMsg
+from apps.core.response import failMsg
 
 
 class PasswordSerializer(serializers.Serializer):

@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 
 from apps.auth.api.views import (
     SignUpView,
-    ActivationView,
+    ActivationWithLinkView,
     LoginView,
     RequestResetPasswordView,
     ResetPasswordView,
@@ -13,7 +13,7 @@ from apps.auth.api.views import (
 
 urlpatterns = [
     path("signup/", SignUpView.as_view(), name="signup-api"),
-    path("activation/", ActivationView.as_view(), name="activation-api"),
+    path("activation/", ActivationWithLinkView.as_view(), name="activation-api"),
     path("login/", LoginView.as_view(), name="login-api"),
     path(
         "request/reset-password/",

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.customer.serializers import UserSerializer
+from apps.users.api.serializers import UserSerializer
 from apps.shopping.models import Cart, Order
 
 

@@ -9,5 +9,5 @@ class HomeView(View):
     template_name: str = "home/index.html"
     context: Mapping[str, Any] = {}
 
-    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+    def get(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> HttpResponse:
         return render(request, self.template_name, self.context)

@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 from django_resized import ResizedImageField
 
-from apps.base.models import AbstractPublicIdMixin, AbstractCreatedUpdatedMixin
+from apps.core.models import AbstractPublicIdMixin, AbstractCreatedUpdatedMixin
 from apps.product.utils import thumbnail_path
 
 
@@ -32,7 +32,7 @@ class Category(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
             return mark_safe(f'<img src="{self.thumbnail.url}" width="40" height="40" />')
         return ""
 
-    def save(self ,*args: Any, **kwargs: Any) -> None:
+    def save(self ,*args: Any, **kwargs: dict[str, Any]) -> None:
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
@@ -64,7 +64,7 @@ class Product(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
         return ""
         # return mark_safe(f'<img src="{"https://picsum.photos/100/100"}" width="100" height="100" />')
 
-    def save(self ,*args: Any, **kwargs: Any) -> None:
+    def save(self ,*args: Any, **kwargs: dict[str, Any]) -> None:
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)

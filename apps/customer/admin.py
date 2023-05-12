@@ -16,6 +16,15 @@ class AddressAdmin(admin.ModelAdmin):
         "zipcode",
         "country",
     )
+    search_fields = (
+        "user__name",
+        "user__email",
+        "user__phone_number",
+        "street_address",
+        "city",
+        "zipcode",
+        "country",
+    )
 
     def name(self, obj: Address) -> str:
         return obj.user.name
@@ -31,6 +40,6 @@ class AddressAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request: HttpRequest) -> bool:
         return False
-    
+
     def has_delete_permission(self, request: HttpRequest, obj: Address = None) -> bool:
         return False
