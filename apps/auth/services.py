@@ -1,7 +1,7 @@
 from typing import cast
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, get_user_model
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpRequest
 from django.utils import timezone
@@ -11,7 +11,7 @@ from django.utils.translation import gettext as _
 
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError as JWTTokenError
 
-from apps.auth.models import PhoneNumberCheck, User
+from apps.auth.models import PhoneNumberCheck
 from apps.auth.tokens import getTokensUser, tokenGenerator
 from apps.auth.types import (
     ActivationLinkPayloadType,
@@ -28,11 +28,15 @@ from apps.core.exceptions import (
     UserNotVerifiedError,
 )
 from apps.core.sender import send_email, send_sms
+from apps.users.types import CreateTokenPayloadType, UserType
+
+
+User = cast(UserType, get_user_model())
 
 
 class AuthService:
     @staticmethod
-    def signup_email(request: HttpRequest, user: User) -> None:
+    def signup_email(request: HttpRequest, user: UserType) -> None:
         token = tokenGenerator.make_token(user)
         domain = get_current_site(request)
         subject = _("Confirm the email address of your EtablissementMedine account")
@@ -50,13 +54,12 @@ class AuthService:
         )
 
     @staticmethod
-    def signup_sms(request: HttpRequest, user: User) -> None:
-        token = PhoneNumberCheck.create_token(user.phone_number)
-        body = _(
-            "Here is your EtablissementMedine code: %(token)d. Never share it."
-        ) % {"token": token}
+    def signup_sms(request: HttpRequest, user: UserType) -> None:
+        payload = CreateTokenPayloadType(phone_number=user.phone_number, user=user)
+        token = PhoneNumberCheck.create_token(payload)
+        body = _("Here is your EtablissementMedine code: %(token)s. Never share it.") % {"token": token}
 
-        send_sms(to=user.phone_number, body=body)
+        send_sms(body=body, to=user.phone_number)
 
     @staticmethod
     def activate_user_link(
@@ -66,9 +69,6 @@ class AuthService:
             public_id = force_str(urlsafe_base64_decode(payload["uidb64"]))
             user = User.objects.get(public_id=public_id)
         except User.DoesNotExist:
-            user = None
-
-        if not user:
             raise UserNotFoundError("User not found")
 
         if not tokenGenerator.check_token(user, payload["token"]):
@@ -83,7 +83,7 @@ class AuthService:
                 "domain": domain,
             }
             send_email(
-                subject=_("%(domain)d - Your account has been successfully activated")
+                subject=_("%(domain)s - Your account has been successfully activated")
                 % {"domain": domain},
                 context=context,
                 to=[user.email],
@@ -114,7 +114,7 @@ class AuthService:
                 "domain": domain,
             }
             send_email(
-                subject=_("%(domain)d - Your account has been successfully activated")
+                subject=_("%(domain)s - Your account has been successfully activated")
                 % {"domain": domain},
                 context=context,
                 to=[user.email],
@@ -124,7 +124,7 @@ class AuthService:
     @staticmethod
     def login(request: HttpRequest, payload: LoginPayloadType) -> JWTTokenType:
         user = cast(
-            User,
+            UserType,
             authenticate(
                 request=request, email=payload["email"], password=payload["password"]
             ),
@@ -163,10 +163,10 @@ class AuthService:
             user = User.objects.get(phone_number=phone_number)
             token = PhoneNumberCheck.create_token(user.phone_number)
             body = _(
-                "Here is your EtablissementMedine code: %(token)d. Never share it."
+                "Here is your EtablissementMedine code: %(token)s. Never share it."
             ) % {"token": token}
 
-            send_sms(to=user.phone_number, body=body)
+            send_sms(body=body, to=user.phone_number)
 
     @staticmethod
     def reset_password_with_link(
@@ -189,7 +189,7 @@ class AuthService:
             "domain": domain,
         }
         send_email(
-            subject=_("%(domain)d - Your password has been successfully changed!")
+            subject=_("%(domain)s - Your password has been successfully changed!")
             % {"domain": domain},
             context=context,
             to=[user.email],
@@ -219,7 +219,7 @@ class AuthService:
             "domain": domain,
         }
         send_email(
-            subject=_("%(domain)d - Your password has been successfully changed!")
+            subject=_("%(domain)s - Your password has been successfully changed!")
             % {"domain": domain},
             context=context,
             to=[user.email],
@@ -234,5 +234,5 @@ class AuthService:
         except JWTTokenError:
             raise JWTTokenError("Refresh token is invalid")
 
-        cast(User, request.user).last_login = timezone.now()
+        cast(UserType, request.user).last_login = timezone.now()
         request.user.save()

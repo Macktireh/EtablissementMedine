@@ -11,6 +11,8 @@ from apps.auth.api.views import (
 )
 
 
+app_name = "authApi"
+
 urlpatterns = [
     path("signup/", SignUpView.as_view(), name="signup-api"),
     path("activation/", ActivationWithLinkView.as_view(), name="activation-api"),

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-23 01:40+0200\n"
+"POT-Creation-Date: 2023-05-18 21:52+0200\n"
 "PO-Revision-Date: 2023-04-22 23:42+0000\n"
 "Last-Translator:  None <admin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,259 +19,323 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.9\n"
 
-#: apps/auth/admin.py:39
+#: .\apps\auth\admin.py:53
 msgid "Personal info"
 msgstr "Informations personnelles"
 
-#: apps/auth/admin.py:43
+#: .\apps\auth\admin.py:57
 msgid "Permissions"
 msgstr "Permissions"
 
-#: apps/auth/admin.py:56
+#: .\apps\auth\admin.py:70
 msgid "Important dates"
 msgstr "Dates importantes"
 
-#: apps/auth/api/serializers.py:272
-msgid "Les champs public_id et refresh sont obligatoire."
-msgstr "Les champs public_id et refresh sont obligatoire."
+#: .\apps\auth\api\drf_schema.py:11
+msgid "Account created successfully."
+msgstr ""
 
-#: apps/auth/apps.py:10
-msgid "Authentication and User Management"
+#: .\apps\auth\api\drf_schema.py:14 .\apps\auth\api\drf_schema.py:27
+#: .\apps\auth\api\drf_schema.py:40
+msgid "success"
+msgstr ""
+
+#: .\apps\auth\api\drf_schema.py:24
+msgid "Account activated successfully."
+msgstr ""
+
+#: .\apps\auth\api\drf_schema.py:37
+msgid "User logged in successfully."
+msgstr ""
+
+#: .\apps\auth\api\drf_schema.py:49 .\apps\auth\api\drf_schema.py:58
+#: .\apps\auth\api\views.py:79 .\apps\auth\api\views.py:92
+#: .\apps\auth\api\views.py:130 .\apps\auth\api\views.py:169
+#: .\apps\auth\api\views.py:177
+msgid "fail"
+msgstr ""
+
+#: .\apps\auth\apps.py:9
+#, fuzzy
+#| msgid "Authentication and User Management"
+msgid "Authentication and Authorization"
 msgstr "Authentification et gestion des utilisateurs"
 
-#: apps/auth/apps.py:14
-msgid "Authorization"
-msgstr "Autorisation"
+#: .\apps\auth\models.py:17
+msgid "group"
+msgstr ""
 
-#: apps/auth/managers.py:12
-msgid "The Email must be set"
-msgstr "L'adresse électronique doit être définie"
+#: .\apps\auth\models.py:18
+msgid "groups"
+msgstr ""
 
-#: apps/auth/managers.py:14
-msgid "The Password must be set"
-msgstr "Le mot de passe doit être défini"
+#: .\apps\auth\models.py:24
+msgid "user"
+msgstr ""
 
-#: apps/auth/managers.py:30
-msgid "Superuser must have is_active=True."
-msgstr "Le superutilisateur doit avoir is_active=True."
+#: .\apps\auth\models.py:25
+msgid "users"
+msgstr ""
 
-#: apps/auth/managers.py:32
-msgid "Superuser must have verified=True."
-msgstr "Le superutilisateur doit avoir vérifié=True."
-
-#: apps/auth/managers.py:34
-msgid "Superuser must have is_staff=True."
-msgstr "Le superutilisateur doit avoir is_staff=True."
-
-#: apps/auth/managers.py:36
-msgid "Superuser must have is_superuser=True."
-msgstr "Le superutilisateur doit avoir is_superuser=True."
-
-#: apps/auth/models.py:19 apps/product/models.py:17 apps/product/models.py:44
-msgid "name"
-msgstr "nom"
-
-#: apps/auth/models.py:21
-msgid "email address"
-msgstr "adresse électronique"
-
-#: apps/auth/models.py:24
-msgid "phone number"
-msgstr "numéro de téléphone"
-
-#: apps/auth/models.py:27 apps/auth/models.py:58
+#: .\apps\auth\models.py:31 .\apps\users\models.py:23
 msgid "verified"
 msgstr "vérifié"
 
-#: apps/auth/models.py:29
-msgid "Designates whether this user has been verified."
-msgstr "Indique si cet utilisateur a été vérifié."
-
-#: apps/auth/models.py:60
+#: .\apps\auth\models.py:33
 msgid "timestamp requested"
 msgstr "horodatage demandé"
 
-#: apps/auth/models.py:62
+#: .\apps\auth\models.py:35
 msgid "timestamp verified"
 msgstr "horodatage vérifié"
 
-#: apps/auth/models.py:66
+#: .\apps\auth\models.py:39
 msgid "verification code"
 msgstr "code de vérification"
 
-#: apps/auth/models.py:67
+#: .\apps\auth\models.py:40
 msgid "verification codes"
 msgstr "codes de vérification"
 
-#: apps/base/admin.py:10 apps/base/admin.py:11
+#: .\apps\auth\services.py:42
+msgid "Confirm the email address of your EtablissementMedine account"
+msgstr ""
+
+#: .\apps\auth\services.py:60
+#, python-format
+msgid "Here is your EtablissementMedine code: %(token)s. Never share it."
+msgstr ""
+
+#: .\apps\auth\services.py:86 .\apps\auth\services.py:117
+#, python-format
+msgid "%(domain)d - Your account has been successfully activated"
+msgstr ""
+
+#: .\apps\auth\services.py:166
+#, python-format
+msgid "Here is your EtablissementMedine code: %(token)d. Never share it."
+msgstr ""
+
+#: .\apps\auth\services.py:192 .\apps\auth\services.py:222
+#, python-format
+msgid "%(domain)d - Your password has been successfully changed!"
+msgstr ""
+
+#: .\apps\core\admin.py:10 .\apps\core\admin.py:11
 msgid "Etablissement Medine Administration"
 msgstr "Etablissement Medine Administration"
 
-#: apps/base/models.py:29
+#: .\apps\core\models.py:29
 msgid "created at"
 msgstr "créé le"
 
-#: apps/base/models.py:30
+#: .\apps\core\models.py:30
 msgid "updated at"
 msgstr "mis à jour le"
 
-#: apps/customer/apps.py:8
+#: .\apps\customer\apps.py:8
 msgid "Information about customers"
 msgstr "Informations sur les clients"
 
-#: apps/customer/models.py:10
+#: .\apps\customer\models.py:10
 msgid "street address"
 msgstr "adresse postale"
 
-#: apps/customer/models.py:11
+#: .\apps\customer\models.py:11
 msgid "City or neighborhood"
 msgstr "Ville ou quartier"
 
-#: apps/customer/models.py:12
+#: .\apps\customer\models.py:12
 msgid "Zip / Postal code"
 msgstr "Code postal"
 
-#: apps/customer/models.py:13
+#: .\apps\customer\models.py:13
 msgid "Country"
 msgstr "Pays"
 
-#: apps/customer/models.py:17
+#: .\apps\customer\models.py:17
 msgid "Customer"
 msgstr "Client"
 
-#: apps/customer/models.py:18
+#: .\apps\customer\models.py:18
 msgid "Customers"
 msgstr "Clients"
 
-#: apps/product/apps.py:8
+#: .\apps\product\apps.py:8
 msgid "Products and categories"
 msgstr "Produits et catégories"
 
-#: apps/product/models.py:19 apps/product/models.py:49
+#: .\apps\product\models.py:17 .\apps\product\models.py:44
+#: .\apps\users\models.py:15
+msgid "name"
+msgstr "nom"
+
+#: .\apps\product\models.py:19 .\apps\product\models.py:49
 msgid "thumbnail"
 msgstr "vignette"
 
-#: apps/product/models.py:23
+#: .\apps\product\models.py:23
 msgid "Category"
 msgstr "Catégorie"
 
-#: apps/product/models.py:24
+#: .\apps\product\models.py:24
 msgid "Categories"
 msgstr "Catégories"
 
-#: apps/product/models.py:45
+#: .\apps\product\models.py:45
 msgid "slug"
 msgstr "slug"
 
-#: apps/product/models.py:46 apps/shopping/models.py:33
+#: .\apps\product\models.py:46 .\apps\shopping\models.py:33
 msgid "price"
 msgstr "prix"
 
-#: apps/product/models.py:47
+#: .\apps\product\models.py:47
 msgid "stock quantity"
 msgstr "quantité en stock"
 
-#: apps/product/models.py:48
+#: .\apps\product\models.py:48
 msgid "description"
 msgstr "description"
 
-#: apps/product/models.py:54
+#: .\apps\product\models.py:54
 msgid "Product"
 msgstr "Produit"
 
-#: apps/product/models.py:55
+#: .\apps\product\models.py:55
 msgid "Products"
 msgstr "Produits"
 
-#: apps/shopping/apps.py:8
+#: .\apps\shopping\apps.py:8
 msgid "Shopping"
 msgstr "Achats"
 
-#: apps/shopping/models.py:12 apps/shopping/models.py:21
+#: .\apps\shopping\models.py:11 .\apps\shopping\models.py:19
 msgid "Pending"
 msgstr "En attente"
 
-#: apps/shopping/models.py:13
+#: .\apps\shopping\models.py:12
 msgid "Processing"
 msgstr "Traitement"
 
-#: apps/shopping/models.py:14
+#: .\apps\shopping\models.py:13
 msgid "Delivered"
 msgstr "Livré"
 
-#: apps/shopping/models.py:15
+#: .\apps\shopping\models.py:14
 msgid "Returned"
 msgstr "Renvoyé"
 
-#: apps/shopping/models.py:16 apps/shopping/models.py:25
+#: .\apps\shopping\models.py:15 .\apps\shopping\models.py:23
 msgid "Cancelled"
 msgstr "Annulé"
 
-#: apps/shopping/models.py:22
+#: .\apps\shopping\models.py:20
 msgid "Completed"
 msgstr "Terminé"
 
-#: apps/shopping/models.py:23
+#: .\apps\shopping\models.py:21
 msgid "Awaiting payment"
 msgstr "En attente de paiement"
 
-#: apps/shopping/models.py:24
+#: .\apps\shopping\models.py:22
 msgid "Refunded"
 msgstr "Remboursé"
 
-#: apps/shopping/models.py:32
+#: .\apps\shopping\models.py:31
 msgid "quantity"
 msgstr "quantité"
 
-#: apps/shopping/models.py:34
-#| msgid "Order"
+#: .\apps\shopping\models.py:35
 msgid "ordered"
 msgstr "commandée"
 
-#: apps/shopping/models.py:35 apps/shopping/models.py:57
+#: .\apps\shopping\models.py:37 .\apps\shopping\models.py:71
 msgid "order date"
 msgstr "date de la commande"
 
-#: apps/shopping/models.py:39
+#: .\apps\shopping\models.py:42
 msgid "Order"
 msgstr "Commande"
 
-#: apps/shopping/models.py:40
+#: .\apps\shopping\models.py:43
 msgid "  Orders"
 msgstr "Commandes"
 
-#: apps/shopping/models.py:55
+#: .\apps\shopping\models.py:58
 msgid "order status"
 msgstr "état de la commande"
 
-#: apps/shopping/models.py:56
+#: .\apps\shopping\models.py:65
 msgid "payment status"
 msgstr "état des paiements"
 
-#: apps/shopping/models.py:58
+#: .\apps\shopping\models.py:74
 msgid "payment date"
 msgstr "date de paiement"
 
-#: apps/shopping/models.py:59
+#: .\apps\shopping\models.py:77
 msgid "delivery date"
 msgstr "date de livraison"
 
-#: apps/shopping/models.py:63
+#: .\apps\shopping\models.py:82
 msgid "Cart"
 msgstr "Panier"
 
-#: apps/shopping/models.py:64
+#: .\apps\shopping\models.py:83
 msgid " Carts"
 msgstr "Paniers"
 
-#: apps/shopping/models.py:79 apps/shopping/models.py:80
+#: .\apps\shopping\models.py:99 .\apps\shopping\models.py:100
 msgid "Cart history"
 msgstr "Historique du panier"
 
-#: config/settings/base.py:123
+#: .\apps\users\managers.py:12
+msgid "The Email must be set"
+msgstr "L'adresse électronique doit être définie"
+
+#: .\apps\users\managers.py:14
+msgid "The Password must be set"
+msgstr "Le mot de passe doit être défini"
+
+#: .\apps\users\managers.py:30
+msgid "Superuser must have is_active=True."
+msgstr "Le superutilisateur doit avoir is_active=True."
+
+#: .\apps\users\managers.py:32
+msgid "Superuser must have verified=True."
+msgstr "Le superutilisateur doit avoir vérifié=True."
+
+#: .\apps\users\managers.py:34
+msgid "Superuser must have is_staff=True."
+msgstr "Le superutilisateur doit avoir is_staff=True."
+
+#: .\apps\users\managers.py:36
+msgid "Superuser must have is_superuser=True."
+msgstr "Le superutilisateur doit avoir is_superuser=True."
+
+#: .\apps\users\models.py:17
+msgid "email address"
+msgstr "adresse électronique"
+
+#: .\apps\users\models.py:20
+msgid "phone number"
+msgstr "numéro de téléphone"
+
+#: .\apps\users\models.py:25
+msgid "Designates whether this user has been verified."
+msgstr "Indique si cet utilisateur a été vérifié."
+
+#: .\config\settings\base.py:124
+msgid "English"
+msgstr "Anglais"
+
+#: .\config\settings\base.py:125
 msgid "French"
 msgstr "Français"
 
-#: config/settings/base.py:124
-msgid "English"
-msgstr "Anglais"
+#~ msgid "Les champs public_id et refresh sont obligatoire."
+#~ msgstr "Les champs public_id et refresh sont obligatoire."
+
+#~ msgid "Authorization"
+#~ msgstr "Autorisation"

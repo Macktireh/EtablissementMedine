@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from apps.users.models import User
+from apps.users.types import CreateTokenPayloadType
 
 
 class GroupProxy(Group):
@@ -42,13 +43,10 @@ class PhoneNumberCheck(models.Model):
         return self.token
 
     @classmethod
-    def create_token(cls, phone_number: str) -> str:
-        token = (
-            "123456"
-            if settings.ENV == "developement"
-            else str(randint(100000, 1000000))
-        )
-        obj, _ = cls.objects.get_or_create(user__phone_number=phone_number)
+    def create_token(cls, payload: CreateTokenPayloadType) -> str:
+        _code = str(randint(100000, 1000000))
+        token = _code if settings.ENV == "production" else "123456"
+        obj, _ = cls.objects.get_or_create(user__phone_number=payload["phone_number"], user=payload["user"])
         obj.token = token
         obj.timestamp_requested = timezone.now()
         obj.timestamp_verified = None

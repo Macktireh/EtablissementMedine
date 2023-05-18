@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Runserver",
+      "type": "shell",
+      "command": "poetry run python manage.py runserver",
+      "group": "build",
+    },
+    {
+      "label": "Makemigrations",
+      "type": "shell",
+      "command": "poetry run python manage.py makemigrations",
+      "group": "build",
+    },
+    {
+      "label": "Migrate",
+      "type": "shell",
+      "command": "poetry run python manage.py migrate",
+      "group": "build",
+    },
+    {
+      "label": "Test",
+      "type": "shell",
+      "command": "poetry run python manage.py test",
+      "group": "build",
+    }
+  ]
+}

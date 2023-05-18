@@ -73,8 +73,9 @@ class SmsService:
         auth = HTTPBasicAuth(
             settings.CLICKSEND_USERNAME, settings.CLICKSEND_PASSWORD
         )
-        if not settings.EVV == "development":
+        if settings.ENV == "production":
             return requests.post(settings.CLICKSEND_URL, json.dumps(payload), auth=auth)
+        return None
 
 
 # send sms aysnc

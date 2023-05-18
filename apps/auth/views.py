@@ -12,7 +12,9 @@ class ActivationView(View):
     template_name: str = "auth/activation-success.html"
     context: Mapping[str, Any] = {}
 
-    def get(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> HttpResponse:
+    def get(
+        self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
+    ) -> HttpResponse:
         uidb64 = kwargs.get("uidb64")
         token = kwargs.get("token")
 
