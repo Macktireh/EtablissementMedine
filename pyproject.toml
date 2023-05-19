@@ -1,0 +1,66 @@
+[tool.poetry]
+name = "etablissementmedinedjango"
+version = "0.1.0"
+description = "The goal of the project is to create an online store for the sale of products with home delivery."
+authors = ["Macktireh <abdimack97@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.2.1"
+django-cloudinary-storage = "^0.3.0"
+django-cors-headers = "^4.0.0"
+django-modeltranslation = "^0.18.9"
+django-resized = "^1.0.2"
+django-rosetta = "^0.9.9"
+djangorestframework = "^3.14.0"
+djangorestframework-simplejwt = "^5.2.2"
+docutils = "^0.20"
+drf-yasg = "^1.21.5"
+gunicorn = "^20.1.0"
+pillow = "^9.5.0"
+psycopg2-binary = "^2.9.6"
+python-dotenv = "^1.0.0"
+six = "^1.16.0"
+tqdm = "^4.65.0"
+whitenoise = "^6.4.0"
+
+
+[tool.poetry.group.dev.dependencies]
+django-extensions = "^3.2.1"
+faker = "^18.7.0"
+pytest-django = "^4.5.2"
+flake8 = "^6.0.0"
+isort = "^5.12.0"
+black = "^23.3.0"
+pre-commit = "^3.3.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 110
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | migrations
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+combine_as_imports = true
+include_trailing_comma = true
+line_length = 110
+skip = ["migrations", ".venv", ".tox", ".git"]
