@@ -24,6 +24,12 @@
       "type": "shell",
       "command": "poetry run python manage.py test",
       "group": "build",
+    },
+    {
+      "label": "Createsuperuser",
+      "type": "shell",
+      "command": "poetry run python manage.py createsuperuser --email=admin@gmail.com --name=Admin --phone_number=77123456",
+      "group": "build",
     }
   ]
 }

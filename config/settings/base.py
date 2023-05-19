@@ -51,8 +51,8 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",  # Whitenoise Middleware
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",  # CORS Middleware
     "django.middleware.locale.LocaleMiddleware",  # Locale Middleware
+    "corsheaders.middleware.CorsMiddleware",  # CORS Middleware
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -119,11 +119,14 @@ LANGUAGES = (
     ("fr", _("French")),
 )
 
+prefix_default_language = False
+
 LOCALE_PATHS = [
     BASE_DIR / "locale/",
 ]
 
 MODELTRANSLATION_LANGUAGES = ("en", "fr")
+MODELTRANSLATION_FALLBACK_LANGUAGES = ("en",)
 
 
 # Static files (CSS, JavaScript, Images)
