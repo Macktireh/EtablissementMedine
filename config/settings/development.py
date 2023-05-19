@@ -1,7 +1,9 @@
+import os
 
 from config.settings.base import *
+from config.settings.base import INSTALLED_APPS
 from config.settings.packages import *
-
+from config.settings.utils import BASE_DIR
 
 DEBUG = True
 
@@ -27,8 +29,8 @@ CACHES = {
 }
 
 
-MEDIA_URL = '/mediafiles/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles/')
+MEDIA_URL = "/mediafiles/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles/")
 
 STORAGES = {
     "default": {
@@ -38,5 +40,3 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
-
-

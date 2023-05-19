@@ -1,6 +1,6 @@
 from config.settings.base import *
 from config.settings.packages import *
-
+from config.settings.utils import BASE_DIR, get_env_variable
 
 DEBUG = False
 
@@ -31,7 +31,7 @@ CACHES = {
 # }
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': get_env_variable('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': get_env_variable('CLOUDINARY_API_KEY'),
-    'API_SECRET': get_env_variable('CLOUDINARY_API_SECRET')
+    "CLOUD_NAME": get_env_variable("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": get_env_variable("CLOUDINARY_API_KEY"),
+    "API_SECRET": get_env_variable("CLOUDINARY_API_SECRET"),
 }

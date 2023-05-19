@@ -1,17 +1,13 @@
 from typing import cast
 
 from django.contrib import admin
-from django.contrib.auth.admin import (
-    GroupAdmin as BaseGroupAdmin,
-    UserAdmin as BaseUserAdmin,
-)
+from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin, UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
 from django.db.models import QuerySet
 from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _
 
 from apps.auth.models import GroupProxy, PhoneNumberCheck, UserProxy
-
 
 admin.site.unregister(Group)
 
@@ -103,22 +99,16 @@ class UserAdmin(BaseUserAdmin):
     ordering = ("date_joined",)
     list_per_page = 20
 
-    def has_view_permission(
-        self, request: HttpRequest, obj: PhoneNumberCheck | None = None
-    ) -> bool:
+    def has_view_permission(self, request: HttpRequest, obj: PhoneNumberCheck | None = None) -> bool:
         return cast(UserProxy, request.user).is_superuser
 
     def has_add_permission(self, request: HttpRequest) -> bool:
         return cast(UserProxy, request.user).is_superuser
 
-    def has_change_permission(
-        self, request: HttpRequest, obj: PhoneNumberCheck | None = None
-    ) -> bool:
+    def has_change_permission(self, request: HttpRequest, obj: PhoneNumberCheck | None = None) -> bool:
         return cast(UserProxy, request.user).is_superuser
 
-    def has_delete_permission(
-        self, request: HttpRequest, obj: UserProxy | None = None
-    ) -> bool:
+    def has_delete_permission(self, request: HttpRequest, obj: UserProxy | None = None) -> bool:
         return cast(UserProxy, request.user).is_superuser
 
 
@@ -146,20 +136,14 @@ class CodeAdmin(admin.ModelAdmin):
     def get_queryset(self, request: HttpRequest) -> QuerySet:
         return super().get_queryset(request).select_related("user")
 
-    def has_view_permission(
-        self, request: HttpRequest, obj: PhoneNumberCheck | None = None
-    ) -> bool:
+    def has_view_permission(self, request: HttpRequest, obj: PhoneNumberCheck | None = None) -> bool:
         return cast(UserProxy, request.user).is_superuser
 
     def has_add_permission(self, request: HttpRequest) -> bool:
         return False
 
-    def has_change_permission(
-        self, request: HttpRequest, obj: PhoneNumberCheck | None = None
-    ) -> bool:
+    def has_change_permission(self, request: HttpRequest, obj: PhoneNumberCheck | None = None) -> bool:
         return False
 
-    def has_delete_permission(
-        self, request: HttpRequest, obj: PhoneNumberCheck | None = None
-    ) -> bool:
+    def has_delete_permission(self, request: HttpRequest, obj: PhoneNumberCheck | None = None) -> bool:
         return False

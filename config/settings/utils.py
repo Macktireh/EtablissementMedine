@@ -1,14 +1,12 @@
 import os
+from pathlib import Path
 
 from django.core.exceptions import ImproperlyConfigured
-
-from pathlib import Path
 from dotenv import load_dotenv
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-load = load_dotenv(os.path.join(BASE_DIR, '.env'))
+load = load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 
 def get_env_variable(var_name: str, default: None | str = None) -> str:

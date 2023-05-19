@@ -9,12 +9,8 @@ class ShoppingService:
     @staticmethod
     def add_to_cart(user: User, productPublicId: str) -> None:
         product = get_object_or_404(Product, public_id=productPublicId)
-        cart, _ = Cart.objects.get_or_create(
-            user=user, order_status=OrderStatusChoices.PENDINGG
-        )
-        order, created = Order.objects.get_or_create(
-            user=user, product=product, ordered=False
-        )
+        cart, _ = Cart.objects.get_or_create(user=user, order_status=OrderStatusChoices.PENDINGG)
+        order, created = Order.objects.get_or_create(user=user, product=product, ordered=False)
 
         if created:
             cart.orders.add(order)

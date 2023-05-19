@@ -1,10 +1,8 @@
 from django.utils.translation import gettext as _
-
-from rest_framework import status
 from drf_yasg import openapi
+from rest_framework import status
 
-from apps.core.response import succesMsg, failMsg
-
+from apps.core.response import failMsg, succesMsg
 
 signup_responses = {
     status.HTTP_201_CREATED: openapi.Response(

@@ -1,12 +1,12 @@
 from collections import OrderedDict
 
-from django.utils.translation import gettext_lazy as _
-
 from rest_framework import serializers
 
 from apps.auth.models import User
 from apps.auth.validators import AuthUserValidators
 from apps.core.response import failMsg
+
+# from django.utils.translation import gettext_lazy as _
 
 
 class PasswordSerializer(serializers.Serializer):
@@ -16,9 +16,7 @@ class PasswordSerializer(serializers.Serializer):
         write_only=True,
         style={"input_type": "password"},
     )
-    confirmPassword = serializers.CharField(
-        max_length=128, write_only=True, style={"input_type": "password"}
-    )
+    confirmPassword = serializers.CharField(max_length=128, write_only=True, style={"input_type": "password"})
 
 
 class SignupSerializer(PasswordSerializer):
@@ -44,11 +42,7 @@ class SignupSerializer(PasswordSerializer):
         confirm_password = attrs.get("confirmPassword")
         if password and confirm_password and password != confirm_password:
             raise serializers.ValidationError(
-                {
-                    "confirmPassword": failMsg[
-                        "THE_PASSWORD_AND_PASSWORD_CONFIRMATION_DO_NOT_MATCH"
-                    ]
-                }
+                {"confirmPassword": failMsg["THE_PASSWORD_AND_PASSWORD_CONFIRMATION_DO_NOT_MATCH"]}
             )
         return attrs
 
@@ -67,9 +61,7 @@ class ActivationTokenSerializer(serializers.Serializer):
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=255)
-    password = serializers.CharField(
-        max_length=128, write_only=True, style={"input_type": "password"}
-    )
+    password = serializers.CharField(max_length=128, write_only=True, style={"input_type": "password"})
 
     class Meta:
         fields = [
@@ -94,9 +86,7 @@ class ResetPasswordSerializer(PasswordSerializer):
         confirm_password = attrs.get("confirmPassword")
 
         if password != confirm_password:
-            raise serializers.ValidationError(
-                failMsg["THE_PASSWORD_AND_PASSWORD_CONFIRMATION_DO_NOT_MATCH"]
-            )
+            raise serializers.ValidationError(failMsg["THE_PASSWORD_AND_PASSWORD_CONFIRMATION_DO_NOT_MATCH"])
         return attrs
 
 

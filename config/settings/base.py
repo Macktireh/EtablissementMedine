@@ -5,18 +5,12 @@ from django.utils.translation import gettext_lazy as _
 
 from config.settings.utils import BASE_DIR, get_env_variable
 
-
-DEFAULT_SECRET_KEY = (
-    get_random_secret_key() + get_random_secret_key() + get_random_secret_key()
-)
+DEFAULT_SECRET_KEY = get_random_secret_key() + get_random_secret_key() + get_random_secret_key()
 SECRET_KEY = get_env_variable("SECRET_KEY", DEFAULT_SECRET_KEY)
 
 ALLOWED_HOSTS = get_env_variable("ALLOWED_HOSTS").split(" ")
 
-ADMINS = [
-    tuple(map(str.strip, i.split("/")))
-    for i in get_env_variable("ADMINS", "").split("%%")
-]
+ADMINS = [tuple(map(str.strip, i.split("/"))) for i in get_env_variable("ADMINS", "").split("%%")]
 
 
 # Application definition

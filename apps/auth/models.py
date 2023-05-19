@@ -29,9 +29,7 @@ class PhoneNumberCheck(models.Model):
     token = models.CharField(max_length=6)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     verified = models.BooleanField(_("verified"), default=False, db_index=True)
-    timestamp_requested = models.DateTimeField(
-        _("timestamp requested"), auto_now_add=True
-    )
+    timestamp_requested = models.DateTimeField(_("timestamp requested"), auto_now_add=True)
     timestamp_verified = models.DateTimeField(_("timestamp verified"), null=True)
 
     class Meta:
@@ -44,8 +42,7 @@ class PhoneNumberCheck(models.Model):
 
     @classmethod
     def create_token(cls, payload: CreateTokenPayloadType) -> str:
-        _code = str(randint(100000, 1000000))
-        token = _code if settings.ENV == "production" else "123456"
+        token = str(randint(100000, 1000000)) if settings.ENV == "production" else "123456"
         obj, _ = cls.objects.get_or_create(user__phone_number=payload["phone_number"], user=payload["user"])
         obj.token = token
         obj.timestamp_requested = timezone.now()
@@ -66,6 +63,4 @@ class PhoneNumberCheck(models.Model):
         return self.get_expiration_time() < timezone.now()
 
     def get_expiration_time(self) -> datetime:
-        return self.timestamp_requested + timedelta(
-            minutes=settings.PHONENUMBER_EXPIRATION
-        )
+        return self.timestamp_requested + timedelta(minutes=settings.PHONENUMBER_EXPIRATION)

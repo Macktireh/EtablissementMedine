@@ -1,19 +1,17 @@
 import json
-import requests
-
-from requests.auth import HTTPBasicAuth
 from threading import Thread
 from typing import Any, Dict, List
 
+import requests
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.mail import EmailMessage
 from django.template.exceptions import TemplateDoesNotExist
 from django.template.loader import get_template
 from django.utils.translation import gettext_lazy as _
+from requests.auth import HTTPBasicAuth
 
 from apps.core.response import failMsg
-
 
 User = get_user_model()
 
@@ -70,9 +68,7 @@ class SmsService:
             ]
         }
 
-        auth = HTTPBasicAuth(
-            settings.CLICKSEND_USERNAME, settings.CLICKSEND_PASSWORD
-        )
+        auth = HTTPBasicAuth(settings.CLICKSEND_USERNAME, settings.CLICKSEND_PASSWORD)
         if settings.ENV == "production":
             return requests.post(settings.CLICKSEND_URL, json.dumps(payload), auth=auth)
         return None

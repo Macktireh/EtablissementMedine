@@ -1,6 +1,5 @@
 from config.settings.utils import get_env_variable
 
-
 ENV = get_env_variable("ENV", "development")
 
 

@@ -3,32 +3,25 @@ from typing import Any, cast
 from django.contrib.auth import get_user_model
 from django.http import HttpRequest
 from django.utils.translation import gettext as _
-
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.utils.serializer_helpers import ReturnDict
 from rest_framework.views import APIView
 
-from drf_yasg import openapi
-from drf_yasg.utils import swagger_auto_schema
-
 from apps.auth.api import serializers
 from apps.auth.api.drf_schema import (
-    signup_responses,
     activation_responses,
     login_responses,
     request_reset_passwoard_responses,
+    signup_responses,
 )
 from apps.auth.services import AuthService
-from apps.auth.types import (
-    ActivationLinkPayloadType,
-    ActivationTokenPayloadType,
-    LoginPayloadType,
-)
+from apps.auth.types import ActivationLinkPayloadType, ActivationTokenPayloadType, LoginPayloadType
 from apps.core.exceptions import EmailOrPasswordIncorrectError, UserNotVerifiedError
-from apps.core.response import succesMsg, failMsg
-
+from apps.core.response import failMsg, succesMsg
 
 User = get_user_model()
 
@@ -41,9 +34,7 @@ class SignUpView(APIView):
         operation_description="Create a new user account.",
         responses=signup_responses,
     )
-    def post(
-        self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
-    ) -> Response:
+    def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
         serializer = serializers.SignupSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
@@ -67,9 +58,7 @@ class ActivationWithLinkView(APIView):
         operation_id="activation_with_link",
         responses=activation_responses,
     )
-    def get(
-        self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
-    ) -> Response:
+    def get(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
         uidb64 = kwargs.get("uidb64")
         token = kwargs.get("token")
 
@@ -86,7 +75,7 @@ class ActivationWithLinkView(APIView):
 
         try:
             AuthService.activate_user_link(request, payload)
-        except:
+        except Exception:
             return Response(
                 {
                     "status": _("fail"),
@@ -112,9 +101,7 @@ class ActivationWithTokenView(APIView):
         operation_id="activation_with_token",
         responses=activation_responses,
     )
-    def post(
-        self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
-    ) -> Response:
+    def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
         serializer = serializers.ActivationTokenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
@@ -124,7 +111,7 @@ class ActivationWithTokenView(APIView):
 
         try:
             AuthService.activate_user_token(request, payload)
-        except:
+        except Exception:
             return Response(
                 {
                     "status": _("fail"),
@@ -151,9 +138,7 @@ class LoginView(APIView):
         operation_id="login",
         responses=login_responses,
     )
-    def post(
-        self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
-    ) -> Response:
+    def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
         serializer = serializers.LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
@@ -199,9 +184,7 @@ class RequestResetPasswordView(APIView):
         operation_id="request_reset_password",
         responses=request_reset_passwoard_responses,
     )
-    def post(
-        self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
-    ) -> Response:
+    def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
         serializer = serializers.RequestResetPasswordSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
@@ -230,18 +213,14 @@ class ResetPasswordView(APIView):
                 examples={
                     "application/json": {
                         "status": "success",
-                        "message": succesMsg[
-                            "THE_PASSWORD_HAS_BEEN_CHANGED_SUCCESSFULLY"
-                        ],
+                        "message": succesMsg["THE_PASSWORD_HAS_BEEN_CHANGED_SUCCESSFULLY"],
                     }
                 },
             ),
             status.HTTP_400_BAD_REQUEST: "Validation error.",
         },
     )
-    def post(
-        self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
-    ) -> Response:
+    def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
         uidb64 = kwargs.get("uidb64")
         token = kwargs.get("token")
 
@@ -276,9 +255,7 @@ class LogoutView(APIView):
             ),
         },
     )
-    def post(
-        self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
-    ) -> Response:
+    def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
         return Response(
             {
                 "status": "success",

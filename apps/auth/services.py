@@ -1,14 +1,13 @@
 from typing import cast
 
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpRequest
 from django.utils import timezone
 from django.utils.encoding import force_bytes, force_str
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import gettext as _
-
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError as JWTTokenError
 
 from apps.auth.models import PhoneNumberCheck
@@ -16,20 +15,14 @@ from apps.auth.tokens import getTokensUser, tokenGenerator
 from apps.auth.types import (
     ActivationLinkPayloadType,
     ActivationTokenPayloadType,
+    JWTTokenType,
     LoginPayloadType,
     ResetPwdLinkPayloadType,
     ResetPwdTokenPayloadType,
-    JWTTokenType,
 )
-from apps.core.exceptions import (
-    EmailOrPasswordIncorrectError,
-    TokenError,
-    UserNotFoundError,
-    UserNotVerifiedError,
-)
+from apps.core.exceptions import EmailOrPasswordIncorrectError, NotFound, TokenError, UserNotVerifiedError
 from apps.core.sender import send_email, send_sms
 from apps.users.types import CreateTokenPayloadType, UserType
-
 
 User = cast(UserType, get_user_model())
 
@@ -62,14 +55,12 @@ class AuthService:
         send_sms(body=body, to=user.phone_number)
 
     @staticmethod
-    def activate_user_link(
-        request: HttpRequest, payload: ActivationLinkPayloadType
-    ) -> None:
+    def activate_user_link(request: HttpRequest, payload: ActivationLinkPayloadType) -> None:
         try:
             public_id = force_str(urlsafe_base64_decode(payload["uidb64"]))
             user = User.objects.get(public_id=public_id)
         except User.DoesNotExist:
-            raise UserNotFoundError("User not found")
+            raise NotFound("User not found")
 
         if not tokenGenerator.check_token(user, payload["token"]):
             raise TokenError("Invalid token")
@@ -83,23 +74,20 @@ class AuthService:
                 "domain": domain,
             }
             send_email(
-                subject=_("%(domain)s - Your account has been successfully activated")
-                % {"domain": domain},
+                subject=_("%(domain)s - Your account has been successfully activated") % {"domain": domain},
                 context=context,
                 to=[user.email],
                 template_name="auth/mail/activation-success.html",
             )
 
     @staticmethod
-    def activate_user_token(
-        request: HttpRequest, payload: ActivationTokenPayloadType
-    ) -> None:
+    def activate_user_token(request: HttpRequest, payload: ActivationTokenPayloadType) -> None:
         try:
             obj = PhoneNumberCheck.objects.get(
                 token=payload["token"], user__phone_number=payload["phone_number"]
             )
             user = obj.user
-        except:
+        except PhoneNumberCheck.DoesNotExist:
             raise TokenError("User not found")
 
         if not obj.confirm_verification(payload["token"]) and obj.is_expired():
@@ -114,8 +102,7 @@ class AuthService:
                 "domain": domain,
             }
             send_email(
-                subject=_("%(domain)s - Your account has been successfully activated")
-                % {"domain": domain},
+                subject=_("%(domain)s - Your account has been successfully activated") % {"domain": domain},
                 context=context,
                 to=[user.email],
                 template_name="auth/mail/activation-success.html",
@@ -125,9 +112,7 @@ class AuthService:
     def login(request: HttpRequest, payload: LoginPayloadType) -> JWTTokenType:
         user = cast(
             UserType,
-            authenticate(
-                request=request, email=payload["email"], password=payload["password"]
-            ),
+            authenticate(request=request, email=payload["email"], password=payload["password"]),
         )
 
         if not user:
@@ -156,27 +141,21 @@ class AuthService:
         return None
 
     @staticmethod
-    def request_reset_password_with_token(
-        request: HttpRequest, phone_number: str
-    ) -> None:
+    def request_reset_password_with_token(request: HttpRequest, phone_number: str) -> None:
         if User.objects.filter(phone_number=phone_number).exists():
             user = User.objects.get(phone_number=phone_number)
             token = PhoneNumberCheck.create_token(user.phone_number)
-            body = _(
-                "Here is your EtablissementMedine code: %(token)s. Never share it."
-            ) % {"token": token}
+            body = _("Here is your EtablissementMedine code: %(token)s. Never share it.") % {"token": token}
 
             send_sms(body=body, to=user.phone_number)
 
     @staticmethod
-    def reset_password_with_link(
-        request: HttpRequest, payload: ResetPwdLinkPayloadType
-    ) -> None:
+    def reset_password_with_link(request: HttpRequest, payload: ResetPwdLinkPayloadType) -> None:
         try:
             public_id = force_str(urlsafe_base64_decode(payload["uidb64"]))
             user = User.objects.get(public_id=public_id)
         except User.DoesNotExist:
-            raise UserNotFoundError("User not found")
+            raise NotFound("User not found")
 
         if not PasswordResetTokenGenerator().check_token(user, payload["token"]):
             raise TokenError("Invalid token")
@@ -189,23 +168,20 @@ class AuthService:
             "domain": domain,
         }
         send_email(
-            subject=_("%(domain)s - Your password has been successfully changed!")
-            % {"domain": domain},
+            subject=_("%(domain)s - Your password has been successfully changed!") % {"domain": domain},
             context=context,
             to=[user.email],
             template_name="auth/mail/rest-password-success.html",
         )
 
     @staticmethod
-    def reset_password_with_token(
-        request: HttpRequest, payload: ResetPwdTokenPayloadType
-    ) -> None:
+    def reset_password_with_token(request: HttpRequest, payload: ResetPwdTokenPayloadType) -> None:
         try:
             obj = PhoneNumberCheck.objects.get(
                 token=payload["token"], user__phone_number=payload["phone_number"]
             )
             user = obj.user
-        except:
+        except PhoneNumberCheck.DoesNotExist:
             raise TabError("Invalid token")
 
         if not obj.confirm_verification(payload["token"]) and obj.is_expired():
@@ -219,8 +195,7 @@ class AuthService:
             "domain": domain,
         }
         send_email(
-            subject=_("%(domain)s - Your password has been successfully changed!")
-            % {"domain": domain},
+            subject=_("%(domain)s - Your password has been successfully changed!") % {"domain": domain},
             context=context,
             to=[user.email],
             template_name="auth/mail/rest-password-success.html",

@@ -1,10 +1,11 @@
 from typing import Any, Dict, Tuple
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from apps.users.models import User
-from apps.core.models import AbstractPublicIdMixin, AbstractCreatedUpdatedMixin
+from apps.core.models import AbstractCreatedUpdatedMixin, AbstractPublicIdMixin
 from apps.product.models import Product
+from apps.users.models import User
 
 
 class OrderStatusChoices(models.TextChoices):
@@ -25,17 +26,11 @@ class PaymentStatusChoices(models.TextChoices):
 
 class Order(AbstractPublicIdMixin):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="order_items")
-    product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="order_items"
-    )
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="order_items")
     quantity = models.PositiveIntegerField(_("quantity"), default=1)
-    price = models.DecimalField(
-        _("price"), max_digits=10, decimal_places=2, default=0.00
-    )
+    price = models.DecimalField(_("price"), max_digits=10, decimal_places=2, default=0.00)
     ordered = models.BooleanField(_("ordered"), default=False, db_index=True)
-    order_date = models.DateTimeField(
-        _("order date"), blank=True, null=True, db_index=True
-    )
+    order_date = models.DateTimeField(_("order date"), blank=True, null=True, db_index=True)
 
     class Meta:
         db_table = "orders"
@@ -67,15 +62,9 @@ class Cart(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
         choices=PaymentStatusChoices.choices,
         default=PaymentStatusChoices.PENDING,
     )
-    order_date = models.DateTimeField(
-        _("order date"), blank=True, null=True, db_index=True
-    )
-    payment_date = models.DateTimeField(
-        _("payment date"), blank=True, null=True, db_index=True
-    )
-    delivery_date = models.DateTimeField(
-        _("delivery date"), blank=True, null=True, db_index=True
-    )
+    order_date = models.DateTimeField(_("order date"), blank=True, null=True, db_index=True)
+    payment_date = models.DateTimeField(_("payment date"), blank=True, null=True, db_index=True)
+    delivery_date = models.DateTimeField(_("delivery date"), blank=True, null=True, db_index=True)
 
     class Meta:
         db_table = "cart"
@@ -86,9 +75,7 @@ class Cart(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
     def __str__(self) -> str:
         return f"{self.user.get_full_name()}"
 
-    def delete(
-        self, *args: tuple[Any, ...], **kwargs: dict[str, Any]
-    ) -> Tuple[int, Dict[str, int]]:
+    def delete(self, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Tuple[int, Dict[str, int]]:
         self.orders.all().delete()
         return super().delete(*args, **kwargs)
 

@@ -6,7 +6,6 @@ from django.utils.log import DEFAULT_LOGGING
 
 from config.settings.utils import BASE_DIR, get_env_variable
 
-
 logger = logging.getLogger(__name__)
 LOG_LEVEL = "INFO"
 FILE_LOGGER = True if get_env_variable("FILE_LOGGER", "False") == "True" else False

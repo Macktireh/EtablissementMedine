@@ -6,7 +6,6 @@ from faker import Faker
 
 from apps.core.utils import uidGenerator
 
-
 fake = Faker(locale="fr_FR")
 
 _users_data = []

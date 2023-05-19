@@ -1,15 +1,13 @@
 from django.urls import path
-
 from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 
 from apps.auth.api.views import (
-    SignUpView,
     ActivationWithLinkView,
     LoginView,
     RequestResetPasswordView,
     ResetPasswordView,
+    SignUpView,
 )
-
 
 app_name = "authApi"
 

@@ -2,7 +2,6 @@ from django.urls import path
 
 from apps.auth.views import ActivationView
 
-
 app_name = "auth"
 
 urlpatterns = [

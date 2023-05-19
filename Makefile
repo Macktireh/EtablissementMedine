@@ -34,3 +34,9 @@ loaddata:
 
 i18n:
 	poetry run django-admin makemessages --all --ignore=env
+
+black:
+	poetry run python -m black .
+
+isort:
+	poetry run python -m isort --profile black .

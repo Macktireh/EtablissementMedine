@@ -12,9 +12,7 @@ class ActivationView(View):
     template_name: str = "auth/activation-success.html"
     context: Mapping[str, Any] = {}
 
-    def get(
-        self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
-    ) -> HttpResponse:
+    def get(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> HttpResponse:
         uidb64 = kwargs.get("uidb64")
         token = kwargs.get("token")
 
@@ -25,7 +23,7 @@ class ActivationView(View):
 
         try:
             AuthService.activate_user_link(request, payload)
-        except:
+        except Exception:
             return render(request, "error/404.html", self.context)
 
         return render(request, self.template_name, self.context)

@@ -5,7 +5,6 @@ from apps.users.models import User
 
 @pytest.mark.django_db
 class TestUserModel:
-
     @classmethod
     def setup_class(cls) -> None:
         cls.user_data = {

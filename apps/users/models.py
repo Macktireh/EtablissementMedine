@@ -13,12 +13,8 @@ class User(AbstractPublicIdMixin, AbstractUser):
     fisrt_name = None
     last_name = None
     name = models.CharField(_("name"), max_length=128)
-    email = models.EmailField(
-        _("email address"), max_length=255, unique=True, db_index=True
-    )
-    phone_number = models.CharField(
-        _("phone number"), max_length=24, unique=True, db_index=True
-    )
+    email = models.EmailField(_("email address"), max_length=255, unique=True, db_index=True)
+    phone_number = models.CharField(_("phone number"), max_length=24, unique=True, db_index=True)
     verified = models.BooleanField(
         _("verified"),
         default=False,
@@ -34,9 +30,7 @@ class User(AbstractPublicIdMixin, AbstractUser):
         db_table = "user"
 
     def save(self, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> None:
-        if not self.phone_number.startswith("+253") or not self.phone_number.startswith(
-            "00253"
-        ):
+        if not self.phone_number.startswith("+253") or not self.phone_number.startswith("00253"):
             self.phone_number = "+253" + self.phone_number
         super().save(*args, **kwargs)
 
