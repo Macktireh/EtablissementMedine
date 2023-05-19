@@ -8,9 +8,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %} {% endblock title %}| Etablissement Medine</title>
+  <link rel="shortcut icon" href="{% static 'global/images/favicon.png' %}" type="image/x-icon">
   <link rel="stylesheet" href="{% static 'global/css/style.css' %}">
   {% block style %} {% endblock style %}
-  {% block js %} {% endblock js %}
 </head>
 
 <body>
@@ -25,6 +25,7 @@
   <footer>
     {% block footer %} {% endblock footer %}
   </footer>
+  {% block js %} {% endblock js %}
 </body>
 
 </html>
