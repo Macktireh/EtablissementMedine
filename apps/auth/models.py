@@ -1,59 +1,66 @@
-from typing import Union
+from datetime import datetime, timedelta
+from random import randint
 
+from django.conf import settings
+from django.contrib.auth.models import Group
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.utils.encoding import force_str
-from django.utils.http import urlsafe_base64_decode
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from apps.auth.managers import UserManager
-from apps.auth.tokens import tokenGenerator
-from apps.base.models import AbstractPublicIdMixin
+from apps.users.models import User
+from apps.users.types import CreateTokenPayloadType
 
 
-class User(AbstractPublicIdMixin, AbstractUser):
-
-    username = None
-    email = models.EmailField(_('email address'), max_length=255, unique=True, db_index=True)
-    phone_number = models.CharField(_('phone number'), max_length=24, unique=True, db_index=True)
-    verified = models.BooleanField(_("verified"), default=False, help_text=_("Designates whether this user has been verified."))
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
-
-    objects = UserManager()
-
-    class Meta(AbstractUser.Meta, AbstractPublicIdMixin.Meta):
-        db_table = 'users'
-    
-    @classmethod
-    def activate_user(cls, uidb64: str, token: str) -> tuple[Union['User', None], bool, bool]:
-        try:
-            _public_id = force_str(urlsafe_base64_decode(uidb64))
-            _user = cls.objects.get(public_id=_public_id)
-        except cls.DoesNotExist:
-            _user = None
-        
-        if _user is None:
-            return None, False, False
-        return _user, tokenGenerator.check_token(_user, token), _user.verified
-
-    def __str__(self) -> str:
-        return f'{self.get_full_name()} <{self.email}>'
+class GroupProxy(Group):
+    class Meta:
+        proxy = True
+        verbose_name = _("group")
+        verbose_name_plural = _("groups")
 
 
-class Codes(models.Model):
+class UserProxy(User):
+    class Meta:
+        proxy = True
+        verbose_name = _("user")
+        verbose_name_plural = _("users")
 
-    code = models.CharField(max_length=255, unique=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    verified = models.BooleanField(default=False, db_index=True)
-    timestamp_requested = models.DateTimeField(auto_now_add=True)
-    timestamp_verified = models.DateTimeField(null=True)
+
+class PhoneNumberCheck(models.Model):
+    token = models.CharField(max_length=6)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    verified = models.BooleanField(_("verified"), default=False, db_index=True)
+    timestamp_requested = models.DateTimeField(_("timestamp requested"), auto_now_add=True)
+    timestamp_verified = models.DateTimeField(_("timestamp verified"), null=True)
 
     class Meta:
-        db_table = 'codes'
-        verbose_name = _('verification code')
-        verbose_name_plural = _('verification codes')
+        db_table = "phoneNumberCheck"
+        verbose_name = _("verification code")
+        verbose_name_plural = _("verification codes")
 
     def __str__(self) -> str:
-        return self.code
+        return self.token
+
+    @classmethod
+    def create_token(cls, payload: CreateTokenPayloadType) -> str:
+        token = str(randint(100000, 1000000)) if settings.ENV == "production" else "123456"
+        obj, _ = cls.objects.get_or_create(user__phone_number=payload["phone_number"], user=payload["user"])
+        obj.token = token
+        obj.timestamp_requested = timezone.now()
+        obj.timestamp_verified = None
+        obj.verified = False
+        obj.save()
+        return token
+
+    def confirm_verification(self, token: str) -> bool:
+        if self.token == token:
+            self.verified = True
+            self.timestamp_verified = timezone.now()
+            self.save()
+            return True
+        return False
+
+    def is_expired(self) -> bool:
+        return self.get_expiration_time() < timezone.now()
+
+    def get_expiration_time(self) -> datetime:
+        return self.timestamp_requested + timedelta(minutes=settings.PHONENUMBER_EXPIRATION)
