@@ -26,7 +26,10 @@ urlpatterns_api_v1 = [
 ]
 
 
-urlpatterns = i18n_patterns(*urlpatterns_admin, *urlpatterns_web, *urlpatterns_api_v1)
+urlpatterns_api = urlpatterns_api_v1
+
+
+urlpatterns = i18n_patterns(*urlpatterns_admin, *urlpatterns_web) + urlpatterns_api
 
 if settings.DEBUG:
     from django.conf.urls.static import static

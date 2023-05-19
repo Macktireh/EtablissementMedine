@@ -1,4 +1,11 @@
-{% extends 'admin/base.html' %} {% block extrahead %}{{ block.super }}
+{% extends 'admin/base.html' %}
+{% load static %}
+
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="shortcut icon" href="{% static 'global/images/favicon.png' %}" type="image/x-icon">
+
 <style>
   :root {
     --primary: #0098a0b3;
