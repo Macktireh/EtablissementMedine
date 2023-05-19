@@ -8,7 +8,7 @@ from config.settings.utils import BASE_DIR, get_env_variable
 DEFAULT_SECRET_KEY = get_random_secret_key() + get_random_secret_key() + get_random_secret_key()
 SECRET_KEY = get_env_variable("SECRET_KEY", DEFAULT_SECRET_KEY)
 
-ALLOWED_HOSTS = get_env_variable("ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = get_env_variable("ALLOWED_HOSTS", "127.0.0.1 localhost 10.0.2.2").split(" ")
 
 ADMINS = [tuple(map(str.strip, i.split("/"))) for i in get_env_variable("ADMINS", "").split("%%")]
 
@@ -150,23 +150,23 @@ AUTH_USER_MODEL = "users.User"
 
 # Email settings
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = get_env_variable("EMAIL_HOST")
-EMAIL_HOST_USER = get_env_variable("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = get_env_variable("EMAIL_HOST_PASSWORD")
-EMAIL_PORT = get_env_variable("EMAIL_PORT")
-EMAIL_USE_TLS = get_env_variable("EMAIL_USE_TLS")
-DEFAULT_FROM_EMAIL = get_env_variable("EMAIL_HOST_USER")
+EMAIL_HOST = get_env_variable("EMAIL_HOST", raise_error=False)
+EMAIL_HOST_USER = get_env_variable("EMAIL_HOST_USER", raise_error=False)
+EMAIL_HOST_PASSWORD = get_env_variable("EMAIL_HOST_PASSWORD", raise_error=False)
+EMAIL_PORT = get_env_variable("EMAIL_PORT", raise_error=False)
+EMAIL_USE_TLS = get_env_variable("EMAIL_USE_TLS", raise_error=False)
+DEFAULT_FROM_EMAIL = get_env_variable("EMAIL_HOST_USER", raise_error=False)
 
 # SMS
 PHONENUMBER_EXPIRATION = 5
 CLICKSEND_URL = "https://rest.clicksend.com/v3/sms/send"
-CLICKSEND_USERNAME = get_env_variable("CLICKSEND_USERNAME")
-CLICKSEND_PASSWORD = get_env_variable("CLICKSEND_PASSWORD")
+CLICKSEND_USERNAME = get_env_variable("CLICKSEND_USERNAME", raise_error=False)
+CLICKSEND_PASSWORD = get_env_variable("CLICKSEND_PASSWORD", raise_error=False)
 CLICKSEND_FROM = "EtabMedine"
 
 
 # the list of origins authorized to make HTTP requests
-CORS_ALLOWED_ORIGINS = get_env_variable("CORS_ALLOWED_ORIGINS").split(" ")
+CORS_ALLOWED_ORIGINS = get_env_variable("CORS_ALLOWED_ORIGINS", raise_error=False).split(" ")
 
 
 GRAPH_MODELS = {
