@@ -28,6 +28,8 @@ jobs:
           poetry-version: ${{ matrix.poetry-version }}
       - name: Install dependencies
         run: poetry install
+      - name: Export environment variables
+        run: export ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }}
       - name: Run tests
         run: poetry run pytest
 
