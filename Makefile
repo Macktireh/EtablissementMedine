@@ -24,7 +24,7 @@ shell:
 	poetry run python manage.py shell_plus
 
 test:
-	poetry run pytest
+	poetry run pytest --cov --cov-report=html:coverage
 
 superuser:
 	poetry run python manage.py createsuperuser
