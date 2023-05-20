@@ -19,6 +19,7 @@ class TestSignupApiView:
             "password": "Password@123",
             "confirmPassword": "Password@123",
         }
+
         cls.url = reverse("authApi:signup-api")
 
     @pytest.fixture
