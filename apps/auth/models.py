@@ -43,12 +43,15 @@ class PhoneNumberCheck(models.Model):
     @classmethod
     def create_token(cls, payload: CreateTokenPayloadType) -> str:
         token = str(randint(100000, 1000000)) if settings.ENV == "production" else "123456"
-        obj, _ = cls.objects.get_or_create(user__phone_number=payload["phone_number"], user=payload["user"])
-        obj.token = token
-        obj.timestamp_requested = timezone.now()
-        obj.timestamp_verified = None
-        obj.verified = False
-        obj.save()
+        obj, created = cls.objects.get_or_create(
+            user__phone_number=payload["phone_number"], user=payload["user"]
+        )
+        if not created:
+            obj.token = token
+            obj.timestamp_requested = timezone.now()
+            obj.timestamp_verified = None
+            obj.verified = False
+            obj.save()
         return token
 
     def confirm_verification(self, token: str) -> bool:
