@@ -6,8 +6,6 @@ from apps.auth.models import User
 from apps.auth.validators import AuthUserValidators
 from apps.core.response import failMsg
 
-# from django.utils.translation import gettext_lazy as _
-
 
 class PasswordSerializer(serializers.Serializer):
     password = serializers.CharField(
@@ -51,14 +49,6 @@ class SignupSerializer(PasswordSerializer):
         return User.objects.create_user(**validate_data)
 
 
-class ActivationTokenSerializer(serializers.Serializer):
-    token = serializers.CharField(max_length=6)
-    phoneNumber = serializers.CharField(max_length=24)
-
-    class Meta:
-        fields = ["token", "phoneNumber"]
-
-
 class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=255)
     password = serializers.CharField(max_length=128, write_only=True, style={"input_type": "password"})
@@ -85,8 +75,10 @@ class ResetPasswordSerializer(PasswordSerializer):
         password = attrs.get("password")
         confirm_password = attrs.get("confirmPassword")
 
-        if password != confirm_password:
-            raise serializers.ValidationError(failMsg["THE_PASSWORD_AND_PASSWORD_CONFIRMATION_DO_NOT_MATCH"])
+        if password and confirm_password and password != confirm_password:
+            raise serializers.ValidationError(
+                {"confirmPassword": failMsg["THE_PASSWORD_AND_PASSWORD_CONFIRMATION_DO_NOT_MATCH"]}
+            )
         return attrs
 
 
@@ -94,4 +86,4 @@ class LogoutSerializer(serializers.Serializer):
     refresh = serializers.CharField(write_only=True)
 
     class Meta:
-        fields = ["public_id", "refresh"]
+        fields = ["refresh"]

@@ -1,3 +1,4 @@
+import enum
 from typing import cast
 
 from django.contrib.auth import authenticate, get_user_model
@@ -15,6 +16,7 @@ from apps.auth.tokens import getTokensUser, tokenGenerator
 from apps.auth.types import (
     ActivationLinkPayloadType,
     ActivationTokenPayloadType,
+    ClientType,
     JWTTokenType,
     LoginPayloadType,
     ResetPwdLinkPayloadType,
@@ -29,21 +31,27 @@ User = cast(UserType, get_user_model())
 
 class AuthService:
     @staticmethod
-    def signup_email(request: HttpRequest, user: UserType) -> None:
-        token = tokenGenerator.make_token(user)
+    def signup_email(request: HttpRequest, user: UserType, client: ClientType) -> None:
+        if client == ClientType.WEB:
+            template_name = "auth/mail/activation_link.html"
+            token = tokenGenerator.make_token(user)
+        else:
+            payload = CreateTokenPayloadType(phone_number=user.phone_number, user=user)
+            token = PhoneNumberCheck.create_token(payload)
+            template_name = "auth/mail/activation_code.html"
         domain = get_current_site(request)
-        subject = _("Confirm the email address of your EtablissementMedine account")
+        subject = _("Account Activation") + " - EtablissementMedine"
         context = {
             "user": user,
             "domain": domain,
-            "uidb64": urlsafe_base64_encode(force_bytes(user.public_id)) or None,
+            "uidb64": urlsafe_base64_encode(force_bytes(user.public_id)),
             "token": token,
         }
         send_email(
             subject=subject,
             context=context,
             to=[user.email],
-            template_name="auth/mail/activation.html",
+            template_name=template_name,
         )
 
     @staticmethod
@@ -74,7 +82,7 @@ class AuthService:
                 "domain": domain,
             }
             send_email(
-                subject=_("%(domain)s - Your account has been successfully activated") % {"domain": domain},
+                subject=_("Account Activation Successful") + " - EtablissementMedine",
                 context=context,
                 to=[user.email],
                 template_name="auth/mail/activation-success.html",
@@ -102,7 +110,7 @@ class AuthService:
                 "domain": domain,
             }
             send_email(
-                subject=_("%(domain)s - Your account has been successfully activated") % {"domain": domain},
+                subject=_("Account Activation Successful") + " - EtablissementMedine",
                 context=context,
                 to=[user.email],
                 template_name="auth/mail/activation-success.html",
@@ -131,9 +139,14 @@ class AuthService:
         if User.objects.filter(email=email).exists():
             user = User.objects.get(email=email)
             token = PasswordResetTokenGenerator().make_token(user)
-            context = {"user": user, "domain": domain, "token": token}
+            context = {
+                "user": user,
+                "domain": domain,
+                "uidb64": urlsafe_base64_encode(force_bytes(user.public_id)),
+                "token": token,
+            }
             send_email(
-                subject=f"Password reset on {domain}",
+                subject=_("Password Reset") + " - EtablissementMedine",
                 context=context,
                 to=[user.email],
                 template_name="auth/mail/request-rest-password.html",
@@ -155,7 +168,7 @@ class AuthService:
             public_id = force_str(urlsafe_base64_decode(payload["uidb64"]))
             user = User.objects.get(public_id=public_id)
         except User.DoesNotExist:
-            raise NotFound("User not found")
+            raise TokenError("Invalid token")
 
         if not PasswordResetTokenGenerator().check_token(user, payload["token"]):
             raise TokenError("Invalid token")
@@ -168,7 +181,7 @@ class AuthService:
             "domain": domain,
         }
         send_email(
-            subject=_("%(domain)s - Your password has been successfully changed!") % {"domain": domain},
+            subject=_("Password reset success") + " - EtablissementMedine",
             context=context,
             to=[user.email],
             template_name="auth/mail/rest-password-success.html",
@@ -195,7 +208,7 @@ class AuthService:
             "domain": domain,
         }
         send_email(
-            subject=_("%(domain)s - Your password has been successfully changed!") % {"domain": domain},
+            subject=_("Password reset success") + " - EtablissementMedine",
             context=context,
             to=[user.email],
             template_name="auth/mail/rest-password-success.html",

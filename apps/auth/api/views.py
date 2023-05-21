@@ -19,7 +19,7 @@ from apps.auth.api.drf_schema import (
     signup_responses,
 )
 from apps.auth.services import AuthService
-from apps.auth.types import ActivationLinkPayloadType, ActivationTokenPayloadType, LoginPayloadType
+from apps.auth.types import ActivationLinkPayloadType, LoginPayloadType, ResetPwdLinkPayloadType
 from apps.core.exceptions import EmailOrPasswordIncorrectError, UserNotVerifiedError
 from apps.core.response import failMsg, succesMsg
 
@@ -35,12 +35,12 @@ class SignUpView(APIView):
         responses=signup_responses,
     )
     def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
+        client = request.GET["client"]
         serializer = serializers.SignupSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
-        # AuthService.signup_email(request, user)
-        AuthService.signup_sms(request, user)
+        AuthService.signup_email(request, user, client)
 
         return Response(
             {
@@ -75,42 +75,6 @@ class ActivationWithLinkView(APIView):
 
         try:
             AuthService.activate_user_link(request, payload)
-        except Exception:
-            return Response(
-                {
-                    "status": _("fail"),
-                    "message": failMsg["THE_TOKEN_IS_NOT_VALID_OR_HAS_EXPIRED"],
-                },
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        return Response(
-            {
-                "status": "success",
-                "message": succesMsg["YOUR_ACCOUNT_HAS_BEEN_SUCCESSFULLY_ACTIVATED"],
-            },
-            status=status.HTTP_200_OK,
-        )
-
-
-class ActivationWithTokenView(APIView):
-    permission_classes = [AllowAny]
-
-    @swagger_auto_schema(
-        request_body=serializers.ActivationTokenSerializer,
-        operation_id="activation_with_token",
-        responses=activation_responses,
-    )
-    def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
-        serializer = serializers.ActivationTokenSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        token = cast(ReturnDict, serializer.validated_data)["token"]
-        phone_number = cast(ReturnDict, serializer.validated_data)["phoneNumber"]
-        payload = ActivationTokenPayloadType(token=token, phone_number=phone_number)
-
-        try:
-            AuthService.activate_user_token(request, payload)
         except Exception:
             return Response(
                 {
@@ -221,13 +185,23 @@ class ResetPasswordView(APIView):
         },
     )
     def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
+        serializer = serializers.ResetPasswordSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
         uidb64 = kwargs.get("uidb64")
         token = kwargs.get("token")
+        password = cast(str, serializer.validated_data)["password"]
 
-        serializer = serializers.ResetPasswordSerializer(
-            data=request.data, context={"uid": uidb64, "token": token}
-        )
-        serializer.is_valid(raise_exception=True)
+        payload = ResetPwdLinkPayloadType(uidb64=uidb64, token=token, password=password)
+        try:
+            AuthService.reset_password_with_link(request, payload)
+        except Exception:
+            return Response(
+                {
+                    "status": _("fail"),
+                    "message": failMsg["THE_TOKEN_IS_NOT_VALID_OR_HAS_EXPIRED"],
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
         return Response(
             {
@@ -240,7 +214,7 @@ class ResetPasswordView(APIView):
 
 class LogoutView(APIView):
     @swagger_auto_schema(
-        request_body=serializers.ResetPasswordSerializer,
+        request_body=serializers.LogoutSerializer,
         operation_description="Reset a password.",
         operation_id="reset_password",
         responses={
@@ -256,6 +230,21 @@ class LogoutView(APIView):
         },
     )
     def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
+        serializer = serializers.LogoutSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        refresh = cast(str, serializer.validated_data)["refresh"]
+
+        try:
+            AuthService.logout(request, refresh)
+        except Exception:
+            return Response(
+                {
+                    "status": _("fail"),
+                    "message": failMsg["THE_TOKEN_IS_NOT_VALID_OR_HAS_EXPIRED"],
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
         return Response(
             {
                 "status": "success",

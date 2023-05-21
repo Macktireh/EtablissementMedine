@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% translate "Account Activation Successful" %} - EtablissementMedine</title>
+    <title>{% translate "Account Activation" %} - EtablissementMedine</title>
     <style>
         /* Add your custom CSS styles here */
         a:visited {
@@ -28,9 +28,10 @@
         p {
             margin-bottom: 20px;
         }
-        .success-message {
+        .confirmation-code {
+            font-size: 24px;
             font-weight: bold;
-            color: #008000;
+            color: #0088cc;
         }
         .contact-info {
             margin-top: 30px;
@@ -47,12 +48,14 @@
 <body>
     <div class="container">
         <h2>{% translate "Dear" %}, {{ user.name }}!</h2>
-        <p>{% translate "Your account on EtablissementMedine has been successfully activated!" %}</p>
-        <p class="success-message">{% translate "Congratulations! You can now enjoy all the features of our platform." %}</p>
+        <p>{% translate "To complete your registration on EtablissementMedine, please activate your account using the confirmation code below:" %}</p>
+        <p class="confirmation-code">{{ token }}</p>
+        <p>{% translate "Please note that the confirmation code is confidential and should not be shared with others. It is used to verify your identity and protect the security of your account." %}</p>
+        <p>{% translate "If you did not create an account on our platform, please ignore this email." %}</p>
         <div class="contact-info">
             <p>{% translate "For any additional assistance, feel free to contact us at the following email address:" %} support-etablissementmedine@gmail.com.</p>
         </div>
-        <p>{% translate "Thank you for joining EtablissementMedine!" %}</p>
+        <p>{% translate "Thank you and welcome to EtablissementMedine!" %}</p>
         <div class="footer">
             <p>{% translate "Best regards," %}<br>{% translate "The EtablissementMedine Team" %}</p>
             <p><a href="https://{{ domain }}">https://{{ domain }}</a></p>

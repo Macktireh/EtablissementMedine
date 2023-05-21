@@ -146,4 +146,4 @@ class CodeAdmin(admin.ModelAdmin):
         return False
 
     def has_delete_permission(self, request: HttpRequest, obj: PhoneNumberCheck | None = None) -> bool:
-        return False
+        return request.user.is_superuser
