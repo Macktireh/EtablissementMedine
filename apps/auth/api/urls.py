@@ -4,7 +4,6 @@ from rest_framework_simplejwt.views import TokenBlacklistView, TokenRefreshView,
 from apps.auth.api.views import (
     ActivationWithLinkView,
     LoginView,
-    LogoutView,
     RequestResetPasswordView,
     ResetPasswordView,
     SignUpView,

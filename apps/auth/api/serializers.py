@@ -80,10 +80,3 @@ class ResetPasswordSerializer(PasswordSerializer):
                 {"confirmPassword": failMsg["THE_PASSWORD_AND_PASSWORD_CONFIRMATION_DO_NOT_MATCH"]}
             )
         return attrs
-
-
-class LogoutSerializer(serializers.Serializer):
-    refresh = serializers.CharField(write_only=True)
-
-    class Meta:
-        fields = ["refresh"]

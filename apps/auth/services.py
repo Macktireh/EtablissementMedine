@@ -213,14 +213,3 @@ class AuthService:
             to=[user.email],
             template_name="auth/mail/rest-password-success.html",
         )
-
-    @staticmethod
-    def logout(request: HttpRequest, refresh: str) -> None:
-        try:
-            refresh_token = RefreshToken(refresh)
-            refresh_token.blacklist()
-        except JWTTokenError:
-            raise JWTTokenError("Refresh token is invalid")
-
-        cast(UserType, request.user).last_login = timezone.now()
-        request.user.save()
