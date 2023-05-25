@@ -31,7 +31,7 @@ User = cast(UserType, get_user_model())
 
 class AuthService:
     @staticmethod
-    def signup_email(request: HttpRequest, user: UserType, client: ClientType) -> None:
+    def signup_email(request: HttpRequest, user: UserType, client: ClientType = ClientType.WEB) -> None:
         if client == ClientType.WEB:
             template_name = "auth/mail/activation_link.html"
             token = tokenGenerator.make_token(user)

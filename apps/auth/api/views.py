@@ -35,12 +35,15 @@ class SignUpView(APIView):
         responses=signup_responses,
     )
     def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
-        client = request.GET["client"]
         serializer = serializers.SignupSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
-        AuthService.signup_email(request, user, client)
+        try:
+            client = request.GET["client"]
+            AuthService.signup_email(request, user, client)
+        except KeyError:
+            AuthService.signup_email(request, user)
 
         return Response(
             {
