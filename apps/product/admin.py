@@ -51,8 +51,11 @@ class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
     list_display = (
         "name",
         "thumbnail_preview",
-        "price",
         "stock",
+        "price",
+        "discount",
+        "price_discount",
+        "expiry_date_discount",
         "_description",
         "category",
         "created_at",
@@ -66,8 +69,11 @@ class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
                     "public_id",
                     "name",
                     "slug",
-                    "price",
                     "stock",
+                    "price",
+                    "discount",
+                    "price_discount",
+                    "expiry_date_discount",
                     "description",
                     "thumbnail",
                     "thumbnail_preview",
@@ -84,8 +90,10 @@ class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
                 "fields": (
                     "name",
                     "slug",
-                    "price",
                     "stock",
+                    "price",
+                    "discount",
+                    "expiry_date_discount",
                     "description",
                     "thumbnail",
                     "category",
@@ -98,6 +106,7 @@ class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
     readonly_fields = (
         "public_id",
         "thumbnail_preview",
+        "price_discount",
     )
     list_per_page = 10
 

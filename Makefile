@@ -27,7 +27,7 @@ test:
 	poetry run pytest --cov --cov-report=html:coverage
 
 superuser:
-	poetry run python manage.py createsuperuser
+	poetry run python manage.py createsuperuser --email=admin@gmail.com --name=Admin --phone_number=77123456
 
 loaddata:
 	poetry run python manage.py load_data
