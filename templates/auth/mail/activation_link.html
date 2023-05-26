@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% translate "Account Activation Successful" %} - EtablissementMedine</title>
+    <title>{% translate "Account Activation" %} - EtablissementMedine</title>
     <style>
         /* Add your custom CSS styles here */
         a:visited {
@@ -28,9 +28,18 @@
         p {
             margin-bottom: 20px;
         }
-        .success-message {
-            font-weight: bold;
-            color: #008000;
+        .activation-link {
+            display: inline-block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            background-color: #299AE6;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+            color: #ffffff;
+        }
+        .activation-link:hover {
+            background-color: #299ae6b9;
         }
         .contact-info {
             margin-top: 30px;
@@ -47,12 +56,14 @@
 <body>
     <div class="container">
         <h2>{% translate "Dear" %}, {{ user.name }}!</h2>
-        <p>{% translate "Your account on EtablissementMedine has been successfully activated!" %}</p>
-        <p class="success-message">{% translate "Congratulations! You can now enjoy all the features of our platform." %}</p>
+        <p>{% translate "To complete your registration on EtablissementMedine, please activate your account by clicking the confirmation link below:" %}</p>
+        <a class="activation-link" href="http://{{ domain }}{% url 'auth:activation' uidb64=uidb64 token=token %}" style="color: #ffffff">{% translate "Activate my account" %}</a>
+        <p>{% translate "Please note that the link is valid for 24 hours. It is used to verify your identity and protect the security of your account." %}</p>
+        <p>{% translate "If you did not create an account on our platform, please ignore this email." %}</p>
         <div class="contact-info">
             <p>{% translate "For any additional assistance, feel free to contact us at the following email address:" %} support-etablissementmedine@gmail.com.</p>
         </div>
-        <p>{% translate "Thank you for joining EtablissementMedine!" %}</p>
+        <p>{% translate "Thank you and welcome to EtablissementMedine!" %}</p>
         <div class="footer">
             <p>{% translate "Best regards," %}<br>{% translate "The EtablissementMedine Team" %}</p>
             <p><a href="https://{{ domain }}">https://{{ domain }}</a></p>
