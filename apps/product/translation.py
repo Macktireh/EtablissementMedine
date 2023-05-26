@@ -9,7 +9,7 @@ class CategoryTranslationOptions(TranslationOptions):
 
 
 @register(Product)
-class AddressTranslationOptions(TranslationOptions):
+class ProductTranslationOptions(TranslationOptions):
     fields = (
         "name",
         "description",

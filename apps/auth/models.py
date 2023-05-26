@@ -7,8 +7,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+from apps.auth.types import CreateTokenPayloadType
 from apps.users.models import User
-from apps.users.types import CreateTokenPayloadType
 
 
 class GroupProxy(Group):
