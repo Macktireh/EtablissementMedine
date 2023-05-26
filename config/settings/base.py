@@ -171,6 +171,8 @@ CLICKSEND_FROM = "EtabMedine"
 # the list of origins authorized to make HTTP requests
 CORS_ALLOWED_ORIGINS = get_env_variable("CORS_ALLOWED_ORIGINS", raise_error=False).split(" ")
 
+DOMAIN_FRONTEND = get_env_variable("DOMAIN_FRONTEND", raise_error=False)
+
 
 GRAPH_MODELS = {
     "all_applications": True,

@@ -1,4 +1,10 @@
+import enum
 from typing import TypedDict
+
+
+class ClientType(str, enum.Enum):
+    WEB = "web"
+    MOBILE = "mobile"
 
 
 class JWTTokenType(TypedDict):

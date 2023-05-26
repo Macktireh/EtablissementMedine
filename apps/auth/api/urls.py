@@ -1,5 +1,5 @@
 from django.urls import path
-from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
+from rest_framework_simplejwt.views import TokenBlacklistView, TokenRefreshView, TokenVerifyView
 
 from apps.auth.api.views import (
     ActivationWithLinkView,
@@ -27,4 +27,5 @@ urlpatterns = [
     ),
     path("token/refresh/", TokenRefreshView.as_view(), name="refresh-api"),
     path("jwt/verify/", TokenVerifyView.as_view(), name="verify-api"),
+    path("logout/", TokenBlacklistView.as_view(), name="logout-api"),
 ]
