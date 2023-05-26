@@ -1,7 +1,9 @@
 from typing import Any
 
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.utils import timezone
 from django.utils.html import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_resized import ResizedImageField
@@ -40,10 +42,22 @@ class Category(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
 class Product(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
     name = models.CharField(_("name"), max_length=255, unique=True, db_index=True)
     slug = models.SlugField(_("slug"), max_length=255, unique=True, db_index=True)
+    stock = models.PositiveIntegerField(_("stock quantity"), null=False, blank=False, default=0)
     price = models.DecimalField(
         _("price"), max_digits=10, decimal_places=2, null=False, blank=False, default=0.00
     )
-    stock = models.PositiveIntegerField(_("stock quantity"), null=False, blank=False, default=0)
+    discount = models.IntegerField(
+        _("discount"),
+        default=0,
+        validators=[MinValueValidator(0), MaxValueValidator(100)],
+        null=False,
+        blank=False,
+    )
+    price_discount = models.DecimalField(
+        _("price discount"), max_digits=10, decimal_places=2, null=False, blank=False
+    )
+    # Expiry date Discount :
+    expiry_date_discount = models.DateTimeField(_("expiry date discount"), null=True, blank=True)
     description = models.TextField(_("description"), null=True, blank=True)
     thumbnail = ResizedImageField(
         _("thumbnail"), size=[400, 400], null=True, blank=True, upload_to=thumbnail_path
@@ -67,7 +81,13 @@ class Product(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
         return ""
         # return mark_safe(f'<img src="{"https://picsum.photos/100/100"}" width="100" height="100" />')
 
+    def is_expired_discount(self) -> bool:
+        if not self.expiry_date_discount:
+            return False
+        return self.expiry_date_discount < timezone.now()
+
     def save(self, *args: Any, **kwargs: dict[str, Any]) -> None:
         if not self.slug:
             self.slug = slugify(self.name)
+        self.price_discount = self.price * (100 - self.discount) / 100
         super().save(*args, **kwargs)

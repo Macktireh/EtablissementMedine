@@ -17,6 +17,7 @@ from apps.auth.types import (
     ActivationLinkPayloadType,
     ActivationTokenPayloadType,
     ClientType,
+    CreateTokenPayloadType,
     JWTTokenType,
     LoginPayloadType,
     ResetPwdLinkPayloadType,
@@ -24,7 +25,7 @@ from apps.auth.types import (
 )
 from apps.core.exceptions import EmailOrPasswordIncorrectError, NotFound, TokenError, UserNotVerifiedError
 from apps.core.sender import send_email, send_sms
-from apps.users.types import CreateTokenPayloadType, UserType
+from apps.users.types import UserType
 
 User = cast(UserType, get_user_model())
 
