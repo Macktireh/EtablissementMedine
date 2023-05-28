@@ -22,7 +22,7 @@ class SignupSerializer(PasswordSerializer):
     phoneNumber = serializers.CharField(
         source="phone_number",
         max_length=24,
-        validators=[AuthUserValidators.phoneValidator],
+        validators=[AuthUserValidators.phoneNumberValidator],
     )
     email = serializers.CharField(validators=[AuthUserValidators.emailValidator])
 

@@ -1,13 +1,17 @@
+import mimetypes
 import os
+import socket
+from typing import Literal
 
 from config.settings.base import *
-from config.settings.base import INSTALLED_APPS
+from config.settings.base import INSTALLED_APPS, MIDDLEWARE
 from config.settings.packages import *
 from config.settings.utils import BASE_DIR
 
 DEBUG = True
 
-INSTALLED_APPS.extend(["django_extensions"])
+INSTALLED_APPS.extend(["django_extensions", "debug_toolbar"])
+MIDDLEWARE.extend(["debug_toolbar.middleware.DebugToolbarMiddleware"])
 
 
 DATABASES = {
@@ -16,6 +20,9 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# Email settings
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 
 CACHES = {
@@ -39,4 +46,20 @@ STORAGES = {
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
+}
+
+
+# Django-debug-toolbar
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = INTERNAL_IPS = [ip[:-1] + "1" for ip in ips] + ["127.0.0.1"]
+mimetypes.add_type("application/javascript", ".js", True)
+
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
+DEBUG_TOOLBAR_CONFIG = {
+    "INTERCEPT_REDIRECTS": False,
+    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
+    "INSERT_BEFORE": "</head>",
+    "INTERCEPT_REDIRECTS": False,
+    "RENDER_PANELS": True,
 }

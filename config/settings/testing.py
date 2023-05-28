@@ -20,6 +20,9 @@ CACHES = {
     }
 }
 
+# Email settings
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
 
 # STORAGES = {
 #     "default": {
@@ -31,7 +34,7 @@ CACHES = {
 # }
 
 CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": get_env_variable("CLOUDINARY_CLOUD_NAME"),
-    "API_KEY": get_env_variable("CLOUDINARY_API_KEY"),
-    "API_SECRET": get_env_variable("CLOUDINARY_API_SECRET"),
+    "CLOUD_NAME": get_env_variable("CLOUDINARY_CLOUD_NAME", raise_error=False),
+    "API_KEY": get_env_variable("CLOUDINARY_API_KEY", raise_error=False),
+    "API_SECRET": get_env_variable("CLOUDINARY_API_SECRET", raise_error=False),
 }
