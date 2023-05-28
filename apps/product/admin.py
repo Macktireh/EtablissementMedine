@@ -53,7 +53,7 @@ class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
         "thumbnail_preview",
         "stock",
         "price",
-        "discount",
+        "_discount",
         "price_discount",
         "expiry_date_discount",
         "_description",
@@ -110,7 +110,11 @@ class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
     )
     list_per_page = 10
 
-    def _description(self, obj):
-        if len(obj.description) > 90:
-            return obj.description[:90] + "..."
+    def _description(self, obj) -> str:
+        if len(obj.description) > 30:
+            return obj.description[:30] + "..."
         return obj.description
+
+    def _discount(self, obj) -> str:
+        if obj.discount:
+            return f"-{obj.discount}%"

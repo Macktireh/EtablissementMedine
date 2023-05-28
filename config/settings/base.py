@@ -152,7 +152,6 @@ AUTH_USER_MODEL = "users.User"
 
 
 # Email settings
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = get_env_variable("EMAIL_HOST", raise_error=False)
 EMAIL_HOST_USER = get_env_variable("EMAIL_HOST_USER", raise_error=False)
 EMAIL_HOST_PASSWORD = get_env_variable("EMAIL_HOST_PASSWORD", raise_error=False)

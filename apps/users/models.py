@@ -30,7 +30,7 @@ class User(AbstractPublicIdMixin, AbstractUser):
         db_table = "user"
 
     def save(self, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> None:
-        if not self.phone_number.startswith("+253") or not self.phone_number.startswith("00253"):
+        if not str(self.phone_number).startswith("+253"):
             self.phone_number = "+253" + self.phone_number
         super().save(*args, **kwargs)
 
