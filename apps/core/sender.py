@@ -32,8 +32,6 @@ def send_email(
     template_name: str | None = None,
     _from: str = settings.EMAIL_HOST_USER,
 ) -> None:
-    if settings.ENV != "production":
-        return
     try:
         if template_name is None:
             raise TemplateDoesNotExist(failMsg["THE_TEMPLATE_EMAIL_HAS_NOT_BEEN_FOUND"])
