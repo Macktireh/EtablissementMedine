@@ -3,7 +3,7 @@ from django.urls import path
 from apps.core.method import getList, getRetrieve
 from apps.product.api.views import CategoryView, ProductView
 
-app_name = "product"
+app_name = "productApi"
 
 urlpatterns = [
     path("", ProductView.as_view(getList), name="list-products-api"),

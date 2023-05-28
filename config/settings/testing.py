@@ -21,7 +21,7 @@ CACHES = {
 }
 
 # Email settings
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 
 # STORAGES = {

@@ -26,6 +26,6 @@ urlpatterns = [
         name="reset-password-api",
     ),
     path("token/refresh/", TokenRefreshView.as_view(), name="refresh-api"),
-    path("jwt/verify/", TokenVerifyView.as_view(), name="verify-api"),
+    path("token/verify/", TokenVerifyView.as_view(), name="verify-api"),
     path("logout/", TokenBlacklistView.as_view(), name="logout-api"),
 ]

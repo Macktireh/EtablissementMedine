@@ -15,7 +15,7 @@ regexPassword = r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$
 
 class AuthUserValidators:
     @staticmethod
-    def phoneValidator(value: str) -> str:
+    def phoneNumberValidator(value: str) -> str:
         if not re.match(regexPhoneNumber, value):
             raise serializers.ValidationError(failMsg["PLEASE_ENTER_A_VALID_DJIBOUTIAN_TELEPHONE_NUMBER"])
         if User.objects.filter(phone_number__iexact=value).exists():

@@ -158,6 +158,7 @@ EMAIL_HOST_PASSWORD = get_env_variable("EMAIL_HOST_PASSWORD", raise_error=False)
 EMAIL_PORT = get_env_variable("EMAIL_PORT", raise_error=False)
 EMAIL_USE_TLS = get_env_variable("EMAIL_USE_TLS", raise_error=False)
 DEFAULT_FROM_EMAIL = get_env_variable("EMAIL_HOST_USER", raise_error=False)
+SERVER_EMAIL = get_env_variable("EMAIL_HOST_USER", raise_error=False)
 
 # SMS
 PHONENUMBER_EXPIRATION = 5
