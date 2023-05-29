@@ -33,16 +33,16 @@ class Order(AbstractPublicIdMixin):
     order_date = models.DateTimeField(_("order date"), blank=True, null=True, db_index=True)
 
     class Meta:
-        db_table = "orders"
+        db_table = "order"
         verbose_name = _("Order")
         verbose_name_plural = _("  Orders")
         ordering = ["-order_date"]
 
     def __str__(self) -> str:
-        return f"{self.product.name} ({self.quantity}) <{self.user.get_full_name()}>"
+        return f"{self.product.name} ({self.quantity}) <{self.user.name}>"
 
     def save(self, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> None:
-        self.price = self.product.price * self.quantity
+        self.price = self.product.price_discount * self.quantity
         return super().save(*args, **kwargs)
 
 
@@ -73,7 +73,7 @@ class Cart(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
         ordering = ["-order_date"]
 
     def __str__(self) -> str:
-        return f"{self.user.get_full_name()}"
+        return f"{self.user.name}"
 
     def delete(self, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Tuple[int, Dict[str, int]]:
         self.orders.all().delete()
@@ -85,3 +85,6 @@ class CartHistory(Cart):
         proxy = True
         verbose_name = _("Cart history")
         verbose_name_plural = _("Cart history")
+
+    def __str__(self) -> str:
+        return f"{self.user.name}"

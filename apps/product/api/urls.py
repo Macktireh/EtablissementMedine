@@ -8,6 +8,6 @@ app_name = "productApi"
 urlpatterns = [
     path("", ProductView.as_view(getList), name="list-products-api"),
     path("<str:publicId>/", ProductView.as_view(getRetrieve), name="retrieve-products-api"),
-    path("categories/", CategoryView.as_view(getList), name="list-categories-api"),
+    path("categories/all/", CategoryView.as_view(getList), name="list-categories-api"),
     path("categories/<str:publicId>", CategoryView.as_view(getRetrieve), name="retrieve-categories-api"),
 ]

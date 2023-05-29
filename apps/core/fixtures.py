@@ -17,7 +17,7 @@ for i, email in enumerate(list_email_unique):
     password = email.split("@")[0]
     _users_data.append(
         {
-            "model": "authUser.User",
+            "model": "users.User",
             "pk": i + 11,
             "fields": {
                 "public_id": f"{uidGenerator()}",
@@ -34,7 +34,7 @@ for i, email in enumerate(list_email_unique):
 
 users_data = [
     {
-        "model": "authUser.User",
+        "model": "users.User",
         "pk": 2,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -46,7 +46,7 @@ users_data = [
         },
     },
     {
-        "model": "authUser.User",
+        "model": "users.User",
         "pk": 3,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -58,7 +58,7 @@ users_data = [
         },
     },
     {
-        "model": "authUser.User",
+        "model": "users.User",
         "pk": 4,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -70,7 +70,7 @@ users_data = [
         },
     },
     {
-        "model": "authUser.User",
+        "model": "users.User",
         "pk": 5,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -82,7 +82,7 @@ users_data = [
         },
     },
     {
-        "model": "authUser.User",
+        "model": "users.User",
         "pk": 6,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -94,7 +94,7 @@ users_data = [
         },
     },
     {
-        "model": "authUser.User",
+        "model": "users.User",
         "pk": 7,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -106,7 +106,7 @@ users_data = [
         },
     },
     {
-        "model": "authUser.User",
+        "model": "users.User",
         "pk": 8,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -118,7 +118,7 @@ users_data = [
         },
     },
     {
-        "model": "authUser.User",
+        "model": "users.User",
         "pk": 9,
         "fields": {
             "public_id": f"{uidGenerator()}",
@@ -130,7 +130,7 @@ users_data = [
         },
     },
     {
-        "model": "authUser.User",
+        "model": "users.User",
         "pk": 10,
         "fields": {
             "public_id": f"{uidGenerator()}",

@@ -7,7 +7,7 @@ from django.db.models import QuerySet
 from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _
 
-from apps.auth.models import GroupProxy, PhoneNumberCheck, UserProxy
+from apps.auth.models import CodeChecker, GroupProxy, UserProxy
 
 admin.site.unregister(Group)
 
@@ -99,20 +99,20 @@ class UserAdmin(BaseUserAdmin):
     ordering = ("date_joined",)
     list_per_page = 20
 
-    def has_view_permission(self, request: HttpRequest, obj: PhoneNumberCheck | None = None) -> bool:
+    def has_view_permission(self, request: HttpRequest, obj: CodeChecker | None = None) -> bool:
         return cast(UserProxy, request.user).is_superuser
 
     def has_add_permission(self, request: HttpRequest) -> bool:
         return cast(UserProxy, request.user).is_superuser
 
-    def has_change_permission(self, request: HttpRequest, obj: PhoneNumberCheck | None = None) -> bool:
+    def has_change_permission(self, request: HttpRequest, obj: CodeChecker | None = None) -> bool:
         return cast(UserProxy, request.user).is_superuser
 
     def has_delete_permission(self, request: HttpRequest, obj: UserProxy | None = None) -> bool:
         return cast(UserProxy, request.user).is_superuser
 
 
-@admin.register(PhoneNumberCheck)
+@admin.register(CodeChecker)
 class CodeAdmin(admin.ModelAdmin):
     list_display = (
         "token",
@@ -127,23 +127,23 @@ class CodeAdmin(admin.ModelAdmin):
         "name",
     )
 
-    def name(self, obj: PhoneNumberCheck) -> str:
+    def name(self, obj: CodeChecker) -> str:
         return obj.user.get_full_name()
 
-    def phone_number(self, obj: PhoneNumberCheck) -> str:
+    def phone_number(self, obj: CodeChecker) -> str:
         return obj.user.phone_number
 
     def get_queryset(self, request: HttpRequest) -> QuerySet:
         return super().get_queryset(request).select_related("user")
 
-    def has_view_permission(self, request: HttpRequest, obj: PhoneNumberCheck | None = None) -> bool:
+    def has_view_permission(self, request: HttpRequest, obj: CodeChecker | None = None) -> bool:
         return cast(UserProxy, request.user).is_superuser
 
     def has_add_permission(self, request: HttpRequest) -> bool:
         return False
 
-    def has_change_permission(self, request: HttpRequest, obj: PhoneNumberCheck | None = None) -> bool:
+    def has_change_permission(self, request: HttpRequest, obj: CodeChecker | None = None) -> bool:
         return False
 
-    def has_delete_permission(self, request: HttpRequest, obj: PhoneNumberCheck | None = None) -> bool:
+    def has_delete_permission(self, request: HttpRequest, obj: CodeChecker | None = None) -> bool:
         return request.user.is_superuser

@@ -1,10 +1,10 @@
-import enum
+from enum import Enum
 from typing import TypedDict
 
 from apps.users.types import UserType
 
 
-class ClientType(str, enum.Enum):
+class ClientType(str, Enum):
     WEB = "web"
     MOBILE = "mobile"
 
