@@ -19,7 +19,7 @@ urlpatterns_web = [
 
 
 urlpatterns_api_v1 = [
-    path("api/v1/docs/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
+    path("api/v1/docs/", schema_view.with_ui("swagger", cache_timeout=0), name="schema-redoc"),
     path("api/v1/auth/user/", include("apps.auth.api.urls")),
     path("api/v1/user/", include("apps.users.api.urls")),
     path("api/v1/products/", include("apps.product.api.urls")),

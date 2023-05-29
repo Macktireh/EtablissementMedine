@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from apps.users.api.serializers import UserSerializer
+from apps.users.api.serializers import AddressSerializer, UserSerializer
 
 
 class CurrentUserView(APIView):
@@ -15,6 +15,18 @@ class CurrentUserView(APIView):
 
     def patch(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
         serializer = UserSerializer(request.user, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class AddressView(APIView):
+    def get(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
+        serializer = AddressSerializer(request.user.address)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def patch(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
+        serializer = AddressSerializer(request.user.address, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)

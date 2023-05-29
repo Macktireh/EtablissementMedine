@@ -1,8 +1,14 @@
+from typing import cast
+
+from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 
-from apps.auth.models import User
 from apps.product.models import Product
 from apps.shopping.models import Cart, Order, OrderStatusChoices
+from apps.shopping.types import ActionOrderQuantity
+from apps.users.types import UserType
+
+User = cast(UserType, get_user_model())
 
 
 class ShoppingService:
@@ -20,11 +26,11 @@ class ShoppingService:
             order.save()
 
     @staticmethod
-    def update_order(orderPublicId: str, actionQuantity: int) -> None:
+    def update_order_quantity(orderPublicId: str, actionQuantity: ActionOrderQuantity) -> None:
         order = get_object_or_404(Order, public_id=orderPublicId)
-        if actionQuantity == "increase":
+        if actionQuantity == ActionOrderQuantity.INCREASE:
             order.quantity += 1
-        elif actionQuantity == "reduce":
+        elif actionQuantity == ActionOrderQuantity.REDUCE:
             order.quantity -= 1
         order.save()
 

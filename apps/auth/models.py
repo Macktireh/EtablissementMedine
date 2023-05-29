@@ -25,7 +25,7 @@ class UserProxy(User):
         verbose_name_plural = _("users")
 
 
-class PhoneNumberCheck(models.Model):
+class CodeChecker(models.Model):
     token = models.CharField(max_length=6)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     verified = models.BooleanField(_("verified"), default=False, db_index=True)
@@ -33,9 +33,9 @@ class PhoneNumberCheck(models.Model):
     timestamp_verified = models.DateTimeField(_("timestamp verified"), null=True)
 
     class Meta:
-        db_table = "phoneNumberCheck"
-        verbose_name = _("verification code")
-        verbose_name_plural = _("verification codes")
+        db_table = "code_checker"
+        verbose_name = _("code checker")
+        verbose_name_plural = _("code checkers")
 
     def __str__(self) -> str:
         return self.token

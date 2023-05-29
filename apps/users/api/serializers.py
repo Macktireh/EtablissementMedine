@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.users.models import User
+from apps.users.models import Address, User
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -11,3 +11,12 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ["publicId", "name", "email", "phoneNnumber"]
         read_only_fields = ["email"]
+
+
+class AddressSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    streetAddress = serializers.CharField(source="street_address")
+
+    class Meta:
+        model = Address
+        exclude = ["id", "street_address"]
