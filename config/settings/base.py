@@ -39,7 +39,6 @@ LOCAL_APPS = [
     "apps.home.apps.HomeConfig",
     "apps.users.apps.UsersConfig",
     "apps.auth.apps.AuthUserConfig",
-    "apps.customer.apps.CustomerConfig",
     "apps.product.apps.ProductConfig",
     "apps.shopping.apps.ShoppingConfig",
 ]

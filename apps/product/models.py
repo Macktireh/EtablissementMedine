@@ -20,7 +20,7 @@ class Category(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
     )
 
     class Meta(AbstractPublicIdMixin.Meta, AbstractCreatedUpdatedMixin.Meta):
-        db_table = "categories"
+        db_table = "category"
         verbose_name = _("Category")
         verbose_name_plural = _("Categories")
 
@@ -67,7 +67,7 @@ class Product(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
     )
 
     class Meta(AbstractPublicIdMixin.Meta, AbstractCreatedUpdatedMixin.Meta):
-        db_table = "products"
+        db_table = "product"
         verbose_name = _("Product")
         verbose_name_plural = _("Products")
 

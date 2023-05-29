@@ -1,4 +1,3 @@
-import enum
 from typing import cast
 
 from django.contrib.auth import authenticate, get_user_model
@@ -9,9 +8,8 @@ from django.utils import timezone
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import gettext as _
-from rest_framework_simplejwt.tokens import RefreshToken, TokenError as JWTTokenError
 
-from apps.auth.models import PhoneNumberCheck
+from apps.auth.models import CodeChecker
 from apps.auth.tokens import getTokensUser, tokenGenerator
 from apps.auth.types import (
     ActivationLinkPayloadType,
@@ -38,7 +36,7 @@ class AuthService:
             token = tokenGenerator.make_token(user)
         else:
             payload = CreateTokenPayloadType(phone_number=user.phone_number, user=user)
-            token = PhoneNumberCheck.create_token(payload)
+            token = CodeChecker.create_token(payload)
             template_name = "auth/mail/activation_code.html"
         domain = get_current_site(request)
         subject = _("Account Activation") + " - EtablissementMedine"
@@ -58,7 +56,7 @@ class AuthService:
     @staticmethod
     def signup_sms(request: HttpRequest, user: UserType) -> None:
         payload = CreateTokenPayloadType(phone_number=user.phone_number, user=user)
-        token = PhoneNumberCheck.create_token(payload)
+        token = CodeChecker.create_token(payload)
         body = _("Here is your EtablissementMedine code: %(token)s. Never share it.") % {"token": token}
 
         send_sms(body=body, to=user.phone_number)
@@ -92,11 +90,9 @@ class AuthService:
     @staticmethod
     def activate_user_token(request: HttpRequest, payload: ActivationTokenPayloadType) -> None:
         try:
-            obj = PhoneNumberCheck.objects.get(
-                token=payload["token"], user__phone_number=payload["phone_number"]
-            )
+            obj = CodeChecker.objects.get(token=payload["token"], user__phone_number=payload["phone_number"])
             user = obj.user
-        except PhoneNumberCheck.DoesNotExist:
+        except CodeChecker.DoesNotExist:
             raise TokenError("User not found")
 
         if not obj.confirm_verification(payload["token"]) and obj.is_expired():
@@ -158,7 +154,7 @@ class AuthService:
     def request_reset_password_with_token(request: HttpRequest, phone_number: str) -> None:
         if User.objects.filter(phone_number=phone_number).exists():
             user = User.objects.get(phone_number=phone_number)
-            token = PhoneNumberCheck.create_token(user.phone_number)
+            token = CodeChecker.create_token(user.phone_number)
             body = _("Here is your EtablissementMedine code: %(token)s. Never share it.") % {"token": token}
 
             send_sms(body=body, to=user.phone_number)
@@ -191,11 +187,9 @@ class AuthService:
     @staticmethod
     def reset_password_with_token(request: HttpRequest, payload: ResetPwdTokenPayloadType) -> None:
         try:
-            obj = PhoneNumberCheck.objects.get(
-                token=payload["token"], user__phone_number=payload["phone_number"]
-            )
+            obj = CodeChecker.objects.get(token=payload["token"], user__phone_number=payload["phone_number"])
             user = obj.user
-        except PhoneNumberCheck.DoesNotExist:
+        except CodeChecker.DoesNotExist:
             raise TabError("Invalid token")
 
         if not obj.confirm_verification(payload["token"]) and obj.is_expired():

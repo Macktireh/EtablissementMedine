@@ -6,15 +6,13 @@ from apps.users.api.serializers import UserSerializer
 
 class OerderSerializer(serializers.ModelSerializer):
     publicId = serializers.CharField(source="public_id", read_only=True)
-    user = UserSerializer()
     productPubliId = serializers.CharField(source="product.public_id", read_only=True)
-    quantity = serializers.IntegerField(read_only=True)
-    ordered = serializers.BooleanField(read_only=True)
-    orderDate = serializers.DateTimeField(source="order_date", read_only=True)
+    orderDate = serializers.DateTimeField(source="order_date")
+    user = UserSerializer()
 
     class Meta:
         model = Order
-        fields = ["publicId", "user", "productPubliId", "quantity", "ordered", "orderDate"]
+        fields = ["publicId", "productPubliId", "quantity", "ordered", "orderDate", "user"]
 
 
 class CartSerializer(serializers.ModelSerializer):

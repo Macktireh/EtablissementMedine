@@ -1,8 +1,6 @@
 from typing import Any
 
 from django.http import HttpRequest
-from drf_yasg import openapi
-from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -12,10 +10,9 @@ from apps.shopping.models import Cart
 from apps.shopping.services import ShoppingService
 
 
-class CartView(viewsets.ModelViewSet):
-    queryset = Cart.objects.all()
+class CartView(viewsets.ReadOnlyModelViewSet):
+    queryset = Cart.objects.select_related("user", "product").all()
     serializer_class = CartSerializer
-    http_method_names = ["get"]
 
 
 class ShoppingCartView(APIView):
