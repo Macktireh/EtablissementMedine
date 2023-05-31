@@ -18,6 +18,8 @@ class AuthUserValidators:
     def phoneNumberValidator(value: str) -> str:
         if not re.match(regexPhoneNumber, value):
             raise serializers.ValidationError(failMsg["PLEASE_ENTER_A_VALID_DJIBOUTIAN_TELEPHONE_NUMBER"])
+        if not str(value).startswith("+253"):
+            value = "+253" + value
         if User.objects.filter(phone_number__iexact=value).exists():
             raise serializers.ValidationError(failMsg["THE_TELEPHONE_NUMBER_ALREADY_EXISTS"])
         return value

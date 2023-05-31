@@ -31,13 +31,13 @@ User = cast(UserType, get_user_model())
 class AuthService:
     @staticmethod
     def signup_email(request: HttpRequest, user: UserType, client: ClientType = ClientType.WEB) -> None:
-        if client == ClientType.WEB:
-            template_name = "auth/mail/activation_link.html"
-            token = tokenGenerator.make_token(user)
-        else:
+        if client == ClientType.MOBILE:
             payload = CreateTokenPayloadType(phone_number=user.phone_number, user=user)
             token = CodeChecker.create_token(payload)
             template_name = "auth/mail/activation_code.html"
+        else:
+            token = tokenGenerator.make_token(user)
+            template_name = "auth/mail/activation_link.html"
         domain = get_current_site(request)
         subject = _("Account Activation") + " - EtablissementMedine"
         context = {
