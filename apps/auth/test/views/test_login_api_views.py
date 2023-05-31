@@ -29,7 +29,7 @@ class TestLoginApiView:
 
         cls.url = reverse("authApi:login-api")
 
-    @pytest.fixture(scope="module")
+    @pytest.fixture
     def create_user(self) -> tuple[User, User]:
         user1: UserType = User.objects.create_user(**self.valid_data_1)
         user1.verified = True
