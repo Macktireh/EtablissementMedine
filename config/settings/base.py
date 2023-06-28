@@ -14,6 +14,10 @@ ADMINS = [tuple(map(str.strip, i.split("/"))) for i in get_env_variable("ADMINS"
 
 
 # Application definition
+THIRD_PARTY_APPS_BEFORE_DJANGO_APPS = [
+    "modeltranslation",
+]
+
 DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -30,8 +34,6 @@ THIRD_PARTY_APPS = [
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
     "drf_yasg",
-    "modeltranslation",
-    "rosetta",
 ]
 
 LOCAL_APPS = [
@@ -39,11 +41,13 @@ LOCAL_APPS = [
     "apps.home.apps.HomeConfig",
     "apps.users.apps.UsersConfig",
     "apps.auth.apps.AuthUserConfig",
-    "apps.product.apps.ProductConfig",
-    "apps.shopping.apps.ShoppingConfig",
+    "apps.products.apps.ProductsConfig",
+    "apps.cart.apps.CartConfig",
+    "apps.orders.apps.OrdersConfig",
+    "apps.payments.apps.PaymentsConfig",
 ]
 
-INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + LOCAL_APPS
+INSTALLED_APPS = THIRD_PARTY_APPS_BEFORE_DJANGO_APPS + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 
 MIDDLEWARE = [

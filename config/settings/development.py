@@ -10,7 +10,7 @@ from config.settings.utils import BASE_DIR
 
 DEBUG = True
 
-INSTALLED_APPS.extend(["django_extensions", "debug_toolbar"])
+INSTALLED_APPS.extend(["django_extensions", "debug_toolbar", "rosetta"])
 MIDDLEWARE.extend(["debug_toolbar.middleware.DebugToolbarMiddleware"])
 
 

@@ -17,3 +17,8 @@
   }
 </style>
 {% endblock %}
+
+{% block userlinks %}
+{{ block.super }}
+<a href="{% url 'admin:index' %}">EN</a>
+{% endblock userlinks %}

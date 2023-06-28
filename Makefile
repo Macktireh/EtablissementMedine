@@ -1,8 +1,8 @@
-.PHONY: start m mm mmm sm shell test superuser loaddata i18n
+.PHONY: runserver m mm mmm sm shell test superuser loaddata i18n
 
-.DEFAULT_GOAL := start
+.DEFAULT_GOAL := runserver
 
-start:
+runserver:
 	poetry run python manage.py runserver
 
 # migrate
