@@ -8,7 +8,6 @@ from apps.core.swagger import schema_view
 urlpatterns_admin = [
     path("admin/docs/", include("django.contrib.admindocs.urls")),
     path("admin/", admin.site.urls),
-    path("rosetta/", include("rosetta.urls")),
 ]
 
 
@@ -22,8 +21,8 @@ urlpatterns_api_v1 = [
     path("api/v1/docs/", schema_view.with_ui("swagger", cache_timeout=0), name="schema-redoc"),
     path("api/v1/auth/user/", include("apps.auth.api.urls")),
     path("api/v1/user/", include("apps.users.api.urls")),
-    path("api/v1/products/", include("apps.product.api.urls")),
-    path("api/v1/shopping/", include("apps.shopping.api.urls")),
+    path("api/v1/products/", include("apps.products.api.urls")),
+    path("api/v1/cart/", include("apps.cart.api.urls")),
 ]
 
 
@@ -36,6 +35,8 @@ if settings.DEBUG:
     import debug_toolbar
     from django.conf.urls.static import static
 
-    urlpatterns += [path("__debug__", include(debug_toolbar.urls))] + static(
-        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+    urlpatterns += (
+        i18n_patterns(path("rosetta/", include("rosetta.urls")))
+        + [path("__debug__", include(debug_toolbar.urls))]
+        + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     )
