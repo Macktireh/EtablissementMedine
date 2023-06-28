@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Dict, Tuple
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -19,7 +19,7 @@ class AbstractPublicIdMixin(models.Model):
     class Meta:
         abstract = True
 
-    def save(self, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> None:
+    def save(self, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> None:
         if not self.public_id:
             self.public_id = uidGenerator()
         super().save(*args, **kwargs)

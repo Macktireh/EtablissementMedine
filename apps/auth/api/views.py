@@ -1,4 +1,4 @@
-from typing import Any, cast
+from typing import Any, Dict, Tuple, cast
 
 from django.contrib.auth import get_user_model
 from django.http import HttpRequest
@@ -34,7 +34,7 @@ class SignUpView(APIView):
         operation_description="Create a new user account.",
         responses=signup_responses,
     )
-    def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
+    def post(self, request: HttpRequest, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> Response:
         serializer = serializers.SignupSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
@@ -61,7 +61,7 @@ class ActivationWithLinkView(APIView):
         operation_id="activation_with_link",
         responses=activation_responses,
     )
-    def get(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
+    def get(self, request: HttpRequest, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> Response:
         uidb64 = kwargs.get("uidb64")
         token = kwargs.get("token")
 
@@ -105,7 +105,7 @@ class LoginView(APIView):
         operation_id="login",
         responses=login_responses,
     )
-    def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
+    def post(self, request: HttpRequest, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> Response:
         serializer = serializers.LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
@@ -151,7 +151,7 @@ class RequestResetPasswordView(APIView):
         operation_id="request_reset_password",
         responses=request_reset_passwoard_responses,
     )
-    def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
+    def post(self, request: HttpRequest, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> Response:
         serializer = serializers.RequestResetPasswordSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
@@ -187,7 +187,7 @@ class ResetPasswordView(APIView):
             status.HTTP_400_BAD_REQUEST: "Validation error.",
         },
     )
-    def post(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Response:
+    def post(self, request: HttpRequest, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> Response:
         serializer = serializers.ResetPasswordSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         uidb64 = kwargs.get("uidb64")

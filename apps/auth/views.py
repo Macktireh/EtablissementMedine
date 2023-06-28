@@ -1,4 +1,4 @@
-from typing import Any, Mapping
+from typing import Any, Dict, Mapping, Tuple
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
@@ -12,7 +12,7 @@ class ActivationView(View):
     template_name: str = "auth/activation-success.html"
     context: Mapping[str, Any] = {}
 
-    def get(self, request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> HttpResponse:
+    def get(self, request: HttpRequest, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> HttpResponse:
         uidb64 = kwargs.get("uidb64")
         token = kwargs.get("token")
 
