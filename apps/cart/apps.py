@@ -1,5 +1,4 @@
 from django.apps import AppConfig
-from django.utils.translation import gettext_lazy as _
 
 
 class CartConfig(AppConfig):
@@ -7,4 +6,4 @@ class CartConfig(AppConfig):
     name = "apps.cart"
 
     def ready(self) -> None:
-        import apps.cart.signals
+        import apps.cart.signals  # noqa: F401

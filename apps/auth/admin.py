@@ -5,7 +5,6 @@ from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
 from django.contrib.auth.models import Group
 from django.db.models import QuerySet
 from django.http import HttpRequest
-from django.utils.translation import gettext_lazy as _
 
 from apps.auth.models import CodeChecker, GroupProxy, UserProxy
 from apps.users.admin import UserAdmin as BaseUserAdmin

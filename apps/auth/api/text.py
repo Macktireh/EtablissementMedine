@@ -52,7 +52,8 @@ def failMessage() -> Dict[str, str]:
             "The password and password confirmation do not match."
         ),
         "INVALID_PASSWORD": _(
-            "The password must contain at least 8 characters, a uppercase letter, a lowercase letter, a number and a special character."
+            "The password must contain at least 8 characters, a uppercase letter, \
+                a lowercase letter, a number and a special character."
         ),
         "THE_TOKEN_IS_NOT_VALID_OR_HAS_EXPIRED": _("The token is not valid or has expired."),
         "YOU_ARE_NOT_AUTHORIZED_TO_PERFORM_THIS_ACTION": _("You are not authorized to perform this action."),
