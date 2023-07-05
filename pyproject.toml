@@ -8,7 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-django = "^4.2.1"
+django = "^4.2.3"
 django-cloudinary-storage = "^0.3.0"
 django-cors-headers = "^4.0.0"
 django-modeltranslation = "^0.18.9"
