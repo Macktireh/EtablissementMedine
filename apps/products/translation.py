@@ -1,6 +1,11 @@
 from modeltranslation.translator import TranslationOptions, register
 
-from apps.products.models import Category, Product
+from apps.products.models import Category, GroupCategory, Product
+
+
+@register(GroupCategory)
+class GroupCategoryTranslationOptions(TranslationOptions):
+    fields = ("name",)
 
 
 @register(Category)

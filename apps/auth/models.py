@@ -47,11 +47,11 @@ class CodeChecker(models.Model):
             user__phone_number=payload["phone_number"], user=payload["user"]
         )
         if not created:
-            obj.token = token
-            obj.timestamp_requested = timezone.now()
             obj.timestamp_verified = None
             obj.verified = False
-            obj.save()
+        obj.timestamp_requested = timezone.now()
+        obj.token = token
+        obj.save()
         return token
 
     def confirm_verification(self, token: str) -> bool:

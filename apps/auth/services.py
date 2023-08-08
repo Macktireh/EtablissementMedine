@@ -54,7 +54,7 @@ class AuthService:
         )
 
     @staticmethod
-    def signup_sms(request: HttpRequest, user: UserType) -> None:
+    def signup_sms_code(request: HttpRequest, user: UserType) -> None:
         payload = CreateTokenPayloadType(phone_number=user.phone_number, user=user)
         token = CodeChecker.create_token(payload)
         body = _("Here is your EtablissementMedine code: %(token)s. Never share it.") % {"token": token}

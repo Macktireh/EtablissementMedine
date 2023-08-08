@@ -6,7 +6,7 @@ from apps.users.api.serializers import UserSerializer
 
 class OrderItemSerializer(serializers.ModelSerializer):
     publicId = serializers.CharField(source="public_id", read_only=True)
-    user = UserSerializer(read_only=True)
+    # user = UserSerializer(read_only=True)
     productPubliId = serializers.CharField(source="product.public_id", read_only=True)
     totalPrice = serializers.FloatField(source="total_price", read_only=True)
 

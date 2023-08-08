@@ -4,13 +4,51 @@
   box-sizing: border-box;
 }
 
+html {
+  transition: all 0.1s ease-in-out;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   background-color: color(bg);
-  color: color(font);
+  color: color(fg);
+  transition: all 0.5s ease-in-out;
+}
+
+header, main, footer {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
 }
 
 a {
   text-decoration: none;
-  color: color(font);
+  color: color(fg);
+}
+
+ul {
+  list-style: none;
+}
+
+path {
+  fill: color(fg);
+  stroke: color(fg);
+  transition: all 0.2s ease-in-out;
+}
+
+svg {
+  width: 30px;
+  height: 30px;
+  &:hover {
+    path {
+      fill: color(primary);
+      stroke: color(primary);
+    }
+  }
 }

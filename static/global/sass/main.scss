@@ -1,3 +1,10 @@
 @import "./settings/variables";
 @import "./settings/mixin";
 @import "./settings/global";
+
+// pages
+@import "./pages/404";
+
+// components
+@import "./components/head";
+@import "./components/slider";

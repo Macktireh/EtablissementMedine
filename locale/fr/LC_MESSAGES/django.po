@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-21 22:40+0200\n"
+"POT-Creation-Date: 2023-08-09 00:34+0200\n"
 "PO-Revision-Date: 2023-04-22 23:42+0000\n"
 "Last-Translator:  None <admin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,39 +19,30 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.9\n"
 
-#: .\apps\auth\admin.py:49
-msgid "Personal info"
-msgstr "Informations personnelles"
-
-#: .\apps\auth\admin.py:53
-msgid "Permissions"
-msgstr "Permissions"
-
-#: .\apps\auth\admin.py:66
-msgid "Important dates"
-msgstr "Dates importantes"
-
 #: .\apps\auth\api\drf_schema.py:9
 msgid "Account created successfully."
 msgstr ""
 
 #: .\apps\auth\api\drf_schema.py:12 .\apps\auth\api\drf_schema.py:25
-#: .\apps\auth\api\drf_schema.py:38
+#: .\apps\auth\api\drf_schema.py:38 .\apps\cart\api\drf_schema.py:12
+#: .\apps\cart\api\drf_schema.py:25 .\apps\cart\api\drf_schema.py:38
 msgid "success"
 msgstr ""
 
-#: .\apps\auth\api\drf_schema.py:22
+#: .\apps\auth\api\drf_schema.py:22 .\apps\cart\api\drf_schema.py:22
 msgid "Account activated successfully."
 msgstr ""
 
-#: .\apps\auth\api\drf_schema.py:35
+#: .\apps\auth\api\drf_schema.py:35 .\apps\cart\api\drf_schema.py:35
 msgid "User logged in successfully."
 msgstr ""
 
 #: .\apps\auth\api\drf_schema.py:47 .\apps\auth\api\drf_schema.py:56
-#: .\apps\auth\api\views.py:68 .\apps\auth\api\views.py:81
-#: .\apps\auth\api\views.py:118 .\apps\auth\api\views.py:126
-#: .\apps\auth\api\views.py:200 .\apps\auth\api\views.py:242
+#: .\apps\auth\api\views.py:71 .\apps\auth\api\views.py:84
+#: .\apps\auth\api\views.py:113 .\apps\auth\api\views.py:126
+#: .\apps\auth\api\views.py:163 .\apps\auth\api\views.py:171
+#: .\apps\auth\api\views.py:245 .\apps\cart\api\drf_schema.py:47
+#: .\apps\cart\api\drf_schema.py:56
 msgid "fail"
 msgstr ""
 
@@ -125,27 +116,27 @@ msgstr ""
 
 #: .\apps\auth\api\text.py:55
 msgid ""
-"The password must contain at least 8 characters, a uppercase letter, a "
-"lowercase letter, a number and a special character."
-msgstr ""
-
-#: .\apps\auth\api\text.py:57
-msgid "The token is not valid or has expired."
+"The password must contain at least 8 characters, a uppercase "
+"letter,                 a lowercase letter, a number and a special character."
 msgstr ""
 
 #: .\apps\auth\api\text.py:58
-msgid "You are not authorized to perform this action."
+msgid "The token is not valid or has expired."
 msgstr ""
 
 #: .\apps\auth\api\text.py:59
-msgid "Missing parameter."
+msgid "You are not authorized to perform this action."
 msgstr ""
 
 #: .\apps\auth\api\text.py:60
-msgid "Something went wrong."
+msgid "Missing parameter."
 msgstr ""
 
 #: .\apps\auth\api\text.py:61
+msgid "Something went wrong."
+msgstr ""
+
+#: .\apps\auth\api\text.py:62
 msgid "The user does not exist."
 msgstr ""
 
@@ -184,44 +175,90 @@ msgid "timestamp verified"
 msgstr "horodatage vérifié"
 
 #: .\apps\auth\models.py:37
-msgid "verification code"
-msgstr "code de vérification"
+msgid "code checker"
+msgstr ""
 
 #: .\apps\auth\models.py:38
-msgid "verification codes"
-msgstr "codes de vérification"
+msgid "code checkers"
+msgstr ""
 
-#: .\apps\auth\services.py:43 .\templates\auth\mail\activation_code.html:6
+#: .\apps\auth\services.py:42 .\templates\auth\mail\activation_code.html:6
 #: .\templates\auth\mail\activation_link.html:6
 msgid "Account Activation"
 msgstr ""
 
-#: .\apps\auth\services.py:61 .\apps\auth\services.py:161
+#: .\apps\auth\services.py:60 .\apps\auth\services.py:158
 #, python-format
 msgid "Here is your EtablissementMedine code: %(token)s. Never share it."
 msgstr ""
 
-#: .\apps\auth\services.py:85 .\apps\auth\services.py:113
+#: .\apps\auth\services.py:84 .\apps\auth\services.py:110
 #: .\templates\auth\mail\activation-success.html:6
 msgid "Account Activation Successful"
 msgstr ""
 
-#: .\apps\auth\services.py:149
+#: .\apps\auth\services.py:146
 #: .\templates\auth\mail\request-rest-password.html:6
 #, fuzzy
 #| msgid "The Password must be set"
 msgid "Password Reset"
 msgstr "Le mot de passe doit être défini"
 
-#: .\apps\auth\services.py:184 .\apps\auth\services.py:211
+#: .\apps\auth\services.py:181 .\apps\auth\services.py:206
 #: .\templates\auth\mail\rest-password-success.html:6
 #, fuzzy
 #| msgid "The Password must be set"
 msgid "Password reset success"
 msgstr "Le mot de passe doit être défini"
 
-#: .\apps\core\admin.py:9 .\apps\core\admin.py:10
-msgid "Etablissement Medine Administration"
+#: .\apps\cart\api\drf_schema.py:9
+msgid "Added to cart successfully."
+msgstr ""
+
+#: .\apps\cart\api\drf_schema.py:13
+msgid "Added to cart"
+msgstr ""
+
+#: .\apps\cart\models.py:17
+msgid "quantity"
+msgstr "quantité"
+
+#: .\apps\cart\models.py:20 .\apps\orders\models.py:44
+#, fuzzy
+#| msgid "price"
+msgid "total price"
+msgstr "prix"
+
+#: .\apps\cart\models.py:22
+msgid "ordered"
+msgstr "commandée"
+
+#: .\apps\cart\models.py:26 .\apps\orders\models.py:29
+#, fuzzy
+#| msgid "order date"
+msgid "Order Item"
+msgstr "date de la commande"
+
+#: .\apps\cart\models.py:27 .\apps\orders\models.py:30
+#, fuzzy
+#| msgid "order date"
+msgid "Orders Items"
+msgstr "date de la commande"
+
+#: .\apps\cart\models.py:48 .\apps\orders\models.py:15
+msgid "Cart"
+msgstr "Panier"
+
+#: .\apps\cart\models.py:49 .\apps\orders\models.py:16
+#, fuzzy
+#| msgid " Carts"
+msgid "Carts"
+msgstr "Paniers"
+
+#: .\apps\core\admin.py:9 .\apps\core\admin.py:10 .\apps\core\admin.py:11
+#, fuzzy
+#| msgid "Etablissement Medine Administration"
+msgid "Medine Database Administration"
 msgstr "Etablissement Medine Administration"
 
 #: .\apps\core\models.py:29
@@ -232,162 +269,213 @@ msgstr "créé le"
 msgid "updated at"
 msgstr "mis à jour le"
 
-#: .\apps\customer\apps.py:8
-msgid "Information about customers"
-msgstr "Informations sur les clients"
+#: .\apps\orders\apps.py:8
+msgid "Store"
+msgstr ""
 
-#: .\apps\customer\models.py:9
-msgid "street address"
-msgstr "adresse postale"
+#: .\apps\orders\models.py:22 .\apps\payments\models.py:35
+#, fuzzy
+#| msgid "payment date"
+msgid "Payment"
+msgstr "date de paiement"
 
-#: .\apps\customer\models.py:10
-msgid "City or neighborhood"
-msgstr "Ville ou quartier"
+#: .\apps\orders\models.py:23 .\apps\payments\models.py:36
+#, fuzzy
+#| msgid "payment status"
+msgid "Payments"
+msgstr "état des paiements"
 
-#: .\apps\customer\models.py:11
-msgid "Zip / Postal code"
-msgstr "Code postal"
+#: .\apps\orders\models.py:34
+msgid "In progress"
+msgstr ""
 
-#: .\apps\customer\models.py:12
-msgid "Country"
-msgstr "Pays"
-
-#: .\apps\customer\models.py:16
-msgid "Customer"
-msgstr "Client"
-
-#: .\apps\customer\models.py:17
-msgid "Customers"
-msgstr "Clients"
-
-#: .\apps\product\apps.py:8
-msgid "Products and categories"
-msgstr "Produits et catégories"
-
-#: .\apps\product\models.py:14 .\apps\product\models.py:41
-#: .\apps\users\models.py:15
-msgid "name"
-msgstr "nom"
-
-#: .\apps\product\models.py:17 .\apps\product\models.py:49
-msgid "thumbnail"
-msgstr "vignette"
-
-#: .\apps\product\models.py:22
-msgid "Category"
-msgstr "Catégorie"
-
-#: .\apps\product\models.py:23
-msgid "Categories"
-msgstr "Catégories"
-
-#: .\apps\product\models.py:42
-msgid "slug"
-msgstr "slug"
-
-#: .\apps\product\models.py:44 .\apps\shopping\models.py:31
-msgid "price"
-msgstr "prix"
-
-#: .\apps\product\models.py:46
-msgid "stock quantity"
-msgstr "quantité en stock"
-
-#: .\apps\product\models.py:47
-msgid "description"
-msgstr "description"
-
-#: .\apps\product\models.py:57
-msgid "Product"
-msgstr "Produit"
-
-#: .\apps\product\models.py:58
-msgid "Products"
-msgstr "Produits"
-
-#: .\apps\shopping\apps.py:8
-msgid "Shopping"
-msgstr "Achats"
-
-#: .\apps\shopping\models.py:12 .\apps\shopping\models.py:20
-msgid "Pending"
-msgstr "En attente"
-
-#: .\apps\shopping\models.py:13
-msgid "Processing"
-msgstr "Traitement"
-
-#: .\apps\shopping\models.py:14
-msgid "Delivered"
-msgstr "Livré"
-
-#: .\apps\shopping\models.py:15
-msgid "Returned"
-msgstr "Renvoyé"
-
-#: .\apps\shopping\models.py:16 .\apps\shopping\models.py:24
-msgid "Cancelled"
-msgstr "Annulé"
-
-#: .\apps\shopping\models.py:21
+#: .\apps\orders\models.py:35
 msgid "Completed"
 msgstr "Terminé"
 
-#: .\apps\shopping\models.py:22
-msgid "Awaiting payment"
-msgstr "En attente de paiement"
+#: .\apps\orders\models.py:36
+msgid "Cancelled"
+msgstr "Annulé"
 
-#: .\apps\shopping\models.py:23
+#: .\apps\orders\models.py:37
 msgid "Refunded"
 msgstr "Remboursé"
 
-#: .\apps\shopping\models.py:30
-msgid "quantity"
-msgstr "quantité"
-
-#: .\apps\shopping\models.py:32
-msgid "ordered"
-msgstr "commandée"
-
-#: .\apps\shopping\models.py:33 .\apps\shopping\models.py:65
-msgid "order date"
-msgstr "date de la commande"
-
-#: .\apps\shopping\models.py:37
-msgid "Order"
-msgstr "Commande"
-
-#: .\apps\shopping\models.py:38
-msgid "  Orders"
-msgstr "Commandes"
-
-#: .\apps\shopping\models.py:53
+#: .\apps\orders\models.py:47
 msgid "order status"
 msgstr "état de la commande"
 
-#: .\apps\shopping\models.py:60
-msgid "payment status"
-msgstr "état des paiements"
+#: .\apps\orders\models.py:54
+msgid "order date"
+msgstr "date de la commande"
 
-#: .\apps\shopping\models.py:66
-msgid "payment date"
-msgstr "date de paiement"
-
-#: .\apps\shopping\models.py:67
+#: .\apps\orders\models.py:55
 msgid "delivery date"
 msgstr "date de livraison"
 
-#: .\apps\shopping\models.py:71
-msgid "Cart"
-msgstr "Panier"
+#: .\apps\orders\models.py:59
+msgid "Order"
+msgstr "Commande"
 
-#: .\apps\shopping\models.py:72
-msgid " Carts"
-msgstr "Paniers"
+#: .\apps\orders\models.py:60
+#, fuzzy
+#| msgid "Order"
+msgid "Orders"
+msgstr "Commande"
 
-#: .\apps\shopping\models.py:86 .\apps\shopping\models.py:87
-msgid "Cart history"
-msgstr "Historique du panier"
+#: .\apps\payments\models.py:9
+#, fuzzy
+#| msgid "Awaiting payment"
+msgid "Awaiting"
+msgstr "En attente de paiement"
+
+#: .\apps\payments\models.py:10
+msgid "Successful"
+msgstr ""
+
+#: .\apps\payments\models.py:11
+msgid "Failed"
+msgstr ""
+
+#: .\apps\payments\models.py:15
+msgid "Cash"
+msgstr ""
+
+#: .\apps\payments\models.py:16
+msgid "Credit card"
+msgstr ""
+
+#: .\apps\payments\models.py:22
+#, fuzzy
+#| msgid "payment date"
+msgid "payment type"
+msgstr "date de paiement"
+
+#: .\apps\payments\models.py:25
+msgid "payment status"
+msgstr "état des paiements"
+
+#: .\apps\payments\models.py:31
+msgid "payment date"
+msgstr "date de paiement"
+
+#: .\apps\products\apps.py:8
+msgid "Products and categories"
+msgstr "Produits et catégories"
+
+#: .\apps\products\models.py:17 .\apps\products\models.py:39
+#: .\apps\products\models.py:98 .\apps\users\models.py:15
+msgid "name"
+msgstr "nom"
+
+#: .\apps\products\models.py:18 .\apps\products\models.py:99
+msgid "slug"
+msgstr "slug"
+
+#: .\apps\products\models.py:20 .\apps\products\models.py:42
+#: .\apps\products\models.py:106
+msgid "thumbnail"
+msgstr "vignette"
+
+#: .\apps\products\models.py:25
+#, fuzzy
+#| msgid "Category"
+msgid "Group Category"
+msgstr "Catégorie"
+
+#: .\apps\products\models.py:26
+#, fuzzy
+#| msgid "Categories"
+msgid "Groups Categories"
+msgstr "Catégories"
+
+#: .\apps\products\models.py:50
+msgid "Category"
+msgstr "Catégorie"
+
+#: .\apps\products\models.py:51
+msgid "Categories"
+msgstr "Catégories"
+
+#: .\apps\products\models.py:69
+msgid "title of promotion"
+msgstr ""
+
+#: .\apps\products\models.py:71
+msgid "discount"
+msgstr ""
+
+#: .\apps\products\models.py:82
+msgid "Promotion"
+msgstr ""
+
+#: .\apps\products\models.py:83
+#, fuzzy
+#| msgid "Permissions"
+msgid "Promotions"
+msgstr "Permissions"
+
+#: .\apps\products\models.py:100
+msgid "stock quantity"
+msgstr "quantité en stock"
+
+#: .\apps\products\models.py:102
+msgid "price"
+msgstr "prix"
+
+#: .\apps\products\models.py:104 .\apps\products\models.py:150
+msgid "description"
+msgstr "description"
+
+#: .\apps\products\models.py:117
+msgid "Product"
+msgstr "Produit"
+
+#: .\apps\products\models.py:118
+msgid "Products"
+msgstr "Produits"
+
+#: .\apps\products\models.py:140
+msgid "image"
+msgstr ""
+
+#: .\apps\products\models.py:144
+#, fuzzy
+#| msgid "Product"
+msgid "Product Image"
+msgstr "Produit"
+
+#: .\apps\products\models.py:145
+#, fuzzy
+#| msgid "Products"
+msgid "Product Images"
+msgstr "Produits"
+
+#: .\apps\products\models.py:149
+msgid "title"
+msgstr ""
+
+#: .\apps\products\models.py:155 .\apps\products\models.py:156
+#, fuzzy
+#| msgid "Processing"
+msgid "Product Advertising"
+msgstr "Traitement"
+
+#: .\apps\users\admin.py:40
+msgid "Personal info"
+msgstr "Informations personnelles"
+
+#: .\apps\users\admin.py:44
+msgid "Permissions"
+msgstr "Permissions"
+
+#: .\apps\users\admin.py:57
+msgid "Important dates"
+msgstr "Dates importantes"
+
+#: .\apps\users\apps.py:8
+msgid "Information about customers"
+msgstr "Informations sur les clients"
 
 #: .\apps\users\managers.py:10
 msgid "The Email must be set"
@@ -425,11 +513,35 @@ msgstr "numéro de téléphone"
 msgid "Designates whether this user has been verified."
 msgstr "Indique si cet utilisateur a été vérifié."
 
-#: .\config\settings\base.py:118
+#: .\apps\users\models.py:43
+msgid "street address"
+msgstr "adresse postale"
+
+#: .\apps\users\models.py:44
+msgid "City or neighborhood"
+msgstr "Ville ou quartier"
+
+#: .\apps\users\models.py:45
+msgid "Zip / Postal code"
+msgstr "Code postal"
+
+#: .\apps\users\models.py:46
+msgid "Country"
+msgstr "Pays"
+
+#: .\apps\users\models.py:50
+msgid "Customer"
+msgstr "Client"
+
+#: .\apps\users\models.py:51
+msgid "Customers"
+msgstr "Clients"
+
+#: .\config\settings\base.py:121
 msgid "English"
 msgstr "Anglais"
 
-#: .\config\settings\base.py:119
+#: .\config\settings\base.py:122
 msgid "French"
 msgstr "Français"
 
@@ -542,6 +654,30 @@ msgstr ""
 #: .\templates\auth\mail\rest-password-success.html:48
 msgid "You can now log in with your new password."
 msgstr ""
+
+#~ msgid "verification code"
+#~ msgstr "code de vérification"
+
+#~ msgid "verification codes"
+#~ msgstr "codes de vérification"
+
+#~ msgid "Shopping"
+#~ msgstr "Achats"
+
+#~ msgid "Pending"
+#~ msgstr "En attente"
+
+#~ msgid "Delivered"
+#~ msgstr "Livré"
+
+#~ msgid "Returned"
+#~ msgstr "Renvoyé"
+
+#~ msgid "  Orders"
+#~ msgstr "Commandes"
+
+#~ msgid "Cart history"
+#~ msgstr "Historique du panier"
 
 #~ msgid "Les champs public_id et refresh sont obligatoire."
 #~ msgstr "Les champs public_id et refresh sont obligatoire."
