@@ -81,7 +81,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"uidb64\": \"OA\",\r\n    \"token\": \"bbjo36-02b2cb04e7b63906a208fc6378774cab\"\r\n}",
+							"raw": "{\r\n    \"uidb64\": \"\",\r\n    \"token\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
