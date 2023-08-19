@@ -40,3 +40,6 @@ black:
 
 isort:
 	poetry run python -m isort --profile black .
+
+ruff:
+	poetry run ruff check .

@@ -1,5 +1,6 @@
 {% extends 'admin/base.html' %}
 {% load static %}
+{% load i18n %}
 
 
 {% block extrahead %}
@@ -18,7 +19,13 @@
 </style>
 {% endblock %}
 
+
+
 {% block userlinks %}
 {{ block.super }}
-<a href="{% url 'admin:index' %}">EN</a>
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
+{% for language in languages %}
+<a class="dropdown-item" href="/{{language.code}}/admin/">/ {{ language.name_local }}</a>
+{% endfor %}
 {% endblock userlinks %}

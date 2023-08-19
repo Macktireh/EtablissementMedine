@@ -96,6 +96,48 @@ class ActivationWithLinkView(APIView):
         )
 
 
+class ActivationWithCodeView(APIView):
+    permission_classes = [AllowAny]
+
+    @swagger_auto_schema(
+        operation_id="activation_with_code",
+        responses=activation_responses,
+    )
+    def get(self, request: HttpRequest, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> Response:
+        uidb64 = kwargs.get("uidb64")
+        token = kwargs.get("token")
+
+        if not uidb64 or not token:
+            return Response(
+                {
+                    "status": _("fail"),
+                    "message": failMsg["MISSING_PARAMETER"],
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        payload = ActivationLinkPayloadType(uidb64=uidb64, token=token)
+
+        try:
+            AuthService.activate_user_link(request, payload)
+        except Exception:
+            return Response(
+                {
+                    "status": _("fail"),
+                    "message": failMsg["THE_TOKEN_IS_NOT_VALID_OR_HAS_EXPIRED"],
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        return Response(
+            {
+                "status": "success",
+                "message": succesMsg["YOUR_ACCOUNT_HAS_BEEN_SUCCESSFULLY_ACTIVATED"],
+            },
+            status=status.HTTP_200_OK,
+        )
+
+
 class LoginView(APIView):
     permission_classes = [AllowAny]
 

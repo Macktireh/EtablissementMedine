@@ -5,31 +5,39 @@
       "label": "Runserver",
       "type": "shell",
       "command": "poetry run python manage.py runserver",
-      "group": "build",
+      "group": "build"
     },
     {
       "label": "Makemigrations",
       "type": "shell",
       "command": "poetry run python manage.py makemigrations",
-      "group": "build",
+      "group": "build"
     },
     {
       "label": "Migrate",
       "type": "shell",
       "command": "poetry run python manage.py migrate",
-      "group": "build",
+      "group": "build"
     },
     {
       "label": "Test",
       "type": "shell",
       "command": "poetry run python manage.py test",
-      "group": "build",
+      "group": "build"
     },
     {
       "label": "Createsuperuser",
       "type": "shell",
       "command": "poetry run python manage.py createsuperuser --email=admin@gmail.com --name=Admin --phone_number=77123456",
-      "group": "build",
+      "group": "build"
+    },
+    {
+      "type": "npm",
+      "script": "sass",
+      "path": "static/global",
+      "problemMatcher": [],
+      "label": "npm: sass - static/global",
+      "detail": "sass --watch ./sass/main.scss:./css/style.css"
     }
   ]
 }

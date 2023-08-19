@@ -1,17 +1,15 @@
 import mimetypes
 import os
 import socket
-from typing import Literal
 
-from config.settings.base import *
-from config.settings.base import INSTALLED_APPS, MIDDLEWARE
-from config.settings.packages import *
+from config.settings.base import *  # noqa: F403
+from config.settings.packages import *  # noqa: F403
 from config.settings.utils import BASE_DIR
 
 DEBUG = True
 
-INSTALLED_APPS.extend(["django_extensions", "debug_toolbar", "rosetta"])
-MIDDLEWARE.extend(["debug_toolbar.middleware.DebugToolbarMiddleware"])
+# INSTALLED_APPS.extend(["django_extensions", "debug_toolbar", "rosetta"])  # noqa: F405
+# MIDDLEWARE.extend(["debug_toolbar.middleware.DebugToolbarMiddleware"])  # noqa: F405
 
 
 DATABASES = {
@@ -50,16 +48,15 @@ STORAGES = {
 
 
 # Django-debug-toolbar
-hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
-INTERNAL_IPS = INTERNAL_IPS = [ip[:-1] + "1" for ip in ips] + ["127.0.0.1"]
-mimetypes.add_type("application/javascript", ".js", True)
+# hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+# INTERNAL_IPS = INTERNAL_IPS = [ip[:-1] + "1" for ip in ips] + ["127.0.0.1"]
+# mimetypes.add_type("application/javascript", ".js", True)
 
-DEBUG_TOOLBAR_PATCH_SETTINGS = False
+# DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
-DEBUG_TOOLBAR_CONFIG = {
-    "INTERCEPT_REDIRECTS": False,
-    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
-    "INSERT_BEFORE": "</head>",
-    "INTERCEPT_REDIRECTS": False,
-    "RENDER_PANELS": True,
-}
+# DEBUG_TOOLBAR_CONFIG = {
+#     "INTERCEPT_REDIRECTS": False,
+#     "SHOW_TOOLBAR_CALLBACK": lambda request: True,
+#     "INSERT_BEFORE": "</head>",
+#     "RENDER_PANELS": True,
+# }

@@ -8,19 +8,19 @@
 {% block style %} {% endblock style %}
 
 
-{% block js %} {% endblock js %}
-
-
 {% block header %}
-<h1>Welcom to Etablissement Medine</h1>
-<nav style="margin-top: 30px; display: flex; gap: 1rem">
-  <a href="{% url 'schema-redoc' %}">API Docs</a>
-  <a href="{% url 'admin:index' %}">Admin</a>
-</nav>
+{% include 'components/head.html' %}
 {% endblock header %}
 
 
-{% block content %} {% endblock content %}
+{% block content %}
+{% include 'components/slider.html' %}
+{% endblock content %}
 
 
 {% block footer %} {% endblock footer %}
+
+
+{% block js %}
+<script src="{% static 'global/js/slider.js' %}"></script>
+{% endblock js %}

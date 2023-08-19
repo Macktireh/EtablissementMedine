@@ -2,8 +2,6 @@ import logging
 import logging.config
 import os
 
-from django.utils.log import DEFAULT_LOGGING
-
 from config.settings.utils import BASE_DIR, get_env_variable
 
 logger = logging.getLogger(__name__)

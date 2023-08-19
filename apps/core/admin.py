@@ -6,9 +6,9 @@ from django.utils.html import escape
 from django.utils.safestring import SafeText, mark_safe
 from django.utils.translation import gettext_lazy as _
 
-admin.site.site_title = _("Etablissement Medine Administration")
-admin.site.site_header = _("Etablissement Medine Administration")
-# admin.site.index_title = _("Etablissement Medine Administration")
+admin.site.site_title = _("Medine Database Administration")
+admin.site.site_header = _("Medine Database Administration")
+admin.site.index_title = _("Medine Database Administration")
 
 
 @admin.register(LogEntry)

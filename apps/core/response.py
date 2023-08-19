@@ -81,8 +81,10 @@ def failMessage() -> Dict[str, str]:
             msgEN="The password and password confirmation do not match.",
         ),
         "INVALID_PASSWORD": toggleLangMsg(
-            msgFR="Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, minuscule, un chiffre et un caractère spécial.",
-            msgEN="The password must contain at least 8 characters, a uppercase letter, a lowercase letter, a number and a special character.",
+            msgFR="Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, \
+                minuscule, un chiffre et un caractère spécial.",
+            msgEN="The password must contain at least 8 characters, a uppercase letter, a lowercase letter, \
+                a number and a special character.",
         ),
         "THE_TOKEN_IS_NOT_VALID_OR_HAS_EXPIRED": toggleLangMsg(
             msgFR="Le jeton n'est pas valide ou a expiré.", msgEN="The token is not valid or has expired."

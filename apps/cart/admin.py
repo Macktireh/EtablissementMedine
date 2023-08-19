@@ -1,10 +1,10 @@
 from django.contrib import admin
+from django.db.models import Sum
 from django.http import HttpRequest
 
-from apps.cart.models import Cart, OrderItem
+from apps.cart.models import Cart
 
 
-# @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
     list_display = (
         "user",
@@ -14,17 +14,19 @@ class OrderItemAdmin(admin.ModelAdmin):
         "ordered",
     )
     list_filter = ("ordered",)
+    readonly_fields = ("total_price",)
 
 
-# @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
     list_display = (
         "user",
         "_orders_items",
+        "total_price",
     )
+    readonly_fields = ("total_price",)
 
     def _orders_items(self, obj: Cart) -> int:
-        return obj.orders_items.count()
+        return obj.orders_items.aggregate(Sum("quantity"))["quantity__sum"]
 
     def has_add_permission(self, request: HttpRequest) -> bool:
         return False
@@ -33,4 +35,5 @@ class CartAdmin(admin.ModelAdmin):
         return request.user.is_superuser
 
     def has_change_permission(self, request: HttpRequest, obj: Cart = None) -> bool:
+        # return False
         return request.user.is_superuser

@@ -1,5 +1,5 @@
-from config.settings.base import *
-from config.settings.packages import *
+from config.settings.base import *  # noqa: F403
+from config.settings.packages import *  # noqa: F403
 from config.settings.utils import get_env_variable
 
 DEBUG = False

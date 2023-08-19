@@ -77,6 +77,21 @@ class CartService(object):
             item.save()
 
     @staticmethod
+    def delete_to_cart(request: HttpRequest, order_item_public_id: str) -> None:
+        """
+        Delete an order item from the user's cart.
+
+        Args:
+            request (HttpRequest): The HTTP request object.
+            order_item_public_id (str): The public ID of the order item.
+
+        Returns:
+            None
+        """
+        item = get_object_or_404(OrderItem, public_id=order_item_public_id)
+        item.delete()
+
+    @staticmethod
     def clear_cart(request: HttpRequest) -> None:
         """
         Clear all items the cart for the given user.

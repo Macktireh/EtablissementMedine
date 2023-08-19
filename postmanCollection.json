@@ -1,0 +1,1518 @@
+{
+	"info": {
+		"_postman_id": "4d3439f9-fe08-4d84-b3db-09def04e7d16",
+		"name": "EtablissementMedine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21641312"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sign Up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "fr",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"abdimack97@gmail.com\",\r\n    \"name\": \"Macktireh\",\r\n    \"phoneNumber\": \"77130292\",\r\n    \"password\": \"Test@123\",\r\n    \"confirmPassword\": \"Test@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/user/signup/?client=web",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user",
+								"signup",
+								""
+							],
+							"query": [
+								{
+									"key": "client",
+									"value": "web"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activation",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"uidb64\": \"\",\r\n    \"token\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/user/account/activation/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"user",
+								"account",
+								"activation",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200) {\r",
+									"    pm.environment.set('accessToken', pm.response.json().tokens.access)\r",
+									"    pm.environment.set('refreshToken', pm.response.json().tokens.refresh)\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"abdimack97@gmail.com\",\r\n    \"password\": \"Test@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/user/login/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Reset Password",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"abdimack97@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/user/request/reset-password/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user",
+								"request",
+								"reset-password",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"Hello@123\",\r\n    \"confirmPassword\": \"Hello@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/user/reset-password/ZWFjMzA5NzMxNTg3NGQzNzhiYzlkNzc4NTJiMWVjMWY4OTlhYzE5ODI0YTk0ZTU0YWE0ZTYxYTdjNGI1NWIzOQ/boklo7-cfce117cc0966b9e5d155e29cc4ed017/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user",
+								"reset-password",
+								"ZWFjMzA5NzMxNTg3NGQzNzhiYzlkNzc4NTJiMWVjMWY4OTlhYzE5ODI0YTk0ZTU0YWE0ZTYxYTdjNGI1NWIzOQ",
+								"boklo7-cfce117cc0966b9e5d155e29cc4ed017",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200) {\r",
+									"    pm.environment.set('accessToken', pm.response.json().access)\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "refresh",
+									"value": "{{refreshToken}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/user/token/refresh/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user",
+								"token",
+								"refresh",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "JWT Verify",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/user/token/verify/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user",
+								"token",
+								"verify",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log()\r",
+									"\r",
+									"const baseUrl = pm.environment.get(\"baseUrl\")\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: `${baseUrl}/api/v1/auth/user/token/verify/`,\r",
+									"    method: \"POST\",\r",
+									"    header: {\r",
+									"        \"Accept\": \"application/json\",\r",
+									"        \"Content-Type\": \"application/json\"\r",
+									"    },\r",
+									"    body: JSON.stringify({ token: pm.environment.get(\"accessToken\") })\r",
+									"}, (error, response) => {\r",
+									"    console.log(\"STATUS CODE :\", response.code)\r",
+									"    if (response.code === 401) {\r",
+									"        console.log(\"VERIFY TOKEN FAIL\")\r",
+									"        console.log()\r",
+									"        pm.sendRequest({\r",
+									"            url: `${baseUrl}/api/v1/auth/user/token/refresh/`,\r",
+									"            method: \"POST\",\r",
+									"            header: {\r",
+									"                \"Accept\": \"application/json\",\r",
+									"                \"Content-Type\": \"application/json\"\r",
+									"            },\r",
+									"            body: JSON.stringify({ refresh: pm.environment.get(\"refreshToken\") })\r",
+									"        }, (error, response) => {\r",
+									"            if (response.code === 401) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN FAIL\")\r",
+									"            } else if (response.code === 200) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN SUCCESS\")\r",
+									"                pm.environment.set('accessToken', response.json().access)\r",
+									"                console.log(\"RES\", response)\r",
+									"            } else {\r",
+									"                console.log(\"ELSE :\")\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"RES\", response)\r",
+									"            }\r",
+									"        })\r",
+									"    } else if (response.code === 200) {\r",
+									"        console.log(\"VERIFY TOKEN SUCCESS\")\r",
+									"        console.log(\"RES\", response)\r",
+									"    } else {\r",
+									"        console.log(\"ELSE :\")\r",
+									"        console.log(\"STATUS CODE :\", response.code)\r",
+									"        console.log(\"RES\", response)\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200) {\r",
+									"    pm.environment.set('accessToken', \"\")\r",
+									"    pm.environment.set('refreshToken', \"\")\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "refresh",
+									"value": "{{refreshToken}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/user/logout/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user",
+								"logout",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Current User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log()\r",
+									"\r",
+									"const baseUrl = pm.environment.get(\"baseUrl\")\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: `${baseUrl}/api/v1/auth/user/token/verify/`,\r",
+									"    method: \"POST\",\r",
+									"    header: {\r",
+									"        \"Accept\": \"application/json\",\r",
+									"        \"Content-Type\": \"application/json\"\r",
+									"    },\r",
+									"    body: JSON.stringify({ token: pm.environment.get(\"accessToken\") })\r",
+									"}, (error, response) => {\r",
+									"    console.log(\"STATUS CODE :\", response.code)\r",
+									"    if (response.code === 401) {\r",
+									"        console.log(\"VERIFY TOKEN FAIL\")\r",
+									"        console.log()\r",
+									"        pm.sendRequest({\r",
+									"            url: `${baseUrl}/api/v1/auth/user/token/refresh/`,\r",
+									"            method: \"POST\",\r",
+									"            header: {\r",
+									"                \"Accept\": \"application/json\",\r",
+									"                \"Content-Type\": \"application/json\"\r",
+									"            },\r",
+									"            body: JSON.stringify({ refresh: pm.environment.get(\"refreshToken\") })\r",
+									"        }, (error, response) => {\r",
+									"            if (response.code === 401) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN FAIL\")\r",
+									"            } else if (response.code === 200) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN SUCCESS\")\r",
+									"                pm.environment.set('accessToken', response.json().access)\r",
+									"                console.log(\"RES\", response)\r",
+									"            } else {\r",
+									"                console.log(\"ELSE :\")\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"RES\", response)\r",
+									"            }\r",
+									"        })\r",
+									"    } else if (response.code === 200) {\r",
+									"        console.log(\"VERIFY TOKEN SUCCESS\")\r",
+									"        console.log(\"RES\", response)\r",
+									"    } else {\r",
+									"        console.log(\"ELSE :\")\r",
+									"        console.log(\"STATUS CODE :\", response.code)\r",
+									"        console.log(\"RES\", response)\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// if(pm.response.code === 200) {\r",
+									"//     pm.request.method == \"GET\" && pm.environment.set('userId', pm.response.json().user.public_id)\r",
+									"// }"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Macktireh AS\",\r\n    \"phoneNnumber\": \"+25377130292\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/me/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"me",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Current User Address",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log()\r",
+									"\r",
+									"const baseUrl = pm.environment.get(\"baseUrl\")\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: `${baseUrl}/api/v1/auth/user/token/verify/`,\r",
+									"    method: \"POST\",\r",
+									"    header: {\r",
+									"        \"Accept\": \"application/json\",\r",
+									"        \"Content-Type\": \"application/json\"\r",
+									"    },\r",
+									"    body: JSON.stringify({ token: pm.environment.get(\"accessToken\") })\r",
+									"}, (error, response) => {\r",
+									"    console.log(\"STATUS CODE :\", response.code)\r",
+									"    if (response.code === 401) {\r",
+									"        console.log(\"VERIFY TOKEN FAIL\")\r",
+									"        console.log()\r",
+									"        pm.sendRequest({\r",
+									"            url: `${baseUrl}/api/v1/auth/user/token/refresh/`,\r",
+									"            method: \"POST\",\r",
+									"            header: {\r",
+									"                \"Accept\": \"application/json\",\r",
+									"                \"Content-Type\": \"application/json\"\r",
+									"            },\r",
+									"            body: JSON.stringify({ refresh: pm.environment.get(\"refreshToken\") })\r",
+									"        }, (error, response) => {\r",
+									"            if (response.code === 401) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN FAIL\")\r",
+									"            } else if (response.code === 200) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN SUCCESS\")\r",
+									"                pm.environment.set('accessToken', response.json().access)\r",
+									"                console.log(\"RES\", response)\r",
+									"            } else {\r",
+									"                console.log(\"ELSE :\")\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"RES\", response)\r",
+									"            }\r",
+									"        })\r",
+									"    } else if (response.code === 200) {\r",
+									"        console.log(\"VERIFY TOKEN SUCCESS\")\r",
+									"        console.log(\"RES\", response)\r",
+									"    } else {\r",
+									"        console.log(\"ELSE :\")\r",
+									"        console.log(\"STATUS CODE :\", response.code)\r",
+									"        console.log(\"RES\", response)\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// if(pm.response.code === 200) {\r",
+									"//     pm.request.method == \"GET\" && pm.environment.set('userId', pm.response.json().user.public_id)\r",
+									"// }"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"streetAddress\": \"43 AV Jean Jaures\",\r\n    \"city\": \"L'île de Saint Denis\",\r\n    \"zipcode\": 93450,\r\n    \"country\": \"France\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/me/details/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"me",
+								"details",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category & Product",
+			"item": [
+				{
+					"name": "Product CRUD",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// console.log()\r",
+									"\r",
+									"// const baseUrl = pm.environment.get(\"baseUrl\")\r",
+									"\r",
+									"// pm.sendRequest({\r",
+									"//     url: `${baseUrl}/api/v1/auth/user/token/verify/`,\r",
+									"//     method: \"POST\",\r",
+									"//     header: {\r",
+									"//         \"Accept\": \"application/json\",\r",
+									"//         \"Content-Type\": \"application/json\"\r",
+									"//     },\r",
+									"//     body: JSON.stringify({ token: pm.environment.get(\"accessToken\") })\r",
+									"// }, (error, response) => {\r",
+									"//     console.log(\"STATUS CODE :\", response.code)\r",
+									"//     if (response.code === 401) {\r",
+									"//         console.log(\"VERIFY TOKEN FAIL\")\r",
+									"//         console.log()\r",
+									"//         pm.sendRequest({\r",
+									"//             url: `${baseUrl}/api/v1/auth/user/token/refresh/`,\r",
+									"//             method: \"POST\",\r",
+									"//             header: {\r",
+									"//                 \"Accept\": \"application/json\",\r",
+									"//                 \"Content-Type\": \"application/json\"\r",
+									"//             },\r",
+									"//             body: JSON.stringify({ refresh: pm.environment.get(\"refreshToken\") })\r",
+									"//         }, (error, response) => {\r",
+									"//             if (response.code === 401) {\r",
+									"//                 console.log(\"STATUS CODE :\", response.code)\r",
+									"//                 console.log(\"REFRESH TOKEN FAIL\")\r",
+									"//             } else if (response.code === 200) {\r",
+									"//                 console.log(\"STATUS CODE :\", response.code)\r",
+									"//                 console.log(\"REFRESH TOKEN SUCCESS\")\r",
+									"//                 pm.environment.set('accessToken', response.json().access)\r",
+									"//                 console.log(\"RES\", response)\r",
+									"//             } else {\r",
+									"//                 console.log(\"ELSE :\")\r",
+									"//                 console.log(\"STATUS CODE :\", response.code)\r",
+									"//                 console.log(\"RES\", response)\r",
+									"//             }\r",
+									"//         })\r",
+									"//     } else if (response.code === 200) {\r",
+									"//         console.log(\"VERIFY TOKEN SUCCESS\")\r",
+									"//         console.log(\"RES\", response)\r",
+									"//     } else {\r",
+									"//         console.log(\"ELSE :\")\r",
+									"//         console.log(\"STATUS CODE :\", response.code)\r",
+									"//         console.log(\"RES\", response)\r",
+									"//     }\r",
+									"// });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "fr",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/products/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category CRUD",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// console.log()\r",
+									"\r",
+									"// const baseUrl = pm.environment.get(\"baseUrl\")\r",
+									"\r",
+									"// pm.sendRequest({\r",
+									"//     url: `${baseUrl}/api/v1/auth/user/token/verify/`,\r",
+									"//     method: \"POST\",\r",
+									"//     header: {\r",
+									"//         \"Accept\": \"application/json\",\r",
+									"//         \"Content-Type\": \"application/json\"\r",
+									"//     },\r",
+									"//     body: JSON.stringify({ token: pm.environment.get(\"accessToken\") })\r",
+									"// }, (error, response) => {\r",
+									"//     console.log(\"STATUS CODE :\", response.code)\r",
+									"//     if (response.code === 401) {\r",
+									"//         console.log(\"VERIFY TOKEN FAIL\")\r",
+									"//         console.log()\r",
+									"//         pm.sendRequest({\r",
+									"//             url: `${baseUrl}/api/v1/auth/user/token/refresh/`,\r",
+									"//             method: \"POST\",\r",
+									"//             header: {\r",
+									"//                 \"Accept\": \"application/json\",\r",
+									"//                 \"Content-Type\": \"application/json\"\r",
+									"//             },\r",
+									"//             body: JSON.stringify({ refresh: pm.environment.get(\"refreshToken\") })\r",
+									"//         }, (error, response) => {\r",
+									"//             if (response.code === 401) {\r",
+									"//                 console.log(\"STATUS CODE :\", response.code)\r",
+									"//                 console.log(\"REFRESH TOKEN FAIL\")\r",
+									"//             } else if (response.code === 200) {\r",
+									"//                 console.log(\"STATUS CODE :\", response.code)\r",
+									"//                 console.log(\"REFRESH TOKEN SUCCESS\")\r",
+									"//                 pm.environment.set('accessToken', response.json().access)\r",
+									"//                 console.log(\"RES\", response)\r",
+									"//             } else {\r",
+									"//                 console.log(\"ELSE :\")\r",
+									"//                 console.log(\"STATUS CODE :\", response.code)\r",
+									"//                 console.log(\"RES\", response)\r",
+									"//             }\r",
+									"//         })\r",
+									"//     } else if (response.code === 200) {\r",
+									"//         console.log(\"VERIFY TOKEN SUCCESS\")\r",
+									"//         console.log(\"RES\", response)\r",
+									"//     } else {\r",
+									"//         console.log(\"ELSE :\")\r",
+									"//         console.log(\"STATUS CODE :\", response.code)\r",
+									"//         console.log(\"RES\", response)\r",
+									"//     }\r",
+									"// });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "fr",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/products/categories/all/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"categories",
+								"all",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Get Cart",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log()\r",
+									"\r",
+									"const baseUrl = pm.environment.get(\"baseUrl\")\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: `${baseUrl}/api/v1/auth/user/token/verify/`,\r",
+									"    method: \"POST\",\r",
+									"    header: {\r",
+									"        \"Accept\": \"application/json\",\r",
+									"        \"Content-Type\": \"application/json\"\r",
+									"    },\r",
+									"    body: JSON.stringify({ token: pm.environment.get(\"accessToken\") })\r",
+									"}, (error, response) => {\r",
+									"    console.log(\"STATUS CODE :\", response.code)\r",
+									"    if (response.code === 401) {\r",
+									"        console.log(\"VERIFY TOKEN FAIL\")\r",
+									"        console.log()\r",
+									"        pm.sendRequest({\r",
+									"            url: `${baseUrl}/api/v1/auth/user/token/refresh/`,\r",
+									"            method: \"POST\",\r",
+									"            header: {\r",
+									"                \"Accept\": \"application/json\",\r",
+									"                \"Content-Type\": \"application/json\"\r",
+									"            },\r",
+									"            body: JSON.stringify({ refresh: pm.environment.get(\"refreshToken\") })\r",
+									"        }, (error, response) => {\r",
+									"            if (response.code === 401) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN FAIL\")\r",
+									"            } else if (response.code === 200) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN SUCCESS\")\r",
+									"                pm.environment.set('accessToken', response.json().access)\r",
+									"                console.log(\"RES\", response)\r",
+									"            } else {\r",
+									"                console.log(\"ELSE :\")\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"RES\", response)\r",
+									"            }\r",
+									"        })\r",
+									"    } else if (response.code === 200) {\r",
+									"        console.log(\"VERIFY TOKEN SUCCESS\")\r",
+									"        console.log(\"RES\", response)\r",
+									"    } else {\r",
+									"        console.log(\"ELSE :\")\r",
+									"        console.log(\"STATUS CODE :\", response.code)\r",
+									"        console.log(\"RES\", response)\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/cart/get/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cart",
+								"get",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clear Cart",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log()\r",
+									"\r",
+									"const baseUrl = pm.environment.get(\"baseUrl\")\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: `${baseUrl}/api/v1/auth/user/token/verify/`,\r",
+									"    method: \"POST\",\r",
+									"    header: {\r",
+									"        \"Accept\": \"application/json\",\r",
+									"        \"Content-Type\": \"application/json\"\r",
+									"    },\r",
+									"    body: JSON.stringify({ token: pm.environment.get(\"accessToken\") })\r",
+									"}, (error, response) => {\r",
+									"    console.log(\"STATUS CODE :\", response.code)\r",
+									"    if (response.code === 401) {\r",
+									"        console.log(\"VERIFY TOKEN FAIL\")\r",
+									"        console.log()\r",
+									"        pm.sendRequest({\r",
+									"            url: `${baseUrl}/api/v1/auth/user/token/refresh/`,\r",
+									"            method: \"POST\",\r",
+									"            header: {\r",
+									"                \"Accept\": \"application/json\",\r",
+									"                \"Content-Type\": \"application/json\"\r",
+									"            },\r",
+									"            body: JSON.stringify({ refresh: pm.environment.get(\"refreshToken\") })\r",
+									"        }, (error, response) => {\r",
+									"            if (response.code === 401) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN FAIL\")\r",
+									"            } else if (response.code === 200) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN SUCCESS\")\r",
+									"                pm.environment.set('accessToken', response.json().access)\r",
+									"                console.log(\"RES\", response)\r",
+									"            } else {\r",
+									"                console.log(\"ELSE :\")\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"RES\", response)\r",
+									"            }\r",
+									"        })\r",
+									"    } else if (response.code === 200) {\r",
+									"        console.log(\"VERIFY TOKEN SUCCESS\")\r",
+									"        console.log(\"RES\", response)\r",
+									"    } else {\r",
+									"        console.log(\"ELSE :\")\r",
+									"        console.log(\"STATUS CODE :\", response.code)\r",
+									"        console.log(\"RES\", response)\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/cart/clear/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cart",
+								"clear",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Item To Cart",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log()\r",
+									"\r",
+									"const baseUrl = pm.environment.get(\"baseUrl\")\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: `${baseUrl}/api/v1/auth/user/token/verify/`,\r",
+									"    method: \"POST\",\r",
+									"    header: {\r",
+									"        \"Accept\": \"application/json\",\r",
+									"        \"Content-Type\": \"application/json\"\r",
+									"    },\r",
+									"    body: JSON.stringify({ token: pm.environment.get(\"accessToken\") })\r",
+									"}, (error, response) => {\r",
+									"    console.log(\"STATUS CODE :\", response.code)\r",
+									"    if (response.code === 401) {\r",
+									"        console.log(\"VERIFY TOKEN FAIL\")\r",
+									"        console.log()\r",
+									"        pm.sendRequest({\r",
+									"            url: `${baseUrl}/api/v1/auth/user/token/refresh/`,\r",
+									"            method: \"POST\",\r",
+									"            header: {\r",
+									"                \"Accept\": \"application/json\",\r",
+									"                \"Content-Type\": \"application/json\"\r",
+									"            },\r",
+									"            body: JSON.stringify({ refresh: pm.environment.get(\"refreshToken\") })\r",
+									"        }, (error, response) => {\r",
+									"            if (response.code === 401) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN FAIL\")\r",
+									"            } else if (response.code === 200) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN SUCCESS\")\r",
+									"                pm.environment.set('accessToken', response.json().access)\r",
+									"                console.log(\"RES\", response)\r",
+									"            } else {\r",
+									"                console.log(\"ELSE :\")\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"RES\", response)\r",
+									"            }\r",
+									"        })\r",
+									"    } else if (response.code === 200) {\r",
+									"        console.log(\"VERIFY TOKEN SUCCESS\")\r",
+									"        console.log(\"RES\", response)\r",
+									"    } else {\r",
+									"        console.log(\"ELSE :\")\r",
+									"        console.log(\"STATUS CODE :\", response.code)\r",
+									"        console.log(\"RES\", response)\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/cart/delete-to-cart/f1475327c158478dbd44db2475e9353b9b015658b1e64fc08052fb127bd5c900/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cart",
+								"delete-to-cart",
+								"f1475327c158478dbd44db2475e9353b9b015658b1e64fc08052fb127bd5c900",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add To Cart",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log()\r",
+									"\r",
+									"const baseUrl = pm.environment.get(\"baseUrl\")\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: `${baseUrl}/api/v1/auth/user/token/verify/`,\r",
+									"    method: \"POST\",\r",
+									"    header: {\r",
+									"        \"Accept\": \"application/json\",\r",
+									"        \"Content-Type\": \"application/json\"\r",
+									"    },\r",
+									"    body: JSON.stringify({ token: pm.environment.get(\"accessToken\") })\r",
+									"}, (error, response) => {\r",
+									"    console.log(\"STATUS CODE :\", response.code)\r",
+									"    if (response.code === 401) {\r",
+									"        console.log(\"VERIFY TOKEN FAIL\")\r",
+									"        console.log()\r",
+									"        pm.sendRequest({\r",
+									"            url: `${baseUrl}/api/v1/auth/user/token/refresh/`,\r",
+									"            method: \"POST\",\r",
+									"            header: {\r",
+									"                \"Accept\": \"application/json\",\r",
+									"                \"Content-Type\": \"application/json\"\r",
+									"            },\r",
+									"            body: JSON.stringify({ refresh: pm.environment.get(\"refreshToken\") })\r",
+									"        }, (error, response) => {\r",
+									"            if (response.code === 401) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN FAIL\")\r",
+									"            } else if (response.code === 200) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN SUCCESS\")\r",
+									"                pm.environment.set('accessToken', response.json().access)\r",
+									"                console.log(\"RES\", response)\r",
+									"            } else {\r",
+									"                console.log(\"ELSE :\")\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"RES\", response)\r",
+									"            }\r",
+									"        })\r",
+									"    } else if (response.code === 200) {\r",
+									"        console.log(\"VERIFY TOKEN SUCCESS\")\r",
+									"        console.log(\"RES\", response)\r",
+									"    } else {\r",
+									"        console.log(\"ELSE :\")\r",
+									"        console.log(\"STATUS CODE :\", response.code)\r",
+									"        console.log(\"RES\", response)\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productPublicId\": \"eab44b9225434d49820bfe2771fddf3bc92fa65be23e4fe5b87950eaf3c673d3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/cart/add-to-cart/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cart",
+								"add-to-cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order Item Quantity",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log()\r",
+									"\r",
+									"const baseUrl = pm.environment.get(\"baseUrl\")\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: `${baseUrl}/api/v1/auth/user/token/verify/`,\r",
+									"    method: \"POST\",\r",
+									"    header: {\r",
+									"        \"Accept\": \"application/json\",\r",
+									"        \"Content-Type\": \"application/json\"\r",
+									"    },\r",
+									"    body: JSON.stringify({ token: pm.environment.get(\"accessToken\") })\r",
+									"}, (error, response) => {\r",
+									"    console.log(\"STATUS CODE :\", response.code)\r",
+									"    if (response.code === 401) {\r",
+									"        console.log(\"VERIFY TOKEN FAIL\")\r",
+									"        console.log()\r",
+									"        pm.sendRequest({\r",
+									"            url: `${baseUrl}/api/v1/auth/user/token/refresh/`,\r",
+									"            method: \"POST\",\r",
+									"            header: {\r",
+									"                \"Accept\": \"application/json\",\r",
+									"                \"Content-Type\": \"application/json\"\r",
+									"            },\r",
+									"            body: JSON.stringify({ refresh: pm.environment.get(\"refreshToken\") })\r",
+									"        }, (error, response) => {\r",
+									"            if (response.code === 401) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN FAIL\")\r",
+									"            } else if (response.code === 200) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN SUCCESS\")\r",
+									"                pm.environment.set('accessToken', response.json().access)\r",
+									"                console.log(\"RES\", response)\r",
+									"            } else {\r",
+									"                console.log(\"ELSE :\")\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"RES\", response)\r",
+									"            }\r",
+									"        })\r",
+									"    } else if (response.code === 200) {\r",
+									"        console.log(\"VERIFY TOKEN SUCCESS\")\r",
+									"        console.log(\"RES\", response)\r",
+									"    } else {\r",
+									"        console.log(\"ELSE :\")\r",
+									"        console.log(\"STATUS CODE :\", response.code)\r",
+									"        console.log(\"RES\", response)\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderItemPublicId\": \"3e2352247773405687d38714452b28c2b4decb85c631442a9cc69d258a2b56c0\",\r\n    \"quantity\": \"4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/cart/update-order-item-quantity/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cart",
+								"update-order-item-quantity",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Get Orders",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log()\r",
+									"\r",
+									"const baseUrl = pm.environment.get(\"baseUrl\")\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: `${baseUrl}/auth/user/jwt/verify/`,\r",
+									"    method: \"POST\",\r",
+									"    header: {\r",
+									"        \"Accept\": \"application/json\",\r",
+									"        \"Content-Type\": \"application/json\"\r",
+									"    },\r",
+									"    body: JSON.stringify({ token: pm.environment.get(\"accessToken\") })\r",
+									"}, (error, response) => {\r",
+									"    console.log(\"STATUS CODE :\", response.code)\r",
+									"    if (response.code === 401) {\r",
+									"        console.log(\"VERIFY TOKEN FAIL\")\r",
+									"        console.log()\r",
+									"        pm.sendRequest({\r",
+									"            url: `${baseUrl}/auth/user/token/refresh/`,\r",
+									"            method: \"POST\",\r",
+									"            header: {\r",
+									"                \"Accept\": \"application/json\",\r",
+									"                \"Content-Type\": \"application/json\"\r",
+									"            },\r",
+									"            body: JSON.stringify({ refresh: pm.environment.get(\"refreshToken\") })\r",
+									"        }, (error, response) => {\r",
+									"            if (response.code === 401) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN FAIL\")\r",
+									"            } else if (response.code === 200) {\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"REFRESH TOKEN SUCCESS\")\r",
+									"                pm.environment.set('accessToken', response.json().access)\r",
+									"                console.log(\"RES\", response)\r",
+									"            } else {\r",
+									"                console.log(\"ELSE :\")\r",
+									"                console.log(\"STATUS CODE :\", response.code)\r",
+									"                console.log(\"RES\", response)\r",
+									"            }\r",
+									"        })\r",
+									"    } else if (response.code === 200) {\r",
+									"        console.log(\"VERIFY TOKEN SUCCESS\")\r",
+									"        console.log(\"RES\", response)\r",
+									"    } else {\r",
+									"        console.log(\"ELSE :\")\r",
+									"        console.log(\"STATUS CODE :\", response.code)\r",
+									"        console.log(\"RES\", response)\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"followingPubblicId\": \"bbf161b838354a66ad008632aa56bce15c2c9d8c19e14deea197c8f689f846ed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/notifications/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"notifications",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{accessToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

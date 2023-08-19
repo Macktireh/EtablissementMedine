@@ -61,7 +61,6 @@ class Order(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
         ordering = ["-order_date"]
 
     def save(self, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> None:
-        # self.total_price = self.orders_items.aggregate(models.Sum("price"))["price__sum"]
         return super().save(*args, **kwargs)
 
     def delete(self, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> Tuple[int, Dict[str, int]]:
