@@ -2,19 +2,20 @@
 {% load static %}
 
 
-{% block title %} Acceuil {% endblock title %}
+{% block title %} Home {% endblock title %}
 
 
 {% block style %} {% endblock style %}
 
 
 {% block header %}
-{% include 'components/head.html' %}
+{% component 'head' %}
+{% component 'menu' %}
 {% endblock header %}
 
 
 {% block content %}
-{% include 'components/slider.html' %}
+{% component 'carousel' %}
 {% endblock content %}
 
 
@@ -22,5 +23,5 @@
 
 
 {% block js %}
-<script src="{% static 'global/js/slider.js' %}"></script>
+{% component_js_dependencies %}
 {% endblock js %}

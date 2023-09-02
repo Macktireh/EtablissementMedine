@@ -49,28 +49,21 @@ class SignupSerializer(PasswordSerializer):
         return User.objects.create_user(**validate_data)
 
 
+class ActivationSerializer(serializers.Serializer):
+    email = serializers.CharField(max_length=255, write_only=True)
+    token = serializers.CharField(max_length=255, write_only=True)
+
+
 class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=255)
     password = serializers.CharField(max_length=128, write_only=True, style={"input_type": "password"})
 
-    class Meta:
-        fields = [
-            "email",
-            "password",
-        ]
 
-
-class RequestResetPasswordSerializer(serializers.Serializer):
+class RequestActivationOrResetPasswordSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=255)
-
-    class Meta:
-        fields = ["email"]
 
 
 class ResetPasswordSerializer(PasswordSerializer):
-    class Meta:
-        fields = ["password", "confirmPassword"]
-
     def validate(self, attrs: OrderedDict) -> OrderedDict:
         password = attrs.get("password")
         confirm_password = attrs.get("confirmPassword")

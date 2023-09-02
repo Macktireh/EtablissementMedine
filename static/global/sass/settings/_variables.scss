@@ -14,10 +14,11 @@
 $font1: 'Roboto', sans-serif;
 $font2: 'Lobster', cursive;
 
-$primary: #656D75;
+$primary: #f82e57;
 $black: #000000;
 $dim: #15202B;
 $white: #FFFFFF;
+$white2: #DDD;
 $blue: #1d9bf0;
 $red: #F4212E;
 $orange: orange;
@@ -33,6 +34,7 @@ $gray2: #aeaeae87;
   --color-dim: #{$dim};
   --color-black: #{$black};
   --color-white: #{$white};
+  --color-white2: #{$white2};
   --color-blue: #{$blue};
   --color-red: #{$red};
   --color-orange: #{$orange};

@@ -1,0 +1,18 @@
+<section class="head-section">
+  <div class="logo">
+    <a href="{% url 'home:index' %}">Medine</a>
+  </div>
+  {% component 'searchBar' %}
+  <div class="btn-icons">
+    <a href="{% url 'home:index' %}" class="link">
+      <span class="cart-count">0</span>
+      {% include 'svg/cart.html' %}
+    </a>
+    <a href="{% url 'home:index' %}" class="link">
+      {% include 'svg/user.html' %}
+    </a>
+    <div href="{% url 'home:index' %}" class="link theme" id="dark">
+      {% include 'svg/dark.html' %}
+    </div>
+  </div>
+</section>

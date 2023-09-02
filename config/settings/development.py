@@ -1,15 +1,25 @@
-import mimetypes
 import os
-import socket
 
 from config.settings.base import *  # noqa: F403
 from config.settings.packages import *  # noqa: F403
 from config.settings.utils import BASE_DIR
 
+# import socket
+# import mimetypes
+
+
 DEBUG = True
 
-# INSTALLED_APPS.extend(["django_extensions", "debug_toolbar", "rosetta"])  # noqa: F405
-# MIDDLEWARE.extend(["debug_toolbar.middleware.DebugToolbarMiddleware"])  # noqa: F405
+
+DEVELOP_APPS = [
+    "django_extensions",
+    # "debug_toolbar",
+    "rosetta",
+    "developmentEmailDashboard",
+]
+
+INSTALLED_APPS.extend(DEVELOP_APPS)  # noqa: F405
+MIDDLEWARE.extend(["debug_toolbar.middleware.DebugToolbarMiddleware"])  # noqa: F405
 
 
 DATABASES = {
@@ -20,7 +30,8 @@ DATABASES = {
 }
 
 # Email settings
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "developmentEmailDashboard.emailbackend.developmentEmailBackend"
+DEVELOPMENT_EMAIL_DASHBOARD_SEND_EMAIL_NOTIFICATION = True
 
 
 CACHES = {

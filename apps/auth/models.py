@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-from random import randint
 
 from django.conf import settings
 from django.contrib.auth.models import Group
@@ -7,7 +6,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from apps.auth.types import CreateTokenPayloadType
+from apps.auth.utils import make_token
 from apps.users.models import User
 
 
@@ -26,7 +25,7 @@ class UserProxy(User):
 
 
 class CodeChecker(models.Model):
-    token = models.CharField(max_length=6)
+    token = models.CharField(max_length=300)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     verified = models.BooleanField(_("verified"), default=False, db_index=True)
     timestamp_requested = models.DateTimeField(_("timestamp requested"), auto_now_add=True)
@@ -41,11 +40,9 @@ class CodeChecker(models.Model):
         return self.token
 
     @classmethod
-    def create_token(cls, payload: CreateTokenPayloadType) -> str:
-        token = str(randint(100000, 1000000)) if settings.ENV == "production" else "123456"
-        obj, created = cls.objects.get_or_create(
-            user__phone_number=payload["phone_number"], user=payload["user"]
-        )
+    def create_token(cls, user: User) -> str:
+        token = make_token(user)
+        obj, created = cls.objects.get_or_create(user=user)
         if not created:
             obj.timestamp_verified = None
             obj.verified = False

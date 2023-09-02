@@ -38,7 +38,7 @@ class CodeAdmin(admin.ModelAdmin):
     )
 
     def name(self, obj: CodeChecker) -> str:
-        return obj.user.get_full_name()
+        return obj.user.name
 
     def phone_number(self, obj: CodeChecker) -> str:
         return obj.user.phone_number

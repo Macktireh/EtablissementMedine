@@ -1,8 +1,6 @@
 from enum import Enum
 from typing import TypedDict
 
-from apps.users.types import UserType
-
 
 class ClientType(str, Enum):
     WEB = "web"
@@ -14,22 +12,17 @@ class JWTTokenType(TypedDict):
     refresh: str
 
 
-class CreateTokenPayloadType(TypedDict):
-    phone_number: str
-    user: UserType
-
-
 class ActivationLinkPayloadType(TypedDict):
     uidb64: str
     token: str
 
 
-class ActivationTokenPayloadType(TypedDict):
+class ActivationPayloadToken(TypedDict):
+    email: str
     token: str
-    phone_number: str
 
 
-class LoginPayloadType(TypedDict):
+class LoginPayload(TypedDict):
     email: str
     password: str
 
@@ -38,5 +31,5 @@ class ResetPwdLinkPayloadType(ActivationLinkPayloadType):
     password: str
 
 
-class ResetPwdTokenPayloadType(ActivationTokenPayloadType):
-    password: str
+class ResetPwdTokenPayloadType(ActivationPayloadToken):
+    pass
