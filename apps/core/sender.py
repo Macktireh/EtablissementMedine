@@ -8,7 +8,6 @@ from django.contrib.auth import get_user_model
 from django.core.mail import EmailMessage
 from django.template.exceptions import TemplateDoesNotExist
 from django.template.loader import get_template
-from django.utils.translation import gettext_lazy as _
 from requests.auth import HTTPBasicAuth
 
 from apps.core.response import failMsg

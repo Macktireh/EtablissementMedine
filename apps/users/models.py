@@ -10,7 +10,7 @@ from apps.users.managers import UserManager
 
 class User(AbstractPublicIdMixin, AbstractUser):
     username = None
-    fisrt_name = None
+    first_name = None
     last_name = None
     name = models.CharField(_("name"), max_length=128)
     email = models.EmailField(_("email address"), max_length=255, unique=True, db_index=True)

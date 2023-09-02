@@ -5,7 +5,6 @@ from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
 from django.contrib.auth.models import Group
 from django.db.models import QuerySet
 from django.http import HttpRequest
-from django.utils.translation import gettext_lazy as _
 
 from apps.auth.models import CodeChecker, GroupProxy, UserProxy
 from apps.users.admin import UserAdmin as BaseUserAdmin
@@ -39,7 +38,7 @@ class CodeAdmin(admin.ModelAdmin):
     )
 
     def name(self, obj: CodeChecker) -> str:
-        return obj.user.get_full_name()
+        return obj.user.name
 
     def phone_number(self, obj: CodeChecker) -> str:
         return obj.user.phone_number

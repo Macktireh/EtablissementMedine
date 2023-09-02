@@ -19,14 +19,14 @@ from apps.auth.api.drf_schema import (
     signup_responses,
 )
 from apps.auth.services import AuthService
-from apps.auth.types import ActivationLinkPayloadType, LoginPayloadType, ResetPwdLinkPayloadType
+from apps.auth.types import ActivationPayloadToken, ClientType, LoginPayload, ResetPwdLinkPayloadType
 from apps.core.exceptions import EmailOrPasswordIncorrectError, UserNotVerifiedError
 from apps.core.response import failMsg, succesMsg
 
 User = get_user_model()
 
 
-class SignUpView(APIView):
+class SignUpAPIView(APIView):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
@@ -39,11 +39,8 @@ class SignUpView(APIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
-        try:
-            client = request.GET["client"]
-            AuthService.signup_email(request, user, client)
-        except KeyError:
-            AuthService.signup_email(request, user)
+        client = request.GET.get("client") or ClientType.MOBILE
+        AuthService.signup_email(request, user, client)
 
         return Response(
             {
@@ -54,30 +51,23 @@ class SignUpView(APIView):
         )
 
 
-class ActivationWithLinkView(APIView):
+class ActivationAPIView(APIView):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
-        operation_id="activation_with_link",
+        operation_id="activation",
         responses=activation_responses,
     )
-    def get(self, request: HttpRequest, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> Response:
-        uidb64 = kwargs.get("uidb64")
-        token = kwargs.get("token")
+    def post(self, request: HttpRequest, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> Response:
+        serializer = serializers.ActivationSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
 
-        if not uidb64 or not token:
-            return Response(
-                {
-                    "status": _("fail"),
-                    "message": failMsg["MISSING_PARAMETER"],
-                },
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        payload = ActivationLinkPayloadType(uidb64=uidb64, token=token)
+        email = cast(ReturnDict, serializer.validated_data)["email"]
+        token = cast(ReturnDict, serializer.validated_data)["token"]
+        payload = ActivationPayloadToken(email=email, token=token)
 
         try:
-            AuthService.activate_user_link(request, payload)
+            AuthService.activate_user_token(request, payload)
         except Exception:
             return Response(
                 {
@@ -96,7 +86,35 @@ class ActivationWithLinkView(APIView):
         )
 
 
-class LoginView(APIView):
+class RequestActivationAPIView(APIView):
+    permission_classes = [AllowAny]
+
+    @swagger_auto_schema(
+        operation_id="request_activation",
+        responses=activation_responses,
+    )
+    def post(self, request: HttpRequest, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> Response:
+        serializer = serializers.RequestActivationOrResetPasswordSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        email = cast(ReturnDict, serializer.validated_data)["email"]
+
+        try:
+            user = User.objects.get(email=email)
+            AuthService.signup_email(request, user, ClientType.MOBILE)
+        except Exception:
+            pass
+
+        return Response(
+            {
+                "status": "success",
+                "message": succesMsg["YOUR_ACCOUNT_HAS_BEEN_SUCCESSFULLY_ACTIVATED"],
+            },
+            status=status.HTTP_200_OK,
+        )
+
+
+class LoginAPIView(APIView):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
@@ -111,7 +129,7 @@ class LoginView(APIView):
 
         email = cast(ReturnDict, serializer.validated_data)["email"]
         password = cast(ReturnDict, serializer.validated_data)["password"]
-        payload = LoginPayloadType(email=email, password=password)
+        payload = LoginPayload(email=email, password=password)
 
         try:
             tokens = AuthService.login(request, payload)
@@ -142,32 +160,26 @@ class LoginView(APIView):
         )
 
 
-class RequestResetPasswordView(APIView):
+class RequestResetPasswordAPIView(APIView):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
-        request_body=serializers.RequestResetPasswordSerializer,
+        request_body=serializers.RequestActivationOrResetPasswordSerializer,
         operation_description="Request a password reset.",
         operation_id="request_reset_password",
         responses=request_reset_passwoard_responses,
     )
     def post(self, request: HttpRequest, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> Response:
-        serializer = serializers.RequestResetPasswordSerializer(data=request.data)
+        serializer = serializers.RequestActivationOrResetPasswordSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         email = cast(ReturnDict, serializer.validated_data)["email"]
         AuthService.request_reset_password_with_link(request, email)
 
-        return Response(
-            {
-                "status": "success",
-                "message": succesMsg["THE_PASSWORD_RESET_LINK_HAS_BEEN_SENT"],
-            },
-            status=status.HTTP_200_OK,
-        )
+        return Response(None, status=status.HTTP_200_OK)
 
 
-class ResetPasswordView(APIView):
+class ResetPasswordAPIView(APIView):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(

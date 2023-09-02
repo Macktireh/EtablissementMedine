@@ -8,13 +8,12 @@ from rest_framework.views import APIView
 
 from apps.cart.api import serializers
 from apps.cart.api.drf_schema import add_to_cart_responses
-from apps.cart.models import OrderItem
+from apps.cart.models import Cart
 from apps.cart.services import CartService
 
 
 class CartListView(viewsets.ReadOnlyModelViewSet):
-    queryset = OrderItem.objects.select_related("user", "product").all()
-    serializer_class = serializers.OrderItemSerializer
+    serializer_class = serializers.CartSerializer
 
     def list(self, request: HttpRequest, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> Response:
         """
@@ -28,7 +27,8 @@ class CartListView(viewsets.ReadOnlyModelViewSet):
         Returns:
             Response: The serialized data of the queryset.
         """
-        serializer = self.get_serializer(self.get_queryset(), many=True)
+        cart, _ = Cart.objects.select_related("user").get_or_create(user=request.user)
+        serializer = self.get_serializer(cart)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -90,6 +90,31 @@ class UpdateOrderItemQuantityView(APIView):
             {
                 "status": "success",
                 "message": "Updated quantity",
+            },
+            status=status.HTTP_200_OK,
+        )
+
+
+class DeleteToCartView(APIView):
+    def delete(self, request: HttpRequest, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> Response:
+        """
+        Handle DELETE request to delete a product from the cart
+
+        Args:
+            request (HttpRequest): The HTTP request object.
+            args (Tuple): Positional arguments.
+            kwargs (Dict): Keyword arguments.
+
+        Returns:
+            Response: The HTTP response with the status and message.
+        """
+        order_item_public_id = kwargs.get("orderItemPublicId")
+        CartService.delete_to_cart(request, order_item_public_id)
+
+        return Response(
+            {
+                "status": "success",
+                "message": "Deleted from cart",
             },
             status=status.HTTP_200_OK,
         )

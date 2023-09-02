@@ -2,25 +2,26 @@
 {% load static %}
 
 
-{% block title %} Acceuil {% endblock title %}
+{% block title %} Home {% endblock title %}
 
 
 {% block style %} {% endblock style %}
 
 
-{% block js %} {% endblock js %}
-
-
 {% block header %}
-<h1>Welcom to Etablissement Medine</h1>
-<nav style="margin-top: 30px; display: flex; gap: 1rem">
-  <a href="{% url 'schema-redoc' %}">API Docs</a>
-  <a href="{% url 'admin:index' %}">Admin</a>
-</nav>
+{% component 'head' %}
+{% component 'menu' %}
 {% endblock header %}
 
 
-{% block content %} {% endblock content %}
+{% block content %}
+{% component 'carousel' %}
+{% endblock content %}
 
 
 {% block footer %} {% endblock footer %}
+
+
+{% block js %}
+{% component_js_dependencies %}
+{% endblock js %}

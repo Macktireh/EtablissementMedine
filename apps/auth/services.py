@@ -13,11 +13,10 @@ from apps.auth.models import CodeChecker
 from apps.auth.tokens import getTokensUser, tokenGenerator
 from apps.auth.types import (
     ActivationLinkPayloadType,
-    ActivationTokenPayloadType,
+    ActivationPayloadToken,
     ClientType,
-    CreateTokenPayloadType,
     JWTTokenType,
-    LoginPayloadType,
+    LoginPayload,
     ResetPwdLinkPayloadType,
     ResetPwdTokenPayloadType,
 )
@@ -32,8 +31,7 @@ class AuthService:
     @staticmethod
     def signup_email(request: HttpRequest, user: UserType, client: ClientType = ClientType.WEB) -> None:
         if client == ClientType.MOBILE:
-            payload = CreateTokenPayloadType(phone_number=user.phone_number, user=user)
-            token = CodeChecker.create_token(payload)
+            token = CodeChecker.create_token(user)
             template_name = "auth/mail/activation_code.html"
         else:
             token = tokenGenerator.make_token(user)
@@ -54,9 +52,8 @@ class AuthService:
         )
 
     @staticmethod
-    def signup_sms(request: HttpRequest, user: UserType) -> None:
-        payload = CreateTokenPayloadType(phone_number=user.phone_number, user=user)
-        token = CodeChecker.create_token(payload)
+    def signup_sms_code(request: HttpRequest, user: UserType) -> None:
+        token = CodeChecker.create_token(user)
         body = _("Here is your EtablissementMedine code: %(token)s. Never share it.") % {"token": token}
 
         send_sms(body=body, to=user.phone_number)
@@ -88,14 +85,14 @@ class AuthService:
             )
 
     @staticmethod
-    def activate_user_token(request: HttpRequest, payload: ActivationTokenPayloadType) -> None:
+    def activate_user_token(request: HttpRequest, payload: ActivationPayloadToken) -> None:
         try:
-            obj = CodeChecker.objects.get(token=payload["token"], user__phone_number=payload["phone_number"])
-            user = obj.user
-        except CodeChecker.DoesNotExist:
+            user = User.objects.get(email=payload["email"])
+            obj = CodeChecker.objects.get(token=payload["token"], user=user)
+        except Exception:
             raise TokenError("User not found")
 
-        if not obj.confirm_verification(payload["token"]) and obj.is_expired():
+        if obj.is_expired() or not obj.confirm_verification(payload["token"]):
             raise TokenError("Invalid token")
 
         if not user.verified:
@@ -112,9 +109,10 @@ class AuthService:
                 to=[user.email],
                 template_name="auth/mail/activation-success.html",
             )
+        obj.delete()
 
     @staticmethod
-    def login(request: HttpRequest, payload: LoginPayloadType) -> JWTTokenType:
+    def login(request: HttpRequest, payload: LoginPayload) -> JWTTokenType:
         user = cast(
             UserType,
             authenticate(request=request, email=payload["email"], password=payload["password"]),

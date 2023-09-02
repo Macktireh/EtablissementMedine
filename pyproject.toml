@@ -8,35 +8,39 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-django = "^4.2.1"
+django = "^4.2.4"
 django-cloudinary-storage = "^0.3.0"
-django-cors-headers = "^4.0.0"
-django-modeltranslation = "^0.18.9"
+django-colorfield = "^0.9.0"
+django-components = "^0.28.1"
+django-cors-headers = "^4.2.0"
+django-modeltranslation = "^0.18.11"
 django-resized = "^1.0.2"
 django-rosetta = "^0.9.9"
 djangorestframework = "^3.14.0"
-djangorestframework-simplejwt = "^5.2.2"
-docutils = "^0.20"
-drf-yasg = "^1.21.5"
-gunicorn = "^20.1.0"
-pillow = "^9.5.0"
-psycopg2-binary = "^2.9.6"
-python-dotenv = "^1.0.0"
+djangorestframework-simplejwt = "^5.3.0"
+docutils = "^0.20.1"
+drf-yasg = "^1.21.7"
+gunicorn = "^21.2.0"
+pillow = "^10.0.0"
+psycopg2-binary = "^2.9.7"
+python-dotenv = "*"
 six = "^1.16.0"
-tqdm = "^4.65.0"
-whitenoise = "^6.4.0"
+tqdm = "^4.66.1"
+whitenoise = "^6.5.0"
 
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
-django-debug-toolbar = "^4.1.0"
+coverage = "^7.3.0"
+django-debug-toolbar = "^4.2.0"
+django-developmentemaildashboard = "^2.0.2"
 django-extensions = "^3.2.1"
 faker = "^18.7.0"
 flake8 = "^6.0.0"
+ggshield = "^1.18.1"
 isort = "^5.12.0"
 pre-commit = "^3.3.2"
-pytest-cov = "^4.0.0"
-pytest-django = "^4.5.2"
+ruff = "^0.0.275"
 
 [build-system]
 requires = ["poetry-core"]
@@ -66,3 +70,53 @@ combine_as_imports = true
 include_trailing_comma = true
 line_length = 110
 skip = ["migrations", ".venv", ".tox", ".git"]
+
+
+[tool.ruff]
+# Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
+select = ["E", "F"]
+ignore = []
+
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["A", "B", "C", "D", "E", "F", "G", "I", "N", "Q", "S", "T", "W", "ANN", "ARG", "BLE", "COM", "DJ", "DTZ", "EM", "ERA", "EXE", "FBT", "ICN", "INP", "ISC", "NPY", "PD", "PGH", "PIE", "PL", "PT", "PTH", "PYI", "RET", "RSE", "RUF", "SIM", "SLF", "TCH", "TID", "TRY", "UP", "YTT"]
+unfixable = []
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "migrations",
+    "fixtures.py",
+]
+
+# Same as Black.
+line-length = 110
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# Assume Python 3.10.
+target-version = "py310"
+
+[tool.ruff.mccabe]
+# Unlike Flake8, default to a complexity level of 10.
+max-complexity = 10

@@ -23,6 +23,7 @@ urlpatterns_api_v1 = [
     path("api/v1/user/", include("apps.users.api.urls")),
     path("api/v1/products/", include("apps.products.api.urls")),
     path("api/v1/cart/", include("apps.cart.api.urls")),
+    path("api/v1/orders/", include("apps.orders.api.urls")),
 ]
 
 
@@ -32,11 +33,10 @@ urlpatterns_api = urlpatterns_api_v1
 urlpatterns = i18n_patterns(*urlpatterns_admin, *urlpatterns_web) + urlpatterns_api
 
 if settings.DEBUG:
-    import debug_toolbar
+    # import debug_toolbar
     from django.conf.urls.static import static
 
-    urlpatterns += (
-        i18n_patterns(path("rosetta/", include("rosetta.urls")))
-        + [path("__debug__", include(debug_toolbar.urls))]
-        + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    )
+    # urlpatterns.append(path("__debug__", include(debug_toolbar.urls)))
+    urlpatterns.extend(static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
+    urlpatterns.extend(i18n_patterns(path("rosetta/", include("rosetta.urls"))))
+    urlpatterns.append(path("emails/", include("developmentEmailDashboard.urls")))

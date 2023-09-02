@@ -1,0 +1,12 @@
+<form action="{% url 'home:index' %}" class="search">
+  <select name="category">
+    <option value="all">Toutes nos catégories</option>
+    {% for category in categories %}
+    <option value="{{ category.name }}">{{ category.name }}</option>
+    {% endfor %}
+  </select>
+  <input type="search" name="product" placeholder="Recherchez un produit ou une marque">
+  <button type="submit">
+    {% include 'svg/search.html' %}
+  </button>
+</form>

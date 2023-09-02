@@ -1,4 +1,4 @@
-.PHONY: runserver m mm mmm sm shell test superuser loaddata i18n
+.PHONY: runserver m mm mmm sm shell test superuser loaddata dumpdata i18n
 
 .DEFAULT_GOAL := runserver
 
@@ -24,13 +24,22 @@ shell:
 	poetry run python manage.py shell_plus
 
 test:
-	poetry run pytest --cov --cov-report=html:coverage
+	poetry run coverage run --source='.' manage.py test -v 2
+
+coverage:
+	poetry run coverage report -m
+	poetry run coverage html
+
+testc: test coverage
 
 superuser:
 	poetry run python manage.py createsuperuser --email=admin@gmail.com --name=Admin --phone_number=77123456
 
 loaddata:
 	poetry run python manage.py load_data
+
+dumpdata:
+	poetry run python manage.py dumpdata > db.json
 
 i18n:
 	poetry run django-admin makemessages --all --ignore=env
@@ -40,3 +49,9 @@ black:
 
 isort:
 	poetry run python -m isort --profile black .
+
+ruff:
+	poetry run ruff check .
+
+# clean
+clean: black isort ruff

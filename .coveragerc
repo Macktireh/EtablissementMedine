@@ -3,13 +3,13 @@ source = .
 
 omit =
     ./.venv/*
-    ./tests/*
-    ./migrations/*
+    */tests/*
+    */migrations/*
     */__init__.py
 
 [report]
 omit =
     ./.venv/*
-    ./tests/*
-    ./migrations/*
+    */tests/*
+    */migrations/*
     */__init__.py

@@ -1,0 +1,10 @@
+black@latest
+django-debug-toolbar@latest
+django-extensions @latest
+faker@latest
+flake8@latest
+isort@latest
+pre-commit@latest
+ruff@latest
+django-developmentemaildashboard@latest
+zroya@latest

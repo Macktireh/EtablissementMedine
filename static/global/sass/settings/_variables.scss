@@ -1,22 +1,59 @@
-$font1: 'Roboto', sans-serif;
+@font-face {
+  font-family: 'Roboto';
+  src: url('/static/global/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lobster';
+  src: url('/static/global/fonts/Lobster/Lobster-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
-$black: #333;
-$white: #ebeeee;
+$font1: 'Roboto', sans-serif;
+$font2: 'Lobster', cursive;
+
+$primary: #f82e57;
+$black: #000000;
+$dim: #15202B;
+$white: #FFFFFF;
+$white2: #DDD;
 $blue: #1d9bf0;
 $red: #F4212E;
 $orange: orange;
 $green: #23ad5c;
-$green: #aeaeae;
+$gray: #aeaeae;
+$gray2: #aeaeae87;
 
 
 :root {
-  --color-primary: #{$blue};
+  --color-primary: #{$primary};
   --color-bg: #{$black};
-  --color-font: #{$white};
+  --color-fg: #{$white};
+  --color-dim: #{$dim};
+  --color-black: #{$black};
+  --color-white: #{$white};
+  --color-white2: #{$white2};
+  --color-blue: #{$blue};
+  --color-red: #{$red};
+  --color-orange: #{$orange};
+  --color-green: #{$green};
+  --color-gray: #{$gray};
+  --color-gray2: #{$gray2};
 }
 
 [data-theme="light"] {
-  --color-primary: #{$blue};
+  --color-primary: #{$primary};
   --color-bg: #{$white};
-  --color-font: #{$black};
+  --color-fg: #{$black};
+  --color-dim: #{$dim};
+  --color-black: #{$black};
+  --color-white: #{$white};
+  --color-blue: #{$blue};
+  --color-red: #{$red};
+  --color-orange: #{$orange};
+  --color-green: #{$green};
+  --color-gray: #{$gray};
+  --color-gray2: #{$gray2};
 }

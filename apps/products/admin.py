@@ -1,16 +1,24 @@
 from django.contrib import admin
 from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
 
-from apps.products.models import Category, Product, Promotion
+from apps.products.models import (
+    Category,
+    Color,
+    GroupCategory,
+    Product,
+    ProductAdvertising,
+    ProductImage,
+    Promotion,
+)
 
 
-@admin.register(Category)
-class CategoryAdmin(TabbedExternalJqueryTranslationAdmin):
+@admin.register(GroupCategory)
+class GroupCategoryAdmin(TabbedExternalJqueryTranslationAdmin):
     list_display = (
         "name",
-        "thumbnail_preview",
         "created_at",
         "updated_at",
+        "thumbnail_preview",
     )
     fieldsets = (
         (
@@ -44,6 +52,53 @@ class CategoryAdmin(TabbedExternalJqueryTranslationAdmin):
         "public_id",
         "thumbnail_preview",
     )
+
+
+@admin.register(Category)
+class CategoryAdmin(TabbedExternalJqueryTranslationAdmin):
+    list_display = (
+        "name",
+        "group",
+        "created_at",
+        "updated_at",
+        "thumbnail_preview",
+    )
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    "public_id",
+                    "name",
+                    "slug",
+                    "group",
+                    "thumbnail",
+                    "thumbnail_preview",
+                )
+            },
+        ),
+    )
+    add_fieldsets = (
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": (
+                    "name",
+                    "slug",
+                    "group",
+                    "thumbnail",
+                ),
+            },
+        ),
+    )
+    prepopulated_fields = {"slug": ("name",)}
+    readonly_fields = (
+        "public_id",
+        "thumbnail_preview",
+    )
+    search_fields = ("name",)
+    list_filter = ("group",)
 
 
 @admin.register(Product)
@@ -53,12 +108,9 @@ class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
         "thumbnail_preview",
         "stock",
         "price",
-        # "_discount",
-        # "price_discount",
-        # "expiry_date_discount",
         "_description",
-        "promotion",
         "category",
+        "promotion",
         "created_at",
         "updated_at",
     )
@@ -72,14 +124,12 @@ class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
                     "slug",
                     "stock",
                     "price",
-                    # "discount",
-                    # "price_discount",
-                    # "expiry_date_discount",
                     "description",
+                    "color",
+                    "category",
                     "promotion",
                     "thumbnail",
                     "thumbnail_preview",
-                    "category",
                 )
             },
         ),
@@ -94,12 +144,11 @@ class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
                     "slug",
                     "stock",
                     "price",
-                    # "discount",
-                    # "expiry_date_discount",
                     "description",
+                    "color",
+                    "category",
                     "promotion",
                     "thumbnail",
-                    "category",
                 ),
             },
         ),
@@ -109,7 +158,6 @@ class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
     readonly_fields = (
         "public_id",
         "thumbnail_preview",
-        # "price_discount",
     )
     list_per_page = 10
 
@@ -131,3 +179,21 @@ class PromotionAdmin(admin.ModelAdmin):
     def _discount(self, obj) -> str:
         if obj.discount:
             return f"-{obj.discount}%"
+
+
+@admin.register(ProductImage)
+class ProductImageAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(ProductAdvertising)
+class ProductAdvertisingAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Color)
+class ColorAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "color_preview",
+    )
