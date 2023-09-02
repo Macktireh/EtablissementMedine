@@ -1,0 +1,329 @@
+[
+  {
+    "model": "products.groupcategory",
+    "pk": 1,
+    "fields": {
+      "public_id": "aa144d01bc0448fcb982c7a657f81a6f09b60f3c993a4122839a056445a1c0e8",
+      "created_at": "2023-08-08T19:49:52.125Z",
+      "updated_at": "2023-08-28T00:08:12.449Z",
+      "name": "Electronics",
+      "name_en": "Electronics",
+      "name_fr": "�lectronique",
+      "slug": "electronics",
+      "thumbnail": "categories/electronics.png"
+    }
+  },
+  {
+    "model": "products.groupcategory",
+    "pk": 2,
+    "fields": {
+      "public_id": "8988b6c63b2448929c6634d30274174b4e713f417f0343aba8527e2a2508a0cd",
+      "created_at": "2023-08-08T19:53:45.113Z",
+      "updated_at": "2023-08-08T19:53:45.114Z",
+      "name": "Grocery",
+      "name_en": "Grocery",
+      "name_fr": "�picerie",
+      "slug": "grocery",
+      "thumbnail": "categories/grocery.png"
+    }
+  },
+  {
+    "model": "products.groupcategory",
+    "pk": 3,
+    "fields": {
+      "public_id": "feda892e759144dca498bf1450ef1057b72e2e5fd4a242a5a61347c451ae4721",
+      "created_at": "2023-08-08T20:03:45.605Z",
+      "updated_at": "2023-08-08T20:03:45.605Z",
+      "name": "Fashion Stores",
+      "name_en": "Fashion Stores",
+      "name_fr": "Magasins de Mode",
+      "slug": "fashion-stores",
+      "thumbnail": "categories/fashion-stores.png"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 1,
+    "fields": {
+      "public_id": "16b808f263654b6da06f816591c61c82243726c97fc7408e80cb32106c410bb1",
+      "created_at": "2023-08-08T20:12:20.687Z",
+      "updated_at": "2023-08-10T11:24:59.140Z",
+      "name": "Smartphone",
+      "name_en": "Smartphone",
+      "name_fr": "Smartphone",
+      "slug": "smartphone",
+      "thumbnail": "categories/smartphone.png",
+      "group": 1
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 2,
+    "fields": {
+      "public_id": "e2102ee966de4051a237658b6a8f4fe2468b22b0db6e4859b693bd1e9e605aaf",
+      "created_at": "2023-08-08T20:27:30.658Z",
+      "updated_at": "2023-08-08T20:27:30.658Z",
+      "name": "Watch",
+      "name_en": "Watch",
+      "name_fr": "Montre",
+      "slug": "watch",
+      "thumbnail": "categories/watch.png",
+      "group": 1
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 3,
+    "fields": {
+      "public_id": "74e72932f19a4e739dec7b8962d129c3bfb9656a39a7404c8ba6794fca82b0f3",
+      "created_at": "2023-08-08T20:31:44.228Z",
+      "updated_at": "2023-08-08T20:31:44.228Z",
+      "name": "Personal computer",
+      "name_en": "Personal computer",
+      "name_fr": "Ordinateur personnel",
+      "slug": "personal-computer",
+      "thumbnail": "categories/personal-computer.png",
+      "group": 1
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 4,
+    "fields": {
+      "public_id": "0db7b647947f4ce18563efa8d9bec1d35e0f89c3dddf4b39949ffda43a050934",
+      "created_at": "2023-08-08T20:35:55.429Z",
+      "updated_at": "2023-08-08T20:35:55.429Z",
+      "name": "Earphones",
+      "name_en": "Earphones",
+      "name_fr": "�couteurs",
+      "slug": "earphones",
+      "thumbnail": "categories/earphones.png",
+      "group": 1
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 5,
+    "fields": {
+      "public_id": "4194e5c196254c4094aab279894b234268c582fa918845d98c59a73f9663c5c6",
+      "created_at": "2023-08-08T20:48:41.888Z",
+      "updated_at": "2023-08-08T20:48:41.888Z",
+      "name": "Console Games",
+      "name_en": "Console Games",
+      "name_fr": "Jeux de console",
+      "slug": "console-games",
+      "thumbnail": "categories/console-games.png",
+      "group": 1
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 6,
+    "fields": {
+      "public_id": "af4bbd196745464490d2595e6586fbd2ab50755e00154fbdbc2a45c092a3b5ed",
+      "created_at": "2023-08-10T11:27:01.460Z",
+      "updated_at": "2023-08-10T11:27:01.460Z",
+      "name": "Tablet",
+      "name_en": "Tablet",
+      "name_fr": "Tablette",
+      "slug": "tablet",
+      "thumbnail": "categories/tablet.png",
+      "group": 1
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 7,
+    "fields": {
+      "public_id": "2338d77a9ef04091a1c00277c47f8ef3e6d8ead722104fc3a81c067639eb626c",
+      "created_at": "2023-08-10T11:30:33.402Z",
+      "updated_at": "2023-08-10T11:30:33.402Z",
+      "name": "Television TV",
+      "name_en": "Television TV",
+      "name_fr": "T�l�vision TV",
+      "slug": "television-tv",
+      "thumbnail": "categories/television-tv.png",
+      "group": 1
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 8,
+    "fields": {
+      "public_id": "0c4abd64284f4e72ad59ec6b0b1514ac6425f534c84547afbf7cfc17243ef1cc",
+      "created_at": "2023-08-10T11:34:55.172Z",
+      "updated_at": "2023-08-10T11:34:55.172Z",
+      "name": "Children's Clothing",
+      "name_en": "Children's Clothing",
+      "name_fr": "V�tements pour enfants",
+      "slug": "childrens-clothing",
+      "thumbnail": "categories/childrens-clothing.png",
+      "group": 3
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 9,
+    "fields": {
+      "public_id": "e6b91558cda04b60b955aeacd2c4363f277286940b4a45ef84df4c52100063fa",
+      "created_at": "2023-08-10T11:35:44.208Z",
+      "updated_at": "2023-08-10T11:35:44.208Z",
+      "name": "Women's Clothing",
+      "name_en": "Women's Clothing",
+      "name_fr": "V�tements pour Femmes",
+      "slug": "womens-clothing",
+      "thumbnail": "categories/womens-clothing.png",
+      "group": 3
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 10,
+    "fields": {
+      "public_id": "c36bf26002b7475f8ed13a38c86df8cfe91b3805541f4dfb8fde84652bdd16a8",
+      "created_at": "2023-08-10T11:36:22.686Z",
+      "updated_at": "2023-08-10T11:36:22.686Z",
+      "name": "Men's Clothing",
+      "name_en": "Men's Clothing",
+      "name_fr": "V�tements pour Hommes",
+      "slug": "mens-clothing",
+      "thumbnail": "categories/mens-clothing.png",
+      "group": 3
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 11,
+    "fields": {
+      "public_id": "5ef5511953824519b0ac3ed8a4505eb89d46d28ccc724060b95982c0584769bf",
+      "created_at": "2023-08-10T11:38:12.112Z",
+      "updated_at": "2023-08-10T11:38:12.113Z",
+      "name": "Sportswear",
+      "name_en": "Sportswear",
+      "name_fr": "V�tements de Sport",
+      "slug": "sportswear",
+      "thumbnail": "categories/sportswear.png",
+      "group": 3
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 12,
+    "fields": {
+      "public_id": "94660f6ef073446b9954521ff141695ade49503c45d24aa48016069750dfa223",
+      "created_at": "2023-08-10T11:54:47.454Z",
+      "updated_at": "2023-08-10T11:54:47.454Z",
+      "name": "Men's shoes",
+      "name_en": "Men's shoes",
+      "name_fr": "Chaussures pour hommes",
+      "slug": "mens-shoes",
+      "thumbnail": "categories/mens-shoes.png",
+      "group": 3
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 13,
+    "fields": {
+      "public_id": "369bcc96899f4fd28982020898305bdfa53d080515b740e8a67c7723cf4ce87f",
+      "created_at": "2023-08-10T11:58:25.261Z",
+      "updated_at": "2023-08-11T19:13:07.762Z",
+      "name": "Women's shoes",
+      "name_en": "Women's shoes",
+      "name_fr": "Chaussures pour femmes",
+      "slug": "womens-shoes",
+      "thumbnail": "categories/womens-shoes.png",
+      "group": 3
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 14,
+    "fields": {
+      "public_id": "e9082f422a974bcc8ddeaa070b867097886722fa2a17435586fd9c9bd9e8bfde",
+      "created_at": "2023-08-10T12:13:50.443Z",
+      "updated_at": "2023-08-11T19:29:55.191Z",
+      "name": "Fresh products",
+      "name_en": "Fresh products",
+      "name_fr": "Produits frais",
+      "slug": "fresh-products",
+      "thumbnail": "categories/fresh-products.png",
+      "group": 2
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 15,
+    "fields": {
+      "public_id": "fba34f2ebb5b4268aafcbb7761eb9e1afc4bad874eed4d7c9eb763dfee272226",
+      "created_at": "2023-08-10T12:15:21.140Z",
+      "updated_at": "2023-08-11T19:50:08.056Z",
+      "name": "Dry goods",
+      "name_en": "Dry goods",
+      "name_fr": "Produits secs",
+      "slug": "dry-goods",
+      "thumbnail": "categories/dry-goods.png",
+      "group": 2
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 16,
+    "fields": {
+      "public_id": "c2a6117a9cd94544be1af94197529f9208a616222aa44b1f961f343353000068",
+      "created_at": "2023-08-10T12:15:53.771Z",
+      "updated_at": "2023-08-11T19:31:10.468Z",
+      "name": "Spices and Seasonings",
+      "name_en": "Spices and Seasonings",
+      "name_fr": "�pices et assaisonnements",
+      "slug": "spices-and-seasonings",
+      "thumbnail": "categories/spices-and-seasonings.png",
+      "group": 2
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 17,
+    "fields": {
+      "public_id": "d4d1f358515e42b2af8678b52fe6ec5004fd4175ac1d40d8952fce73d0102370",
+      "created_at": "2023-08-10T12:17:01.191Z",
+      "updated_at": "2023-08-11T19:32:06.276Z",
+      "name": "Canned and frozen products",
+      "name_en": "Canned and frozen products",
+      "name_fr": "Produits en conserve et surgel�s",
+      "slug": "canned-and-frozen-products",
+      "thumbnail": "categories/canned-and-frozen-products.png",
+      "group": 2
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 18,
+    "fields": {
+      "public_id": "7b47e86df47c48a887ea6d73984f0fa367f6824ad7c0483e97fe6931072087d4",
+      "created_at": "2023-08-10T12:18:28.458Z",
+      "updated_at": "2023-08-11T19:30:47.013Z",
+      "name": "Bakery and Patisserie",
+      "name_en": "Bakery and Patisserie",
+      "name_fr": "Boulangerie et p�tisserie",
+      "slug": "bakery-and-patisserie",
+      "thumbnail": "categories/bakery-and-patisserie.png",
+      "group": 2
+    }
+  },
+  {
+    "model": "products.promotion",
+    "pk": 1,
+    "fields": {
+      "public_id": "8460f26ab1d74aea8c78a268180c71c91b22e52076c74f26b6d6fe136996a315",
+      "created_at": "2023-08-08T21:51:24.258Z",
+      "updated_at": "2023-08-08T21:51:24.258Z",
+      "title": "Black Friday",
+      "discount": 40,
+      "start_date": "2023-08-08T22:00:00Z",
+      "end_date": "2023-08-30T22:00:00Z"
+    }
+  },
+  { "model": "products.color", "pk": 1, "fields": { "name": "#F1F1F1" } },
+  { "model": "products.color", "pk": 2, "fields": { "name": "#333333" } }
+]

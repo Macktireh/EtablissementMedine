@@ -1,5 +1,6 @@
 from typing import Any
 
+from colorfield.fields import ColorField
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -83,15 +84,29 @@ class Promotion(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
         verbose_name_plural = _("Promotions")
         ordering = ("-start_date",)
 
-    # @property
-    # def discounted_price(self) -> float:
-    #     return self.product.price * (100 - self.discount) / 100
-
     def is_expired_discount(self) -> bool:
         return self.end_date < timezone.now()
 
     def __str__(self) -> str:
         return "%s" % self.title
+
+
+class Color(models.Model):
+    name = ColorField(_("color"), null=True, blank=True)
+
+    class Meta:
+        db_table = "color"
+        verbose_name = _("Color")
+        verbose_name_plural = _("Colors")
+
+    def __str__(self) -> str:
+        return self.name
+
+    @property
+    def color_preview(self) -> Any:
+        if self.name:
+            return mark_safe(f'<div style="background-color:{self.name}; width:20px; height:20px"></div>')
+        return mark_safe('<div style="background-color:transparent; width:20px; height:20px"></div>')
 
 
 class Product(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
@@ -102,8 +117,9 @@ class Product(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
         _("price"), max_digits=10, decimal_places=2, null=False, blank=False, default=0.00
     )
     description = models.TextField(_("description"), null=True, blank=True)
+    color = models.ManyToManyField(Color, related_name="products")
     thumbnail = ResizedImageField(
-        _("thumbnail"), size=[400, 400], null=True, blank=True, upload_to=thumbnail_path
+        _("thumbnail"), size=[500, 500], null=True, blank=True, upload_to=thumbnail_path
     )
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, related_name="products", null=True, blank=True
@@ -137,7 +153,9 @@ class ProductImage(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="images", null=True, blank=True
     )
-    image = models.ImageField(_("image"), upload_to=thumbnail_path)
+    image = ResizedImageField(
+        _("thumbnail"), size=[700, 700], null=True, blank=True, upload_to=thumbnail_path
+    )
 
     class Meta:
         db_table = "product_image"
@@ -159,7 +177,6 @@ class ProductAdvertising(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
         return self.title
 
     def save(self, *args: Any, **kwargs: dict[str, Any]) -> None:
-        """The number of rows in the ProductAdvertising table is 10. If there are more than 10 rows, an exception is thrown."""
         if ProductAdvertising.objects.count() >= 2:
-            raise ValidationError("The number of rows in the ProductAdvertising table is 10.")
+            raise ValidationError(_("The maximum number of rows in the AdvertisingProducts table is 10."))
         super().save(*args, **kwargs)

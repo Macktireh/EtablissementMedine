@@ -34,6 +34,8 @@ THIRD_PARTY_APPS = [
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
     "drf_yasg",
+    "django_components",
+    "colorfield",
 ]
 
 LOCAL_APPS = [
@@ -72,7 +74,7 @@ TEMPLATES = [
         "DIRS": [
             os.path.join(BASE_DIR, "templates"),
         ],
-        "APP_DIRS": True,
+        # "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
@@ -80,9 +82,31 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
+            "loaders": [
+                (
+                    "django.template.loaders.cached.Loader",
+                    [
+                        "django.template.loaders.filesystem.Loader",
+                        "django.template.loaders.app_directories.Loader",
+                        "django_components.template_loader.Loader",
+                    ],
+                )
+            ],
+            "builtins": [
+                "django_components.templatetags.component_tags",
+            ],
         },
     },
 ]
+
+COMPONENTS = {
+    "libraries": [
+        "components.head",
+        "components.menu",
+        "components.searchBar",
+        "components.carousel",
+    ],
+}
 
 WSGI_APPLICATION = "config.wsgi.application"
 
@@ -139,6 +163,7 @@ STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "components"),
 ]
 
 
@@ -164,7 +189,7 @@ DEFAULT_FROM_EMAIL = get_env_variable("EMAIL_HOST_USER", raise_error=False)
 SERVER_EMAIL = get_env_variable("EMAIL_HOST_USER", raise_error=False)
 
 # SMS
-PHONENUMBER_EXPIRATION = 5
+PHONENUMBER_EXPIRATION = 1
 CLICKSEND_URL = "https://rest.clicksend.com/v3/sms/send"
 CLICKSEND_USERNAME = get_env_variable("CLICKSEND_USERNAME", raise_error=False)
 CLICKSEND_PASSWORD = get_env_variable("CLICKSEND_PASSWORD", raise_error=False)

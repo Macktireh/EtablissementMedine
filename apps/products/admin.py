@@ -1,7 +1,15 @@
 from django.contrib import admin
 from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
 
-from apps.products.models import Category, GroupCategory, Product, ProductAdvertising, ProductImage, Promotion
+from apps.products.models import (
+    Category,
+    Color,
+    GroupCategory,
+    Product,
+    ProductAdvertising,
+    ProductImage,
+    Promotion,
+)
 
 
 @admin.register(GroupCategory)
@@ -89,6 +97,8 @@ class CategoryAdmin(TabbedExternalJqueryTranslationAdmin):
         "public_id",
         "thumbnail_preview",
     )
+    search_fields = ("name",)
+    list_filter = ("group",)
 
 
 @admin.register(Product)
@@ -115,6 +125,7 @@ class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
                     "stock",
                     "price",
                     "description",
+                    "color",
                     "category",
                     "promotion",
                     "thumbnail",
@@ -134,6 +145,7 @@ class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
                     "stock",
                     "price",
                     "description",
+                    "color",
                     "category",
                     "promotion",
                     "thumbnail",
@@ -177,3 +189,11 @@ class ProductImageAdmin(admin.ModelAdmin):
 @admin.register(ProductAdvertising)
 class ProductAdvertisingAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(Color)
+class ColorAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "color_preview",
+    )
