@@ -197,7 +197,9 @@ CLICKSEND_FROM = "EtabMedine"
 
 
 # the list of origins authorized to make HTTP requests
-CORS_ALLOWED_ORIGINS = get_env_variable("CORS_ALLOWED_ORIGINS", raise_error=False).split(" ")
+CORS_ALLOWED_ORIGINS = get_env_variable(
+    "CORS_ALLOWED_ORIGINS", "http://localhost:3000 http://127.0.0.1:3000"
+).split(" ")
 
 DOMAIN_FRONTEND = get_env_variable("DOMAIN_FRONTEND", raise_error=False)
 

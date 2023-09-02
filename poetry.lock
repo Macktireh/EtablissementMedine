@@ -1606,19 +1606,7 @@ files = [
 [package.extras]
 brotli = ["Brotli"]
 
-[[package]]
-name = "zroya"
-version = "0.2.4"
-description = "Python library for creating native Windows notifications."
-category = "dev"
-optional = false
-python-versions = "*"
-files = [
-    {file = "zroya-0.2.4-cp36-cp36m-win32.whl", hash = "sha256:f972adebfda76b5558576996974939277e38f7b7966933782a9798e0d8b2ad29"},
-    {file = "zroya-0.2.4.tar.gz", hash = "sha256:e8959ec51987598b4adc1c9db5722aa60a8d663971e5ab371be74a9bdb9dea5c"},
-]
-
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "b3d642e9bb58134dd070561346f9f5ea74c7089a60123f8bcb6448f8ea6ac205"
+content-hash = "82bf25453e2aa076b9d53751b5bb3ca7c7d297f9b75f7e4f265f8b663027c05c"
