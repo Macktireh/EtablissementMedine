@@ -60,7 +60,7 @@ class Migration(migrations.Migration):
                 quality=90,
                 scale=None,
                 size=[700, 700],
-                upload_to=apps.products.utils.thumbnail_path,
+                upload_to=apps.products.utils.thumbnail_path_product,
                 verbose_name="thumbnail",
             ),
         ),
