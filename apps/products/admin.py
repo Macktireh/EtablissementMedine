@@ -105,15 +105,14 @@ class CategoryAdmin(TabbedExternalJqueryTranslationAdmin):
 class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
     list_display = (
         "name",
-        "thumbnail_preview",
+        "_thumbnail",
         "stock",
-        "price",
+        "_price",
         "_description",
         "category",
         "promotion",
-        "created_at",
-        "updated_at",
     )
+    list_filter = ("category", "promotion")
     fieldsets = (
         (
             None,
@@ -130,6 +129,8 @@ class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
                     "promotion",
                     "thumbnail",
                     "thumbnail_preview",
+                    "created_at",
+                    "updated_at",
                 )
             },
         ),
@@ -158,8 +159,17 @@ class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
     readonly_fields = (
         "public_id",
         "thumbnail_preview",
+        "created_at",
+        "updated_at",
     )
     list_per_page = 10
+
+    def _price(self, obj) -> str:
+        if obj.price:
+            return f"${obj.price:.2f}"
+
+    def _thumbnail(self, obj: Product) -> str:
+        return obj.thumbnail_preview
 
     def _description(self, obj) -> str:
         if obj.description and len(obj.description) > 30:
@@ -183,7 +193,30 @@ class PromotionAdmin(admin.ModelAdmin):
 
 @admin.register(ProductImage)
 class ProductImageAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        "_product",
+        "image_preview",
+    )
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    "public_id",
+                    "product",
+                    "image",
+                    "image_preview",
+                )
+            },
+        ),
+    )
+    readonly_fields = (
+        "public_id",
+        "image_preview",
+    )
+
+    def _product(self, obj) -> str:
+        return obj.product.name
 
 
 @admin.register(ProductAdvertising)

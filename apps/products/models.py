@@ -11,14 +11,14 @@ from django.utils.translation import gettext_lazy as _
 from django_resized import ResizedImageField
 
 from apps.core.models import AbstractCreatedUpdatedMixin, AbstractPublicIdMixin
-from apps.products.utils import thumbnail_path
+from apps.products import utils
 
 
 class GroupCategory(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
     name = models.CharField(_("name"), max_length=255, unique=True, db_index=True)
     slug = models.SlugField(_("slug"), max_length=255, unique=True, db_index=True)
     thumbnail = ResizedImageField(
-        _("thumbnail"), size=[200, 200], null=True, blank=True, upload_to=thumbnail_path, force_format="PNG"
+        _("thumbnail"), size=[200, 200], null=True, blank=True, upload_to=utils.thumbnail_path_category
     )
 
     class Meta:
@@ -40,7 +40,7 @@ class Category(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
     name = models.CharField(_("name"), max_length=255, unique=True, db_index=True)
     slug = models.SlugField(max_length=255, db_index=True, unique=True)
     thumbnail = ResizedImageField(
-        _("thumbnail"), size=[200, 200], null=True, blank=True, upload_to=thumbnail_path, force_format="PNG"
+        _("thumbnail"), size=[200, 200], null=True, blank=True, upload_to=utils.thumbnail_path_category
     )
     group = models.ForeignKey(
         GroupCategory, on_delete=models.SET_NULL, null=True, blank=True, related_name="categories"
@@ -119,7 +119,7 @@ class Product(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
     description = models.TextField(_("description"), null=True, blank=True)
     color = models.ManyToManyField(Color, related_name="products")
     thumbnail = ResizedImageField(
-        _("thumbnail"), size=[500, 500], null=True, blank=True, upload_to=thumbnail_path
+        _("thumbnail"), size=[500, 500], null=True, blank=True, upload_to=utils.thumbnail_path_product
     )
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, related_name="products", null=True, blank=True
@@ -139,9 +139,8 @@ class Product(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
     @property
     def thumbnail_preview(self) -> Any:
         if self.thumbnail:
-            return mark_safe(f'<img src="{self.thumbnail}" width="100" height="100" />')
-        return mark_safe('<img src="/static/global/images/favicon.png" width="100" height="100" />')
-        # return mark_safe(f'<img src="{"https://picsum.photos/100/100"}" width="100" height="100" />')
+            return mark_safe(f'<img src="{self.thumbnail.url}" width="50" height="50" />')
+        return ""
 
     def save(self, *args: Any, **kwargs: dict[str, Any]) -> None:
         if not self.slug:
@@ -154,13 +153,22 @@ class ProductImage(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
         Product, on_delete=models.CASCADE, related_name="images", null=True, blank=True
     )
     image = ResizedImageField(
-        _("thumbnail"), size=[700, 700], null=True, blank=True, upload_to=thumbnail_path
+        _("thumbnail"), size=[700, 700], null=True, blank=True, upload_to=utils.thumbnail_path_product
     )
 
     class Meta:
         db_table = "product_image"
         verbose_name = _("Product Image")
         verbose_name_plural = _("Product Images")
+
+    def __str__(self) -> str:
+        return self.product.name
+
+    @property
+    def image_preview(self) -> Any:
+        if self.image:
+            return mark_safe(f'<img src="{self.image.url}" width="50" height="50" />')
+        return ""
 
 
 class ProductAdvertising(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
