@@ -1,8 +1,10 @@
 .head-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background-color: color(bg);
+  @extend .flex-center;
   gap: 1rem;
+  padding: 10px 0 0px;
+  width: 100%;
+  backdrop-filter: blur(15px);
 
   .logo {
     @extend .flex-center;
@@ -82,15 +84,16 @@
     // margin-right: 10px;
     @extend .flex-center;
     gap: 0.5rem;
-    .link {
+    .link,
+    [data-theme-toggle] {
       padding: 15px 10px;
       position: relative;
       cursor: pointer;
       span.cart-count {
-        width: 25px;
-        height: 25px;
+        width: 22px;
+        height: 22px;
         padding: 1px;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         font-weight: 400;
         @extend .flex-center;
         background-color: color(primary);
@@ -98,10 +101,10 @@
         border-radius: 50%;
         position: absolute;
         top: 8px;
-        right: 10%;
+        right: 12%;
       }
     }
-    a.theme {
+    [data-theme-toggle] {
       display: flex;
     }
   }

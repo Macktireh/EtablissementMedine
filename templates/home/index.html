@@ -10,18 +10,26 @@
 
 {% block header %}
 {% component 'head' %}
-{% component 'menu' %}
 {% endblock header %}
 
 
+{% block menu %}
+{% component 'menu' %}
+{% endblock menu %}
+
+
 {% block content %}
-{% component 'carousel' %}
+<div class="part-I">
+  {% component 'sidebarCategory' categories=categories %}
+  {% component 'carousel' %}
+</div>
 {% endblock content %}
 
 
-{% block footer %} {% endblock footer %}
+{% block footer %} {% component 'carousel' %} {% endblock footer %}
 
 
 {% block js %}
+{% component 'carousel' %}
 {% component_js_dependencies %}
 {% endblock js %}

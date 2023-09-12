@@ -9,10 +9,11 @@
       {% include 'svg/cart.html' %}
     </a>
     <a href="{% url 'home:index' %}" class="link">
+      {% include 'svg/favorite.html' %}
+    </a>
+    <a href="{% url 'home:index' %}" class="link">
       {% include 'svg/user.html' %}
     </a>
-    <div href="{% url 'home:index' %}" class="link theme" id="dark">
-      {% include 'svg/dark.html' %}
-    </div>
+    <div class="link theme" data-theme-toggle aria-label="Change to light theme"></div>
   </div>
 </section>

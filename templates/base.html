@@ -14,9 +14,13 @@
 </head>
 
 <body>
-  <header>
+  <header class="header">
     {% block header %} {% endblock header %}
   </header>
+
+  <nav>
+    {% block menu %} {% endblock menu %}
+  </nav>
 
   <main>
     {% block content %} {% endblock content %}

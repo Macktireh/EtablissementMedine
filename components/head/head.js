@@ -1,6 +1,6 @@
 /** -------------------------------------------  Toggle Theme ------------------------------------------- */
 // Access HTML elements
-const themeToggle = document.querySelector(".theme");
+const buttonThemeToggle = document.querySelector("[data-theme-toggle]");
 
 // SVG icon
 const svgDark = `
@@ -14,15 +14,69 @@ const svgLight = `
 </svg>
 `;
 
-// Toggle Theme
-themeToggle.addEventListener("click", () => {
-  if (themeToggle.id === "light") {
-    document.querySelector("html").setAttribute("data-theme", "dark");
-    themeToggle.innerHTML = svgDark;
-    themeToggle.id = "dark";
-  } else {
-    document.querySelector("html").setAttribute("data-theme", "light");
-    themeToggle.innerHTML = svgLight;
-    themeToggle.id = "light";
+function calculateSettingAsThemeString({ localStorageTheme, systemSettingDark }) {
+  if (localStorageTheme !== null) {
+    return localStorageTheme;
   }
+
+  if (systemSettingDark.matches) {
+    return "dark";
+  }
+
+  return "light";
+}
+
+const localStorageTheme = localStorage.getItem("theme");
+const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+let currentThemeSetting = calculateSettingAsThemeString({ localStorageTheme, systemSettingDark });
+
+// Toggle Theme
+function toggleThme() {
+  const newTheme = currentThemeSetting === "dark" ? "light" : "dark";
+  
+  // update theme attribute on HTML to switch theme in CSS
+  document.querySelector("html").setAttribute("data-theme", newTheme);
+
+  // update the button icon
+  if (newTheme === "light") {
+    buttonThemeToggle.innerHTML = svgLight;
+  } else {
+    buttonThemeToggle.innerHTML = svgDark;
+  }
+  
+  // use an aria-label if you are omitting text on the button
+  // and using sun/moon icons, for example
+  const newCta = newTheme === "dark" ? "Change to light theme" : "Change to dark theme";
+  buttonThemeToggle.setAttribute("aria-label", newCta);
+
+
+  // update in local storage
+  localStorage.setItem("theme", newTheme);
+
+  // update the currentThemeSetting in memory
+  currentThemeSetting = newTheme;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (currentThemeSetting === "light") {
+    document.querySelector("html").setAttribute("data-theme", "light");
+    buttonThemeToggle.innerHTML = svgLight;
+  } else {
+    document.querySelector("html").setAttribute("data-theme", "dark");
+    buttonThemeToggle.innerHTML = svgDark;
+  }
+});
+
+buttonThemeToggle.addEventListener("click", toggleThme);
+
+
+/** -------------------------------------------  box shadow bottom ------------------------------------------- */
+// Access HTML elements
+hearder = document.querySelector(".header");
+console.log(hearder.innerHTML);
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 15) hearder.classList.add("shadow");
+  else hearder.classList.remove("shadow");
 });
