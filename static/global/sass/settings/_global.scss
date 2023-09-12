@@ -6,6 +6,20 @@
 
 html {
   transition: all 0.1s ease-in-out;
+  ::-webkit-scrollbar {
+    width: 8px;
+    @media (max-width: 900px) {
+      width: 0px;
+    }
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: color(gray);
+    border-radius: 10px;
+  }
 }
 
 body {
@@ -13,13 +27,29 @@ body {
   background-color: color(bg);
   color: color(fg);
   transition: all 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
 }
 
-header, main, footer {
+header,
+nav,
+main,
+footer {
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+header {
+  background-color: color(bg);
+  position: sticky;
+  top: -13px;
+  z-index: 10;
+  transition: all 0.5s ease-in-out;
+}
+header.shadow {
+  box-shadow: 0 0 5px 0 color(gray2);
 }
 
 main {
@@ -43,8 +73,8 @@ path {
 }
 
 svg {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   &:hover {
     path {
       fill: color(primary);

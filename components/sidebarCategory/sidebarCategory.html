@@ -1,0 +1,12 @@
+<aside class="sidebarCategory">
+  <ul>
+    {% for category in categories %}
+      <a href="#">
+        <img src="{{ category.thumbnail.url }}" alt="{{ category.name }}">
+        <span>
+          {{ category.name }}
+        </span>
+      </a>
+    {% endfor %}
+  </ul>
+</aside>
