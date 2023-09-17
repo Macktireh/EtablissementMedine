@@ -19,17 +19,16 @@
 
 
 {% block content %}
-<div class="part-I">
+<section class="part-I">
   {% component 'sidebarCategory' categories=categories %}
   {% component 'carousel' %}
-</div>
+</section>
 {% endblock content %}
 
 
-{% block footer %} {% component 'carousel' %} {% endblock footer %}
+{% block footer %} {% endblock footer %}
 
 
 {% block js %}
-{% component 'carousel' %}
 {% component_js_dependencies %}
 {% endblock js %}

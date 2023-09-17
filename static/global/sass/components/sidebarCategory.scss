@@ -20,8 +20,16 @@ aside.sidebarCategory {
       align-items: center;
       gap: 1rem;
       transition: all 0.1s ease-in-out;
+      &:first-child {
+          border-top-right-radius: 5px;
+          border-top-left-radius: 5px;
+        }
+      &:last-child {
+          border-bottom-right-radius: 5px;
+          border-bottom-left-radius: 5px;
+      }
       &:hover {
-        background-color: rgba($primary, 0.7);
+        background-color: rgba($primary, 0.5);
         color: color(white);
       }
       img {
@@ -29,5 +37,7 @@ aside.sidebarCategory {
         height: 30px;
       }
     }
+
+    
   }
 }

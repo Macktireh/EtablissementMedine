@@ -110,20 +110,18 @@
   }
 }
 
-.menu-section {
+ul.menu-navigation {
   padding: 15px 0 5px;
-  ul {
-    @extend .flex-center;
-    justify-content: end;
-    gap: 1rem;
-    li {
-      a {
-        padding: 10px;
-        border-radius: 5px;
-        transition: all 0.1s ease-in-out;
-        &:hover {
-          color: color(primary);
-        }
+  @extend .flex-center;
+  justify-content: end;
+  gap: 1rem;
+  li {
+    a {
+      padding: 10px;
+      border-radius: 5px;
+      transition: all 0.1s ease-in-out;
+      &:hover {
+        color: color(primary);
       }
     }
   }

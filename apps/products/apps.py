@@ -8,4 +8,4 @@ class ProductsConfig(AppConfig):
     verbose_name = _("Products and categories")
 
     def ready(self) -> None:
-        import apps.products.signals
+        import apps.products.signals  # noqa: F401
