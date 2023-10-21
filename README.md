@@ -1,1 +1,1 @@
-# Etablissement Medine Django
+# Etablissement Medine
