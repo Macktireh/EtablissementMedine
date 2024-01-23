@@ -1,1 +1,2 @@
-# Etablissement Medine Django
+# Etablissement Medine Project
+
