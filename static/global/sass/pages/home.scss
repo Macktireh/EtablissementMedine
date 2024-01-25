@@ -10,6 +10,7 @@ section.part-I {
 section.part-II {
   width: 100%;
   margin-top: 35px;
+  margin-bottom: 2rem;
   .box-title {
     margin-left: 30px;
     display: flex;
@@ -20,5 +21,12 @@ section.part-II {
       stroke: color(primary);
       transition: all 0.2s ease-in-out;
     }
+  }
+  .flash-container {
+    margin-top: 2rem;
+    display: flex;
+    gap: .5rem;
+    justify-content: center;
+    align-items: center;
   }
 }

@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from apps.core.utils import uidGenerator
 
 
-class AbstractPublicIdMixin(models.Model):
+class PublicIdModel(models.Model):
     public_id = models.CharField(
         max_length=64,
         unique=True,
@@ -14,6 +14,7 @@ class AbstractPublicIdMixin(models.Model):
         blank=False,
         editable=False,
         db_index=True,
+        help_text=_("Unique identifier for this object. This is used to identify "),
     )
 
     class Meta:
@@ -25,10 +26,9 @@ class AbstractPublicIdMixin(models.Model):
         super().save(*args, **kwargs)
 
 
-class AbstractCreatedUpdatedMixin(models.Model):
-    created_at = models.DateTimeField(_("created at"), auto_now_add=True)
-    updated_at = models.DateTimeField(_("updated at"), auto_now=True)
+class IndexedTimeStampedModel(models.Model):
+    created_at = models.DateTimeField(_("created at"), auto_now_add=True, db_index=True)
+    updated_at = models.DateTimeField(_("updated at"), auto_now=True, db_index=True)
 
     class Meta:
         abstract = True
-        ordering = ("-created_at",)

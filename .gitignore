@@ -1,6 +1,8 @@
 .idea
 mediafiles
 initial_data.json
+admin-interface
+db2.sqlite3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

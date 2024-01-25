@@ -16,8 +16,10 @@ $font2: 'Lobster', cursive;
 
 $primary: #f82e57;
 $black: #14141f;
+$black2: #21212f;
 $dim: #15202B;
 $white: #FFFFFF;
+$white3: #F2F2F2;
 $white2: #DDD;
 $blue: #1d9bf0;
 $red: #F4212E;
@@ -30,6 +32,7 @@ $gray2: #aeaeae87;
 :root {
   --color-primary: #{$primary};
   --color-bg: #{$black};
+  --color-bg2: #{$black2};
   --color-fg: #{$white};
   --color-dim: #{$dim};
   --color-black: #{$black};
@@ -46,10 +49,12 @@ $gray2: #aeaeae87;
 [data-theme="light"] {
   --color-primary: #{$primary};
   --color-bg: #{$white};
+  --color-bg2: #{$white3};
   --color-fg: #{$black};
   --color-dim: #{$dim};
   --color-black: #{$black};
   --color-white: #{$white};
+  --color-white2: #{$white2};
   --color-blue: #{$blue};
   --color-red: #{$red};
   --color-orange: #{$orange};

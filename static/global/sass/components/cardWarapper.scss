@@ -1,0 +1,72 @@
+.card-warapper {
+  // max-width: 1100px;
+  // background-color: #ff9191;
+  padding: 20px;
+  width: 100%;
+  // display: flex;
+  // position: relative;
+  .next,
+  .prev {
+    height: 40px;
+    width: 40px;
+    background-color: color(gray2);
+    color: color(fg);
+    font-size: 1.25rem;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 3px 6px color(gray2);
+    @extend .flex-center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.1s linear;
+    cursor: pointer;
+    user-select: none;
+    &:first-child {
+      left: -10px;
+    }
+    &:last-child {
+      right: -10px;
+    }
+    &:hover {
+      background-color: color(gray);
+    }
+    &::after {
+      display: none;
+    }
+  }
+  .slide-content {
+    width: 100%;
+    overflow: hidden;
+  }
+  .slides-product {
+    padding: 2px;
+    // width: 100%;
+    // overflow: hidden;
+    // background-color: #806161;
+    // display: grid;
+    // grid-auto-flow: column;
+    // grid-auto-columns: calc((100% / 4) - 12px);
+    // overflow-x: auto;
+    // scroll-snap-type: x mandatory;
+    // gap: 16px;
+    // border-radius: 8px;
+    // scroll-behavior: smooth;
+    // scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  slides-product.no-transition {
+    scroll-behavior: auto;
+  }
+  .slides-product.dragging {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+  .slides-product.dragging .product-card {
+    cursor: grab;
+    user-select: none;
+  }
+}

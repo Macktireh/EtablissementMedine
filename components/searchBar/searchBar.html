@@ -1,11 +1,41 @@
-<form action="{% url 'home:index' %}" class="search">
+
+<form class="search" action="{% url 'home:search' %}" id="form-search">
   <select name="category">
     <option value="all">Toutes nos catégories</option>
     {% for category in categories %}
     <option value="{{ category.name }}">{{ category.name }}</option>
     {% endfor %}
   </select>
-  <input type="search" name="product" placeholder="Recherchez un produit ou une marque">
+  <div class="input-search" tabindex="0" contentEditable>
+    <input 
+      type="search" 
+      name="product"
+      hx-get="{% url 'home:search' %}" 
+      hx-trigger="keyup delay:100ms changed" 
+      hx-target="#search-results"
+      placeholder="Recherchez un produit ou une marque"
+      autocomplete="off"
+    >
+    <div class="search-results" id="search-results">
+      {% block title-product-search %}
+        {% if search_results %}
+          {% for search in search_results %}
+            <p>
+              <a href="/?category=all&product={{ search.slug }}">{{ search.name }}</a>
+              <span 
+                class="delete-suggestion"
+                hx-get="{% url 'home:index' %}" 
+                hx-trigger="click"
+                hx-swap="none"
+              >
+                {% include 'svg/clos.html' %}
+              </span>
+            </p>
+          {% endfor %}
+        {% endif %}
+      {% endblock %}
+    </div>
+  </div>
   <button type="submit">
     {% include 'svg/search.html' %}
   </button>

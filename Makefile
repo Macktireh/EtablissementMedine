@@ -36,7 +36,7 @@ superuser:
 	poetry run python manage.py createsuperuser --email=admin@gmail.com --name=Admin --phone_number=77123456
 
 loaddata:
-	poetry run python manage.py load_data
+	poetry run python manage.py load_data db.json
 
 dumpdata:
 	poetry run python manage.py dumpdata > db.json

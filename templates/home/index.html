@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 
 {% block title %} Home {% endblock title %}
@@ -9,20 +10,34 @@
 
 
 {% block header %}
-{% component 'head' %}
+  {% component 'head' %}
 {% endblock header %}
 
 
 {% block menu %}
-{% component 'menu' %}
+  {% component 'menu' %}
 {% endblock menu %}
 
 
 {% block content %}
-<section class="part-I">
-  {% component 'sidebarCategory' categories=categories %}
-  {% component 'carousel' %}
-</section>
+
+  <section class="part-I">
+    {% component 'sidebarCategory' categories=categories %}
+    {% component 'carousel' %}
+  </section>
+  <section class="part-II">
+    <div class="box-title">
+      {% include 'svg/flash.html' %}
+      <h2>TRENDING NOW</h2>
+    </div>
+    <div class="flash-container">
+      {% component_block "cardWarapper" id="card-warapper1" %}
+        {% for product in products %}
+          {% component 'productCard' product=product %}
+        {% endfor %}
+      {% endcomponent_block %}
+    </div>
+  </section>
 {% endblock content %}
 
 
@@ -30,5 +45,6 @@
 
 
 {% block js %}
-{% component_js_dependencies %}
+  <script src="{% static 'global/js/script.js' %}"></script>
+  {% component_js_dependencies %}
 {% endblock js %}

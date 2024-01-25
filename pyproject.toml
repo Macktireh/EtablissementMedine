@@ -27,6 +27,8 @@ python-dotenv = "*"
 six = "^1.16.0"
 tqdm = "^4.66.1"
 whitenoise = "^6.5.0"
+django-render-block = "^0.9.2"
+django-htmx = "^1.16.0"
 
 
 [tool.poetry.group.dev.dependencies]

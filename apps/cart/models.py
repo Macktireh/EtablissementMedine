@@ -5,12 +5,12 @@ from django.db import models
 from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
 
-from apps.core.models import AbstractCreatedUpdatedMixin, AbstractPublicIdMixin
+from apps.core.models import IndexedTimeStampedModel, PublicIdModel
 from apps.products.models import Product
 from apps.users.models import User
 
 
-class OrderItem(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
+class OrderItem(PublicIdModel, IndexedTimeStampedModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="order_items")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="order_items")
     quantity = models.PositiveIntegerField(
@@ -21,7 +21,7 @@ class OrderItem(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
     )
     ordered = models.BooleanField(_("ordered"), default=False, db_index=True)
 
-    class Meta(AbstractCreatedUpdatedMixin.Meta):
+    class Meta(IndexedTimeStampedModel.Meta):
         db_table = "order_item"
         verbose_name = _("Order Item")
         verbose_name_plural = _("Orders Items")
@@ -35,7 +35,7 @@ class OrderItem(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
         return f"{self.product.name} ({self.quantity}) <{self.user.name}>"
 
 
-class Cart(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
+class Cart(PublicIdModel, IndexedTimeStampedModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="cart")
     orders_items = models.ManyToManyField(OrderItem, related_name="cart", blank=True)
 

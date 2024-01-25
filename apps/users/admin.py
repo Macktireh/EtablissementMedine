@@ -31,7 +31,7 @@ class UserAdmin(BaseUserAdmin):
             None,
             {
                 "fields": (
-                    "email",
+                    "_email",
                     "password",
                 )
             },
@@ -81,7 +81,7 @@ class UserAdmin(BaseUserAdmin):
             },
         ),
     )
-    readonly_fields = ("public_id", "date_joined", "last_login")
+    readonly_fields = ("public_id", "_email", "date_joined", "last_login")
     search_fields = (
         "email",
         "name",
@@ -89,6 +89,9 @@ class UserAdmin(BaseUserAdmin):
     )
     ordering = ("date_joined",)
     list_per_page = 20
+
+    def _email(self, obj: User) -> str:
+        return obj.email
 
     def has_view_permission(self, request: HttpRequest, obj: User | None = None) -> bool:
         return cast(User, request.user).is_superuser

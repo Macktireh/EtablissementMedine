@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from apps.cart.models import Cart, OrderItem
-from apps.core.models import AbstractCreatedUpdatedMixin, AbstractPublicIdMixin
+from apps.core.models import IndexedTimeStampedModel, PublicIdModel
 from apps.payments.models import Payment
 from apps.users.models import User
 
@@ -37,7 +37,7 @@ class OrderStatusChoices(models.TextChoices):
     REFUNDED = "refunded", _("Refunded")
 
 
-class Order(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
+class Order(PublicIdModel, IndexedTimeStampedModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders")
     orders_items = models.ManyToManyField(OrderItem, related_name="orders", blank=True)
     total_price = models.DecimalField(

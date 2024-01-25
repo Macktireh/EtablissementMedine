@@ -574,6 +574,21 @@ files = [
 Django = ">=3.2"
 
 [[package]]
+name = "django-htmx"
+version = "1.16.0"
+description = "Extensions for using Django with htmx."
+category = "main"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_htmx-1.16.0-py3-none-any.whl", hash = "sha256:360d11266666e5d92bda57069f671f2c04642eb1fc071e4c4160cf9f504cbfa6"},
+    {file = "django_htmx-1.16.0.tar.gz", hash = "sha256:56a65045e079503877ba1354acb481030cf54da1e1f731d33c280e0a14b214cf"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
 name = "django-modeltranslation"
 version = "0.18.11"
 description = "Translates Django models using a registration approach."
@@ -588,6 +603,24 @@ files = [
 [package.dependencies]
 Django = ">=3.2"
 typing-extensions = "*"
+
+[[package]]
+name = "django-render-block"
+version = "0.9.2"
+description = "Render a particular block from a template to a string."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "django-render-block-0.9.2.tar.gz", hash = "sha256:3dde0d2abde9381685659d2ed0761b8bddf7741c48eaadec9e5b50a6c7850247"},
+    {file = "django_render_block-0.9.2-py3-none-any.whl", hash = "sha256:1768832be78476c36627b3e3a8e7d9eb0e2bc46b84daf2c51958e2f674173c40"},
+]
+
+[package.dependencies]
+django = ">=2.2"
+
+[package.extras]
+dev = ["Jinja2 (>=2.8)"]
 
 [[package]]
 name = "django-resized"
@@ -1609,4 +1642,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "82bf25453e2aa076b9d53751b5bb3ca7c7d297f9b75f7e4f265f8b663027c05c"
+content-hash = "aff844fe413a7026969cb65222854ad95c69954a6e07d664a29018e2cf99ceb4"
