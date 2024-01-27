@@ -40,7 +40,6 @@ faker = "^18.7.0"
 ggshield = "^1.18.1"
 pre-commit = "^3.3.2"
 ruff = "^0.1.8"
-zroya = "^0.2.4"
 
 [build-system]
 requires = ["poetry-core"]
