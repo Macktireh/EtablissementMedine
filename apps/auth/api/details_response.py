@@ -28,18 +28,14 @@ def succesMessage() -> Dict[str, str]:
         "LOGIN_SUCCESS": _("Login success."),
         "THE_PASSWORD_HAS_BEEN_CHANGED_SUCCESSFULLY": _("The password has been changed successfully."),
         "PASSWORD_RESET_SUCCESSFULLY": _("Password reset successfully."),
-        "THE_PASSWORD_RESET_LINK_HAS_BEEN_SENT": _(
-            "The password reset link has been sent. Please check your e-mail."
-        ),
+        "THE_PASSWORD_RESET_LINK_HAS_BEEN_SENT": _("The password reset link has been sent. Please check your e-mail."),
         "LOGOUT_SUCCESS": _("Logout success."),
     }
 
 
 def failMessage() -> Dict[str, str]:
     return {
-        "PLEASE_ENTER_A_VALID_DJIBOUTIAN_TELEPHONE_NUMBER": _(
-            "Please enter a valid Djiboutian telephone number."
-        ),
+        "PLEASE_ENTER_A_VALID_DJIBOUTIAN_TELEPHONE_NUMBER": _("Please enter a valid Djiboutian telephone number."),
         "THE_TELEPHONE_NUMBER_ALREADY_EXISTS": _("The telephone number already exists."),
         "THE_EMAIL_ADDRESS_DOES_NOT_EXIST": _("The email address does not exist."),
         "PLEASE_CONFIRM_YOUR_ADDRESS_EMAIL": _("Please confirm your address email."),

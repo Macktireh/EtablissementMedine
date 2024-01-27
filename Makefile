@@ -44,14 +44,13 @@ dumpdata:
 i18n:
 	poetry run django-admin makemessages --all --ignore=env
 
-black:
-	poetry run python -m black .
+rufffix:
+	poetry run ruff --fix --exit-zero .
 
-isort:
-	poetry run python -m isort --profile black .
+ruffformat:
+	poetry run ruff format .
 
 ruff:
 	poetry run ruff check .
 
-# clean
-clean: black isort ruff
+clean: rufffix ruffformat ruff

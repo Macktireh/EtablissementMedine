@@ -14,8 +14,6 @@ urlpatterns = [
         views.UpdateOrderItemQuantityView.as_view(),
         name="update-order-item-quantity-api",
     ),
-    path(
-        "delete-to-cart/<str:orderItemPublicId>/", views.DeleteToCartView.as_view(), name="delete-to-cart-api"
-    ),
+    path("delete-to-cart/<str:orderItemPublicId>/", views.DeleteToCartView.as_view(), name="delete-to-cart-api"),
     path("clear/", views.ClearCartView.as_view(), name="clear-cart-api"),
 ]

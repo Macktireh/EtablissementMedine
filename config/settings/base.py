@@ -206,9 +206,9 @@ CLICKSEND_FROM = "EtabMedine"
 
 
 # the list of origins authorized to make HTTP requests
-CORS_ALLOWED_ORIGINS = get_env_variable(
-    "CORS_ALLOWED_ORIGINS", "http://localhost:3000 http://127.0.0.1:3000"
-).split(" ")
+CORS_ALLOWED_ORIGINS = get_env_variable("CORS_ALLOWED_ORIGINS", "http://localhost:3000 http://127.0.0.1:3000").split(
+    " "
+)
 
 DOMAIN_FRONTEND = get_env_variable("DOMAIN_FRONTEND", raise_error=False)
 
@@ -224,5 +224,5 @@ DJANGORESIZED_DEFAULT_QUALITY = 90
 DJANGORESIZED_DEFAULT_FORCE_FORMAT = "JPEG"
 DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {"JPEG": ".jpg"}
 
-EXPORT_EMAILS_ORDER_BY = ['name', 'email']
-EXPORT_EMAILS_FIELDS = ['name', 'email']
+EXPORT_EMAILS_ORDER_BY = ["name", "email"]
+EXPORT_EMAILS_FIELDS = ["name", "email"]

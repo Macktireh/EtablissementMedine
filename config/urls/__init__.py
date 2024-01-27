@@ -15,4 +15,4 @@ if settings.DEBUG:
     # urlpatterns.append(path("__debug__", include(debug_toolbar.urls)))
     urlpatterns.extend(static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
     urlpatterns.extend(i18n_patterns(path("rosetta/", include("rosetta.urls"))))
-    urlpatterns.append(path("emails/", include("developmentEmailDashboard.urls")))
+    urlpatterns.append(path("mails/", include("developmentEmailDashboard.urls")))

@@ -35,8 +35,8 @@ class LogEntryAdmin(admin.ModelAdmin):
             link = '<span class="deletelink">%s</span>' % escape(obj.object_repr)
         else:
             ct = obj.content_type
-            link = '<a href="%s" class="%s">%s</a>' % (
-                reverse("admin:%s_%s_change" % (ct.app_label, ct.model), args=[obj.object_id]),
+            link = '<a href="%s" class="%s">%s</a>' % (  # noqa: UP031
+                reverse("admin:%s_%s_change" % (ct.app_label, ct.model), args=[obj.object_id]),  # noqa: UP031
                 "changelink" if obj.action_flag == CHANGE else "addlink",
                 escape(obj.object_repr),
             )
@@ -47,4 +47,4 @@ class LogEntryAdmin(admin.ModelAdmin):
     object_link.short_description = "object"
 
     def queryset(self, request: HttpRequest):
-        return super(LogEntryAdmin, self).queryset(request).prefetch_related("content_type")
+        return super().queryset(request).prefetch_related("content_type")

@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from apps.cart.admin import CartAdmin as CartAdminBase, OrderItemAdmin as OrderItemAdminBase
+from apps.cart.admin import CartAdmin as CartAdminBase
+from apps.cart.admin import OrderItemAdmin as OrderItemAdminBase
 from apps.orders.models import CartProxy, Order, OrderItemProxy, PaymentProxy
 from apps.payments.admin import PaymentAdmin as PaymentAdminBase
 

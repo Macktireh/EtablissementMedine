@@ -97,8 +97,8 @@ class AuthService:
         try:
             public_id = force_str(urlsafe_base64_decode(payload["uidb64"]))
             user = User.objects.get(public_id=public_id)
-        except User.DoesNotExist:
-            raise NotFound("User not found")
+        except User.DoesNotExist as err:
+            raise NotFound("User not found") from err
 
         if not tokenGenerator.check_token(user, payload["token"]):
             raise TokenError("Invalid token")
@@ -123,8 +123,8 @@ class AuthService:
         try:
             user = User.objects.get(email=payload["email"])
             obj = CodeChecker.objects.get(token=payload["token"], user=user)
-        except Exception:
-            raise TokenError("User not found")
+        except Exception as e:
+            raise TokenError("User not found") from e
 
         if obj.is_expired() or not obj.confirm_verification(payload["token"]):
             raise TokenError("Invalid token")
@@ -196,8 +196,8 @@ class AuthService:
         try:
             public_id = force_str(urlsafe_base64_decode(payload["uidb64"]))
             user = User.objects.get(public_id=public_id)
-        except User.DoesNotExist:
-            raise TokenError("Invalid token")
+        except User.DoesNotExist as e:
+            raise TokenError("Invalid token") from e
 
         if not PasswordResetTokenGenerator().check_token(user, payload["token"]):
             raise TokenError("Invalid token")
@@ -221,8 +221,8 @@ class AuthService:
         try:
             obj = CodeChecker.objects.get(token=payload["token"], user__phone_number=payload["phone_number"])
             user = obj.user
-        except CodeChecker.DoesNotExist:
-            raise TabError("Invalid token")
+        except CodeChecker.DoesNotExist as e:
+            raise TabError("Invalid token") from e
 
         if not obj.confirm_verification(payload["token"]) and obj.is_expired():
             raise TokenError("Invalid token")

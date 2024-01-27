@@ -223,9 +223,7 @@ class Product(PublicIdModel, IndexedTimeStampedModel):
         default=0.00,
         help_text=_("Price of the product"),
     )
-    description = models.TextField(
-        _("description"), null=True, blank=True, help_text=_("Description of the product")
-    )
+    description = models.TextField(_("description"), null=True, blank=True, help_text=_("Description of the product"))
     color = models.ManyToManyField(
         Color,
         related_name="products",

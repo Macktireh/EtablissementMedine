@@ -1,12 +1,6 @@
-from unittest.mock import MagicMock
-
-from django.http import HttpRequest, HttpResponse, HttpResponseBadRequest
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
 from rest_framework import status
-
-from apps.home.views import HomeView, SearchSuggestionView
-from apps.products.models import Category, Product
 
 
 class HomeViewTestCase(TestCase):
