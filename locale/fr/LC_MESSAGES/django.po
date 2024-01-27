@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-09 00:34+0200\n"
-"PO-Revision-Date: 2023-04-22 23:42+0000\n"
-"Last-Translator:  None <admin@gmail.com>\n"
+"POT-Creation-Date: 2023-10-01 18:42+0200\n"
+"PO-Revision-Date: 2023-10-01 18:42+0200\n"
+"Last-Translator: None None <admin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,100 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.9\n"
+
+#: .\apps\auth\api\details_response.py:26
+msgid "Your account has been successfully registered."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:27
+msgid "Your account has been successfully activated."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:28
+msgid "Login success."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:29
+msgid "The password has been changed successfully."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:30
+msgid "Password reset successfully."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:32
+msgid "The password reset link has been sent. Please check your e-mail."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:34
+msgid "Logout success."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:41
+msgid "Please enter a valid Djiboutian telephone number."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:43
+msgid "The telephone number already exists."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:44
+msgid "The email address does not exist."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:45
+msgid "Please confirm your address email."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:46
+msgid "Please enter a valid email address."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:47
+msgid "The email address already exists."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:48
+msgid "The template email has not been found."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:49
+msgid "The email server is not working."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:50
+msgid "The email or password is incorrect."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:52
+msgid "The password and password confirmation do not match."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:55
+msgid ""
+"The password must contain at least 8 characters, a uppercase letter,"
+"                 a lowercase letter, a number and a special character."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:58
+msgid "The token is not valid or has expired."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:59
+msgid "You are not authorized to perform this action."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:60
+msgid "Missing parameter."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:61
+msgid "Something went wrong."
+msgstr ""
+
+#: .\apps\auth\api\details_response.py:62
+msgid "The user does not exist."
+msgstr ""
 
 #: .\apps\auth\api\drf_schema.py:9
 msgid "Account created successfully."
@@ -38,106 +132,10 @@ msgid "User logged in successfully."
 msgstr ""
 
 #: .\apps\auth\api\drf_schema.py:47 .\apps\auth\api\drf_schema.py:56
-#: .\apps\auth\api\views.py:71 .\apps\auth\api\views.py:84
-#: .\apps\auth\api\views.py:113 .\apps\auth\api\views.py:126
-#: .\apps\auth\api\views.py:163 .\apps\auth\api\views.py:171
-#: .\apps\auth\api\views.py:245 .\apps\cart\api\drf_schema.py:47
-#: .\apps\cart\api\drf_schema.py:56
+#: .\apps\auth\api\views.py:74 .\apps\auth\api\views.py:139
+#: .\apps\auth\api\views.py:147 .\apps\auth\api\views.py:215
+#: .\apps\cart\api\drf_schema.py:47 .\apps\cart\api\drf_schema.py:56
 msgid "fail"
-msgstr ""
-
-#: .\apps\auth\api\text.py:26
-msgid "Your account has been successfully registered."
-msgstr ""
-
-#: .\apps\auth\api\text.py:27
-msgid "Your account has been successfully activated."
-msgstr ""
-
-#: .\apps\auth\api\text.py:28
-msgid "Login success."
-msgstr ""
-
-#: .\apps\auth\api\text.py:29
-msgid "The password has been changed successfully."
-msgstr ""
-
-#: .\apps\auth\api\text.py:30
-msgid "Password reset successfully."
-msgstr ""
-
-#: .\apps\auth\api\text.py:32
-msgid "The password reset link has been sent. Please check your e-mail."
-msgstr ""
-
-#: .\apps\auth\api\text.py:34
-msgid "Logout success."
-msgstr ""
-
-#: .\apps\auth\api\text.py:41
-msgid "Please enter a valid Djiboutian telephone number."
-msgstr ""
-
-#: .\apps\auth\api\text.py:43
-msgid "The telephone number already exists."
-msgstr ""
-
-#: .\apps\auth\api\text.py:44
-msgid "The email address does not exist."
-msgstr ""
-
-#: .\apps\auth\api\text.py:45
-msgid "Please confirm your address email."
-msgstr ""
-
-#: .\apps\auth\api\text.py:46
-msgid "Please enter a valid email address."
-msgstr ""
-
-#: .\apps\auth\api\text.py:47
-msgid "The email address already exists."
-msgstr ""
-
-#: .\apps\auth\api\text.py:48
-msgid "The template email has not been found."
-msgstr ""
-
-#: .\apps\auth\api\text.py:49
-msgid "The email server is not working."
-msgstr ""
-
-#: .\apps\auth\api\text.py:50
-msgid "The email or password is incorrect."
-msgstr ""
-
-#: .\apps\auth\api\text.py:52
-msgid "The password and password confirmation do not match."
-msgstr ""
-
-#: .\apps\auth\api\text.py:55
-msgid ""
-"The password must contain at least 8 characters, a uppercase "
-"letter,                 a lowercase letter, a number and a special character."
-msgstr ""
-
-#: .\apps\auth\api\text.py:58
-msgid "The token is not valid or has expired."
-msgstr ""
-
-#: .\apps\auth\api\text.py:59
-msgid "You are not authorized to perform this action."
-msgstr ""
-
-#: .\apps\auth\api\text.py:60
-msgid "Missing parameter."
-msgstr ""
-
-#: .\apps\auth\api\text.py:61
-msgid "Something went wrong."
-msgstr ""
-
-#: .\apps\auth\api\text.py:62
-msgid "The user does not exist."
 msgstr ""
 
 #: .\apps\auth\apps.py:9
@@ -146,65 +144,65 @@ msgstr ""
 msgid "Authentication and Authorization"
 msgstr "Authentification et gestion des utilisateurs"
 
-#: .\apps\auth\models.py:17
+#: .\apps\auth\models.py:16
 msgid "group"
 msgstr ""
 
-#: .\apps\auth\models.py:18
+#: .\apps\auth\models.py:17
 msgid "groups"
 msgstr ""
 
-#: .\apps\auth\models.py:24
+#: .\apps\auth\models.py:23
 msgid "user"
 msgstr ""
 
-#: .\apps\auth\models.py:25
+#: .\apps\auth\models.py:24
 msgid "users"
 msgstr ""
 
-#: .\apps\auth\models.py:31 .\apps\users\models.py:19
+#: .\apps\auth\models.py:30 .\apps\users\models.py:19
 msgid "verified"
 msgstr "vérifié"
 
-#: .\apps\auth\models.py:32
+#: .\apps\auth\models.py:31
 msgid "timestamp requested"
 msgstr "horodatage demandé"
 
-#: .\apps\auth\models.py:33
+#: .\apps\auth\models.py:32
 msgid "timestamp verified"
 msgstr "horodatage vérifié"
 
-#: .\apps\auth\models.py:37
+#: .\apps\auth\models.py:36
 msgid "code checker"
 msgstr ""
 
-#: .\apps\auth\models.py:38
+#: .\apps\auth\models.py:37
 msgid "code checkers"
 msgstr ""
 
-#: .\apps\auth\services.py:42 .\templates\auth\mail\activation_code.html:6
+#: .\apps\auth\services.py:54 .\templates\auth\mail\activation_code.html:6
 #: .\templates\auth\mail\activation_link.html:6
 msgid "Account Activation"
 msgstr ""
 
-#: .\apps\auth\services.py:60 .\apps\auth\services.py:158
+#: .\apps\auth\services.py:80 .\apps\auth\services.py:190
 #, python-format
 msgid "Here is your EtablissementMedine code: %(token)s. Never share it."
 msgstr ""
 
-#: .\apps\auth\services.py:84 .\apps\auth\services.py:110
+#: .\apps\auth\services.py:115 .\apps\auth\services.py:141
 #: .\templates\auth\mail\activation-success.html:6
 msgid "Account Activation Successful"
 msgstr ""
 
-#: .\apps\auth\services.py:146
+#: .\apps\auth\services.py:178
 #: .\templates\auth\mail\request-rest-password.html:6
 #, fuzzy
 #| msgid "The Password must be set"
 msgid "Password Reset"
 msgstr "Le mot de passe doit être défini"
 
-#: .\apps\auth\services.py:181 .\apps\auth\services.py:206
+#: .\apps\auth\services.py:213 .\apps\auth\services.py:238
 #: .\templates\auth\mail\rest-password-success.html:6
 #, fuzzy
 #| msgid "The Password must be set"
@@ -268,6 +266,93 @@ msgstr "créé le"
 #: .\apps\core\models.py:30
 msgid "updated at"
 msgstr "mis à jour le"
+
+#: .\apps\home\views.py:75
+#| msgid ""
+#| "\n"
+#| "    The SearchSuggestionView is a class-based view  that handles GET requests for searching product suggestions.\n"
+#| "    It expects a query parameter named \"product\" in the request's query string. If the parameter is missing,\n"
+#| "    t returns a HttpResponseBadRequest. If the parameter is present,\n"
+#| "    it performs a search using the Product model and filters the results based on the search term.\n"
+#| "    The search results are added to the view's context dictionary and used to render a specific block of a template.\n"
+#| "    Finally, the rendered block is returned as the HTTP response.\n"
+#| "\n"
+#| "    Inherits from:\n"
+#| "        A class that inherits from: django.views.generic.base.View\n"
+#| "\n"
+#| "    **Method:**\n"
+#| "\n"
+#| "        :**Get**: A method that retrieves the first 10 Product objects from the database that match the search query.\n"
+#| "\n"
+#| "            **Arguments:**\n"
+#| "\n"
+#| "                ``request``: The HTTP request object.\n"
+#| "\n"
+#| "                ``*args``: Variable length argument list.\n"
+#| "\n"
+#| "                ``**kwargs``: Arbitrary keyword arguments.\n"
+#| "\n"
+#| "            **Context:**\n"
+#| "\n"
+#| "                ``products``: An List of instance of :model:`products.Product`.\n"
+#| "\n"
+#| "    "
+msgid ""
+"\n"
+"    The SearchSuggestionView is a class-based view  that handles GET requests for searching product suggestions.\n"
+"    It expects a query parameter named \"product\" in the request's query string. If the parameter is missing,\n"
+"    t returns a HttpResponseBadRequest. If the parameter is present,\n"
+"    it performs a search using the Product model and filters the results based on the search term.\n"
+"    The search results are added to the view's context dictionary and used to render a specific block of a template.\n"
+"    Finally, the rendered block is returned as the HTTP response.\n"
+"\n"
+"    Inherits from:\n"
+"        django.views.generic.base.View\n"
+"\n"
+"    **Method:**\n"
+"\n"
+"        :**Get**: A method that retrieves the first 10 Product objects from the database that match the search query.\n"
+"\n"
+"            **Arguments:**\n"
+"\n"
+"                ``request``: The HTTP request object.\n"
+"\n"
+"                ``*args``: Variable length argument list.\n"
+"\n"
+"                ``**kwargs``: Arbitrary keyword arguments.\n"
+"\n"
+"            **Context:**\n"
+"\n"
+"                ``products``: An List of instance of :model:`products.Product`.\n"
+"\n"
+"    "
+msgstr ""
+"\n"
+"SearchSuggestionView est une vue basée sur une classe qui gère les requêtes GET pour la recherche de suggestions de produits.\n"
+"Elle attend un paramètre de requête nommé \"product\" dans la chaîne de requête de la demande. Si le paramètre est manquant,\n"
+"renvoie une HttpResponseBadRequest. Si le paramètre est présent,\n"
+"il effectue une recherche à l'aide du modèle Produit et filtre les résultats en fonction du terme recherché.\n"
+"Les résultats de la recherche sont ajoutés au dictionnaire contextuel de la vue et utilisés pour rendre un bloc spécifique d'un modèle.\n"
+"Enfin, le bloc rendu est renvoyé en tant que réponse HTTP.\n"
+"\n"
+"Hérite de :\n"
+"    django.views.generic.base.View\n"
+"\n"
+"**Method:**\n"
+"\n"
+"    :**Get** : Une méthode qui récupère les 10 premiers objets Produit de la base de données qui correspondent à la requête de recherche.\n"
+"\n"
+"        **Arguments:**\n"
+"\n"
+"            ``request`` : L'objet de requête HTTP.\n"
+"\n"
+"            ``*args`` : Liste d'arguments de longueur variable.\n"
+"\n"
+"            ``**kwargs`` : Arguments arbitraires de type mot-clé.\n"
+"\n"
+"        **Contexte:**\n"
+"\n"
+"            ``produits`` : Une liste d'instances de :model:`products.Product`."
 
 #: .\apps\orders\apps.py:8
 msgid "Store"
@@ -363,103 +448,143 @@ msgstr "date de paiement"
 msgid "Products and categories"
 msgstr "Produits et catégories"
 
-#: .\apps\products\models.py:17 .\apps\products\models.py:39
-#: .\apps\products\models.py:98 .\apps\users\models.py:15
+#: .\apps\products\models.py:21 .\apps\products\models.py:76
+#: .\apps\products\models.py:187 .\apps\users\models.py:15
 msgid "name"
 msgstr "nom"
 
-#: .\apps\products\models.py:18 .\apps\products\models.py:99
+#: .\apps\products\models.py:25
+msgid "Name of the group category (e.g: 'Electronics')"
+msgstr ""
+
+#: .\apps\products\models.py:28 .\apps\products\models.py:188
 msgid "slug"
 msgstr "slug"
 
-#: .\apps\products\models.py:20 .\apps\products\models.py:42
-#: .\apps\products\models.py:106
+#: .\apps\products\models.py:32
+msgid "Slug of the group category (e.g: 'electronics')"
+msgstr ""
+
+#: .\apps\products\models.py:35 .\apps\products\models.py:86
+#: .\apps\products\models.py:196 .\apps\products\models.py:230
 msgid "thumbnail"
 msgstr "vignette"
 
-#: .\apps\products\models.py:25
+#: .\apps\products\models.py:40
+msgid "Thumbnail of the group category"
+msgstr ""
+
+#: .\apps\products\models.py:45
 #, fuzzy
 #| msgid "Category"
 msgid "Group Category"
 msgstr "Catégorie"
 
-#: .\apps\products\models.py:26
+#: .\apps\products\models.py:46
 #, fuzzy
 #| msgid "Categories"
 msgid "Groups Categories"
 msgstr "Catégories"
 
-#: .\apps\products\models.py:50
-msgid "Category"
-msgstr "Catégorie"
-
-#: .\apps\products\models.py:51
-msgid "Categories"
-msgstr "Catégories"
-
-#: .\apps\products\models.py:69
-msgid "title of promotion"
-msgstr ""
-
-#: .\apps\products\models.py:71
-msgid "discount"
-msgstr ""
-
-#: .\apps\products\models.py:82
-msgid "Promotion"
+#: .\apps\products\models.py:80
+msgid "Name of the category (e.g: 'Watches')"
 msgstr ""
 
 #: .\apps\products\models.py:83
+msgid "Slug of the category (e.g: 'watches')"
+msgstr ""
+
+#: .\apps\products\models.py:91
+msgid "Thumbnail of the category"
+msgstr ""
+
+#: .\apps\products\models.py:95
+msgid "The group that the category belongs to."
+msgstr ""
+
+#: .\apps\products\models.py:100
+msgid "Category"
+msgstr "Catégorie"
+
+#: .\apps\products\models.py:101
+msgid "Categories"
+msgstr "Catégories"
+
+#: .\apps\products\models.py:144
+msgid "title of promotion"
+msgstr ""
+
+#: .\apps\products\models.py:146
+msgid "discount"
+msgstr ""
+
+#: .\apps\products\models.py:157
+msgid "Promotion"
+msgstr ""
+
+#: .\apps\products\models.py:158
 #, fuzzy
 #| msgid "Permissions"
 msgid "Promotions"
 msgstr "Permissions"
 
-#: .\apps\products\models.py:100
+#: .\apps\products\models.py:169
+msgid "color"
+msgstr ""
+
+#: .\apps\products\models.py:173
+msgid "Color"
+msgstr ""
+
+#: .\apps\products\models.py:174
+msgid "Colors"
+msgstr ""
+
+#: .\apps\products\models.py:189
 msgid "stock quantity"
 msgstr "quantité en stock"
 
-#: .\apps\products\models.py:102
+#: .\apps\products\models.py:191
 msgid "price"
 msgstr "prix"
 
-#: .\apps\products\models.py:104 .\apps\products\models.py:150
+#: .\apps\products\models.py:193 .\apps\products\models.py:250
 msgid "description"
 msgstr "description"
 
-#: .\apps\products\models.py:117
+#: .\apps\products\models.py:207
 msgid "Product"
 msgstr "Produit"
 
-#: .\apps\products\models.py:118
+#: .\apps\products\models.py:208
 msgid "Products"
 msgstr "Produits"
 
-#: .\apps\products\models.py:140
-msgid "image"
-msgstr ""
-
-#: .\apps\products\models.py:144
+#: .\apps\products\models.py:235
 #, fuzzy
 #| msgid "Product"
 msgid "Product Image"
 msgstr "Produit"
 
-#: .\apps\products\models.py:145
+#: .\apps\products\models.py:236
 #, fuzzy
 #| msgid "Products"
 msgid "Product Images"
 msgstr "Produits"
 
-#: .\apps\products\models.py:149
+#: .\apps\products\models.py:249
 msgid "title"
 msgstr ""
 
-#: .\apps\products\models.py:155 .\apps\products\models.py:156
+#: .\apps\products\models.py:255 .\apps\products\models.py:256
 #, fuzzy
 #| msgid "Processing"
 msgid "Product Advertising"
 msgstr "Traitement"
+
+#: .\apps\products\models.py:263
+msgid "The maximum number of rows in the AdvertisingProducts table is 10."
+msgstr ""
 
 #: .\apps\users\admin.py:40
 msgid "Personal info"
@@ -537,16 +662,16 @@ msgstr "Client"
 msgid "Customers"
 msgstr "Clients"
 
-#: .\config\settings\base.py:121
+#: .\config\settings\base.py:154
 msgid "English"
 msgstr "Anglais"
 
-#: .\config\settings\base.py:122
+#: .\config\settings\base.py:155
 msgid "French"
 msgstr "Français"
 
 #: .\templates\auth\mail\activation-success.html:49
-#: .\templates\auth\mail\activation_code.html:50
+#: .\templates\auth\mail\activation_code.html:51
 #: .\templates\auth\mail\activation_link.html:58
 #: .\templates\auth\mail\request-rest-password.html:58
 #: .\templates\auth\mail\rest-password-success.html:46
@@ -562,7 +687,7 @@ msgid "Congratulations! You can now enjoy all the features of our platform."
 msgstr ""
 
 #: .\templates\auth\mail\activation-success.html:53
-#: .\templates\auth\mail\activation_code.html:56
+#: .\templates\auth\mail\activation_code.html:57
 #: .\templates\auth\mail\activation_link.html:64
 #: .\templates\auth\mail\request-rest-password.html:63
 #: .\templates\auth\mail\rest-password-success.html:50
@@ -576,7 +701,7 @@ msgid "Thank you for joining EtablissementMedine!"
 msgstr ""
 
 #: .\templates\auth\mail\activation-success.html:57
-#: .\templates\auth\mail\activation_code.html:60
+#: .\templates\auth\mail\activation_code.html:61
 #: .\templates\auth\mail\activation_link.html:68
 #: .\templates\auth\mail\request-rest-password.html:65
 #: .\templates\auth\mail\rest-password-success.html:52
@@ -584,7 +709,7 @@ msgid "Best regards,"
 msgstr ""
 
 #: .\templates\auth\mail\activation-success.html:57
-#: .\templates\auth\mail\activation_code.html:60
+#: .\templates\auth\mail\activation_code.html:61
 #: .\templates\auth\mail\activation_link.html:68
 #: .\templates\auth\mail\request-rest-password.html:65
 #: .\templates\auth\mail\rest-password-success.html:52
@@ -593,26 +718,26 @@ msgstr ""
 msgid "The EtablissementMedine Team"
 msgstr "Etablissement Medine Administration"
 
-#: .\templates\auth\mail\activation_code.html:51
+#: .\templates\auth\mail\activation_code.html:52
 msgid ""
 "To complete your registration on EtablissementMedine, please activate your "
 "account using the confirmation code below:"
 msgstr ""
 
-#: .\templates\auth\mail\activation_code.html:53
+#: .\templates\auth\mail\activation_code.html:54
 msgid ""
 "Please note that the confirmation code is confidential and should not be "
 "shared with others. It is used to verify your identity and protect the "
 "security of your account."
 msgstr ""
 
-#: .\templates\auth\mail\activation_code.html:54
+#: .\templates\auth\mail\activation_code.html:55
 #: .\templates\auth\mail\activation_link.html:62
 msgid ""
 "If you did not create an account on our platform, please ignore this email."
 msgstr ""
 
-#: .\templates\auth\mail\activation_code.html:58
+#: .\templates\auth\mail\activation_code.html:59
 #: .\templates\auth\mail\activation_link.html:66
 msgid "Thank you and welcome to EtablissementMedine!"
 msgstr ""

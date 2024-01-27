@@ -94,12 +94,8 @@ def failMessage() -> Dict[str, str]:
             msgEN="You are not authorized to perform this action.",
         ),
         "MISSING_PARAMETER": toggleLangMsg(msgFR="paramètre manquant.", msgEN="Missing parameter."),
-        "SOMETHING_WENT_WRONG": toggleLangMsg(
-            msgFR="Quelque chose a mal tourné.", msgEN="Something went wrong."
-        ),
-        "USER_DOES_NOT_EXIST": toggleLangMsg(
-            msgFR="L'utilisateur n'existe pas.", msgEN="The user does not exist."
-        ),
+        "SOMETHING_WENT_WRONG": toggleLangMsg(msgFR="Quelque chose a mal tourné.", msgEN="Something went wrong."),
+        "USER_DOES_NOT_EXIST": toggleLangMsg(msgFR="L'utilisateur n'existe pas.", msgEN="The user does not exist."),
     }
 
 

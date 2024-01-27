@@ -13,6 +13,17 @@ class ActivationView(View):
     context: Mapping[str, Any] = {}
 
     def get(self, request: HttpRequest, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> HttpResponse:
+        """
+        Retrieves the activation link from the request's keyword arguments and validates it to activate the user.
+
+        Args:
+            request (HttpRequest): The HTTP request object.
+            *args (Tuple[Any, ...]): Variable length argument list.
+            **kwargs (Dict[str, Any]): Arbitrary keyword arguments.
+
+        Returns:
+            HttpResponse: The HTTP response object.
+        """
         uidb64 = kwargs.get("uidb64")
         token = kwargs.get("token")
 

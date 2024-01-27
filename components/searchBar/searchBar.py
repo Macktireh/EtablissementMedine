@@ -9,6 +9,9 @@ from apps.products.models import Category
 class SearchBar(component.Component):
     template_name = "searchBar/searchBar.html"
 
+    class Media:
+        js = "searchBar/searchBar.js"
+
     def get_context_data(self) -> dict[str, Any]:
         categories = Category.objects.all()
         return {"categories": categories}

@@ -14,26 +14,68 @@ regexPassword = r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$
 
 
 class AuthUserValidators:
+    """Validators for the AuthUser class"""
+
     @staticmethod
     def phoneNumberValidator(value: str) -> str:
+        """
+        Validates a phone number and returns it if valid.
+
+        Parameters:
+            value (str): The phone number to be validated.
+
+        Returns:
+            str: The validated phone number.
+
+        Raises:
+            serializers.ValidationError: If the phone number is not valid or already exists.
+        """
         if not re.match(regexPhoneNumber, value):
             raise serializers.ValidationError(failMsg["PLEASE_ENTER_A_VALID_DJIBOUTIAN_TELEPHONE_NUMBER"])
-        if not str(value).startswith("+253"):
-            value = "+253" + value
+
+        value = "+253" + value if not str(value).startswith("+253") else value
+
         if User.objects.filter(phone_number__iexact=value).exists():
             raise serializers.ValidationError(failMsg["THE_TELEPHONE_NUMBER_ALREADY_EXISTS"])
+
         return value
 
     @staticmethod
     def emailValidator(value: str) -> str:
+        """
+        Validates an email address and checks if it already exists in the database.
+
+        Parameters:
+            value (str): The email address to be validated.
+
+        Returns:
+            str: The validated email address.
+
+        Raises:
+            serializers.ValidationError: If the email address is not valid or already exists.
+        """
         if not re.match(regexEmail, value):
             raise serializers.ValidationError(failMsg["PLEASE_ENTER_A_VALID_EMAIL_ADDRESS"])
+
         if User.objects.filter(email__iexact=value).exists():
             raise serializers.ValidationError(failMsg["THE_EMAIL_ADDRESS_ALREADY_EXISTS"])
+
         return value
 
     @staticmethod
     def passwordValidator(value: str) -> str:
+        """
+        Validates the password based on a regular expression.
+
+        Args:
+            value (str): The password string to be validated.
+
+        Returns:
+            str: The validated password string.
+
+        Raises:
+            serializers.ValidationError: If the password does not match the regular expression.
+        """
         if not re.match(regexPassword, value):
             raise serializers.ValidationError(failMsg["INVALID_PASSWORD"])
         return value

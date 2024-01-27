@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from apps.core.models import AbstractCreatedUpdatedMixin, AbstractPublicIdMixin
+from apps.core.models import IndexedTimeStampedModel, PublicIdModel
 from apps.users.models import User
 
 
@@ -16,7 +16,7 @@ class PaymentTypeChoices(models.TextChoices):
     CREDIT_CARD = "credit_card", _("Credit card")
 
 
-class Payment(AbstractPublicIdMixin, AbstractCreatedUpdatedMixin):
+class Payment(PublicIdModel, IndexedTimeStampedModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="payments")
     type = models.CharField(
         _("payment type"), max_length=20, choices=PaymentTypeChoices.choices, default=PaymentTypeChoices.CASH

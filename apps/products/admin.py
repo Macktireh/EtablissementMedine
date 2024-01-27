@@ -101,8 +101,41 @@ class CategoryAdmin(TabbedExternalJqueryTranslationAdmin):
     list_filter = ("group",)
 
 
+# @admin.register(ProductImage)
+class ProductImageAdmin(admin.TabularInline):
+    model = ProductImage
+    max_num = 5
+    list_display = (
+        "_product",
+        "image_preview",
+    )
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    "public_id",
+                    "product",
+                    "image",
+                    "image_preview",
+                )
+            },
+        ),
+    )
+    readonly_fields = (
+        "public_id",
+        "image_preview",
+    )
+
+    def _product(self, obj) -> str:
+        return obj.product.name
+
+
 @admin.register(Product)
 class ProductAdmin(TabbedExternalJqueryTranslationAdmin):
+    save_on_top = True
+    list_display_links = ("name", "_thumbnail")
+    inlines = (ProductImageAdmin,)
     list_display = (
         "name",
         "_thumbnail",
@@ -189,34 +222,6 @@ class PromotionAdmin(admin.ModelAdmin):
     def _discount(self, obj) -> str:
         if obj.discount:
             return f"-{obj.discount}%"
-
-
-@admin.register(ProductImage)
-class ProductImageAdmin(admin.ModelAdmin):
-    list_display = (
-        "_product",
-        "image_preview",
-    )
-    fieldsets = (
-        (
-            None,
-            {
-                "fields": (
-                    "public_id",
-                    "product",
-                    "image",
-                    "image_preview",
-                )
-            },
-        ),
-    )
-    readonly_fields = (
-        "public_id",
-        "image_preview",
-    )
-
-    def _product(self, obj) -> str:
-        return obj.product.name
 
 
 @admin.register(ProductAdvertising)

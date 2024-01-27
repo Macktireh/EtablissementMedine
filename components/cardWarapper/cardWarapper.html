@@ -1,0 +1,14 @@
+{% load static %}
+
+
+<div class="card-warapper swiper" id="{{id}}">
+  <div class="slide-content">
+    <div class="slides-product swiper-wrapper">
+      {% slot "content" default %}{% endslot %}
+    </div>
+  </div>
+  <span id="left" class="swiper-button-next next">&#8702;</span>
+  <span id="right" class="swiper-button-prev prev">&#8701;</span>
+  <!-- <div class="swiper-button-next next"></div>
+  <div class="swiper-button-prev prev"></div> -->
+</div>

@@ -19,7 +19,7 @@ class CategoryListView(PermissionMixin, viewsets.ReadOnlyModelViewSet):
     serializer_class = CategorySerializer
 
 
-class ProductView(PermissionMixin, viewsets.ReadOnlyModelViewSet):
+class ProductAPIView(PermissionMixin, viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.select_related("category").all()
     serializer_class = ProductSerializer
 

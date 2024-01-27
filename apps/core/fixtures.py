@@ -359,7 +359,7 @@ products_data = [
             "slug": "yaourt-nature",
             "price": "120",
             "stock": 63,
-            "description": "Le yaourt nature est un produit laitier fermenté à base de lait. Il est riche en calcium et en protéines, ce qui en fait un aliment nutritif pour les personnes de tous âges. Il peut être consommé tel quel ou mélangé avec des fruits ou du miel pour un goût sucré.",
+            "description": "Le yaourt nature est un produit laitier fermenté à base de lait. Il est riche en calcium et en protéines, ce qui en fait un aliment nutritif pour les personnes de tous âges. Il peut être consommé tel quel ou mélangé avec des fruits ou du miel pour un goût sucré.",  # noqa: E501
             "category": 1,
             "created_at": str(
                 timezone.now()
@@ -386,7 +386,7 @@ products_data = [
             "slug": "fromage-bleu",
             "price": "80",
             "stock": 53,
-            "description": "Le fromage bleu est un fromage à pâte persillée fabriqué à partir de lait de vache, de brebis ou de chèvre. Il a une texture crémeuse et un goût fort et salé. Il est souvent utilisé pour ajouter de la saveur à des salades, des pâtes ou des sandwichs.",
+            "description": "Le fromage bleu est un fromage à pâte persillée fabriqué à partir de lait de vache, de brebis ou de chèvre. Il a une texture crémeuse et un goût fort et salé. Il est souvent utilisé pour ajouter de la saveur à des salades, des pâtes ou des sandwichs.",  # noqa: E501
             "category": 1,
             "created_at": str(
                 timezone.now()
@@ -413,7 +413,7 @@ products_data = [
             "slug": "lait-de-soja",
             "price": "160",
             "stock": 63,
-            "description": "Le lait de soja est une alternative végétale au lait de vache. Il est fabriqué à partir de graines de soja broyées et mélangées avec de l'eau. Il est riche en protéines et en nutriments essentiels, mais ne contient pas de lactose. Il est souvent utilisé par les personnes allergiques au lait ou par celles qui suivent un régime végétalien ou végétarien.",
+            "description": "Le lait de soja est une alternative végétale au lait de vache. Il est fabriqué à partir de graines de soja broyées et mélangées avec de l'eau. Il est riche en protéines et en nutriments essentiels, mais ne contient pas de lactose. Il est souvent utilisé par les personnes allergiques au lait ou par celles qui suivent un régime végétalien ou végétarien.",  # noqa: E501
             "category": 1,
             "created_at": str(
                 timezone.now()
@@ -440,7 +440,7 @@ products_data = [
             "slug": "pizza-surgelee",
             "price": "150",
             "stock": 23,
-            "description": "La pizza surgelée est une option pratique pour les repas rapides. Elle est généralement composée d'une croûte, de sauce tomate et de fromage, avec une variété de garnitures disponibles telles que le pepperoni, les légumes ou le poulet. Elle peut être cuite au four en quelques minutes et servie chaude.",
+            "description": "La pizza surgelée est une option pratique pour les repas rapides. Elle est généralement composée d'une croûte, de sauce tomate et de fromage, avec une variété de garnitures disponibles telles que le pepperoni, les légumes ou le poulet. Elle peut être cuite au four en quelques minutes et servie chaude.",  # noqa: E501
             "category": 2,
             "created_at": str(
                 timezone.now()
@@ -467,7 +467,7 @@ products_data = [
             "slug": "poisson-surgelee",
             "price": "120",
             "stock": 26,
-            "description": "Le poisson surgelé est une alternative pratique et économique au poisson frais. Il est généralement emballé individuellement et peut être cuit directement à partir du congélateur. Les variétés courantes comprennent le saumon, la morue, le tilapia et le cabillaud.",
+            "description": "Le poisson surgelé est une alternative pratique et économique au poisson frais. Il est généralement emballé individuellement et peut être cuit directement à partir du congélateur. Les variétés courantes comprennent le saumon, la morue, le tilapia et le cabillaud.",  # noqa: E501
             "category": 2,
             "created_at": str(
                 timezone.now()
@@ -494,7 +494,7 @@ products_data = [
             "slug": "legumes-surgelees",
             "price": "100",
             "stock": 43,
-            "description": "Les légumes surgelés sont une option pratique pour les repas rapides ou pour ceux qui ne peuvent pas acheter de légumes frais régulièrement. Ils sont emballés individuellement ou mélangés dans des sacs et peuvent être cuits rapidement au micro-ondes ou à la vapeur. Les variétés courantes comprennent les pois, les carottes, le brocoli et les haricots verts.",
+            "description": "Les légumes surgelés sont une option pratique pour les repas rapides ou pour ceux qui ne peuvent pas acheter de légumes frais régulièrement. Ils sont emballés individuellement ou mélangés dans des sacs et peuvent être cuits rapidement au micro-ondes ou à la vapeur. Les variétés courantes comprennent les pois, les carottes, le brocoli et les haricots verts.",  # noqa: E501
             "category": 2,
             "created_at": str(
                 timezone.now()
@@ -521,7 +521,7 @@ products_data = [
             "slug": "noix-de-cajou-grillees",
             "price": "130",
             "stock": 123,
-            "description": "Ces noix de cajou sont légèrement grillées pour leur donner une saveur croustillante et délicieuse. Elles sont riches en protéines et en graisses saines, ce qui en fait une collation saine et satisfaisante. Les noix de cajou grillées sont également un excellent ajout aux salades et aux plats cuisinés.",
+            "description": "Ces noix de cajou sont légèrement grillées pour leur donner une saveur croustillante et délicieuse. Elles sont riches en protéines et en graisses saines, ce qui en fait une collation saine et satisfaisante. Les noix de cajou grillées sont également un excellent ajout aux salades et aux plats cuisinés.",  # noqa: E501
             "category": 3,
             "created_at": str(
                 timezone.now()
@@ -548,7 +548,7 @@ products_data = [
             "slug": "riz-basmati-biologique",
             "price": "70",
             "stock": 210,
-            "description": "Le riz basmati biologique est un choix parfait pour les personnes soucieuses de leur santé et de l'environnement. Ce riz est cultivé sans l'utilisation de produits chimiques nocifs, ce qui en fait une option plus saine que le riz traditionnel. Le riz basmati a une texture légère et un goût subtil, ce qui le rend parfait pour accompagner les plats épicés.",
+            "description": "Le riz basmati biologique est un choix parfait pour les personnes soucieuses de leur santé et de l'environnement. Ce riz est cultivé sans l'utilisation de produits chimiques nocifs, ce qui en fait une option plus saine que le riz traditionnel. Le riz basmati a une texture légère et un goût subtil, ce qui le rend parfait pour accompagner les plats épicés.",  # noqa: E501
             "category": 3,
             "created_at": str(
                 timezone.now()
@@ -575,7 +575,7 @@ products_data = [
             "slug": "pates-de-lentilles-rouges",
             "price": "60",
             "stock": 200,
-            "description": "Ces pâtes de lentilles rouges sont une alternative saine aux pâtes traditionnelles à base de blé. Elles sont riches en protéines et en fibres, ce qui en fait un choix idéal pour les végétariens et les personnes soucieuses de leur santé. Les pâtes de lentilles rouges ont une texture ferme et une saveur légèrement sucrée, ce qui les rend parfaites pour les sauces légères ou pour les mélanger avec des légumes frais.",
+            "description": "Ces pâtes de lentilles rouges sont une alternative saine aux pâtes traditionnelles à base de blé. Elles sont riches en protéines et en fibres, ce qui en fait un choix idéal pour les végétariens et les personnes soucieuses de leur santé. Les pâtes de lentilles rouges ont une texture ferme et une saveur légèrement sucrée, ce qui les rend parfaites pour les sauces légères ou pour les mélanger avec des légumes frais.",  # noqa: E501
             "category": 3,
             "created_at": str(
                 timezone.now()
@@ -602,7 +602,7 @@ products_data = [
             "slug": "huile-d-olive-extra-vierge",
             "price": "110",
             "stock": 200,
-            "description": "L'huile d'olive extra vierge est une huile de cuisine saine et délicieuse qui est souvent utilisée dans la cuisine méditerranéenne. Elle est riche en graisses monoinsaturées et est également une source de vitamine E.",
+            "description": "L'huile d'olive extra vierge est une huile de cuisine saine et délicieuse qui est souvent utilisée dans la cuisine méditerranéenne. Elle est riche en graisses monoinsaturées et est également une source de vitamine E.",  # noqa: E501
             "category": 4,
             "created_at": str(
                 timezone.now()
@@ -629,7 +629,7 @@ products_data = [
             "slug": "sucre",
             "price": "50",
             "stock": 250,
-            "description": "Le sucre est un édulcorant courant qui est utilisé dans de nombreux produits alimentaires. Il peut être utilisé dans la cuisine pour sucrer les boissons chaudes, les desserts et les plats principaux.",
+            "description": "Le sucre est un édulcorant courant qui est utilisé dans de nombreux produits alimentaires. Il peut être utilisé dans la cuisine pour sucrer les boissons chaudes, les desserts et les plats principaux.",  # noqa: E501
             "category": 4,
             "created_at": str(
                 timezone.now()
@@ -656,7 +656,7 @@ products_data = [
             "slug": "farine",
             "price": "90",
             "stock": 200,
-            "description": "La farine est un ingrédient de base utilisé pour faire du pain, des pâtisseries et des pâtes fraîches. Il existe de nombreuses variétés de farine, notamment la farine de blé, la farine d'épeautre et la farine de seigle.",
+            "description": "La farine est un ingrédient de base utilisé pour faire du pain, des pâtisseries et des pâtes fraîches. Il existe de nombreuses variétés de farine, notamment la farine de blé, la farine d'épeautre et la farine de seigle.",  # noqa: E501
             "category": 4,
             "created_at": str(
                 timezone.now()
@@ -683,7 +683,7 @@ products_data = [
             "slug": "eau-minerale-naturelle",
             "price": "100",
             "stock": 300,
-            "description": "Une eau pure et naturelle qui est extraite de sources souterraines et qui contient des minéraux essentiels pour une hydratation saine.",
+            "description": "Une eau pure et naturelle qui est extraite de sources souterraines et qui contient des minéraux essentiels pour une hydratation saine.",  # noqa: E501
             "category": 5,
             "created_at": str(
                 timezone.now()
@@ -710,7 +710,7 @@ products_data = [
             "slug": "boisson-energisante",
             "price": "110",
             "stock": 200,
-            "description": "Une boisson qui contient de la caféine et des vitamines B pour une stimulation mentale et physique, généralement consommée avant une activité sportive ou une journée chargée.",
+            "description": "Une boisson qui contient de la caféine et des vitamines B pour une stimulation mentale et physique, généralement consommée avant une activité sportive ou une journée chargée.",  # noqa: E501
             "category": 5,
             "created_at": str(
                 timezone.now()
@@ -737,7 +737,7 @@ products_data = [
             "slug": "sirop-d-erable",
             "price": "90",
             "stock": 200,
-            "description": "Un édulcorant naturel produit à partir de l'eau d'érable, ajoutant une saveur sucrée et délicieuse aux boissons chaudes telles que le café ou le thé.",
+            "description": "Un édulcorant naturel produit à partir de l'eau d'érable, ajoutant une saveur sucrée et délicieuse aux boissons chaudes telles que le café ou le thé.",  # noqa: E501
             "category": 5,
             "created_at": str(
                 timezone.now()
@@ -764,7 +764,7 @@ products_data = [
             "slug": "dentifrice-blanchissant",
             "price": "80",
             "stock": 200,
-            "description": "Ce dentifrice est spécialement formulé pour aider à éliminer les taches de surface et à blanchir les dents en douceur. Il contient des ingrédients actifs pour aider à renforcer l'émail et à prévenir les caries.",
+            "description": "Ce dentifrice est spécialement formulé pour aider à éliminer les taches de surface et à blanchir les dents en douceur. Il contient des ingrédients actifs pour aider à renforcer l'émail et à prévenir les caries.",  # noqa: E501
             "category": 6,
             "created_at": str(
                 timezone.now()
@@ -791,7 +791,7 @@ products_data = [
             "slug": "deodorant-naturel",
             "price": "120",
             "stock": 200,
-            "description": "Ce déodorant est formulé avec des ingrédients naturels pour aider à éliminer les odeurs tout en étant doux pour la peau. Il ne contient pas de produits chimiques agressifs et est sans parfum.",
+            "description": "Ce déodorant est formulé avec des ingrédients naturels pour aider à éliminer les odeurs tout en étant doux pour la peau. Il ne contient pas de produits chimiques agressifs et est sans parfum.",  # noqa: E501
             "category": 6,
             "created_at": str(
                 timezone.now()
@@ -818,7 +818,7 @@ products_data = [
             "slug": "shampooing-revitalisant",
             "price": "90",
             "stock": 200,
-            "description": "Ce shampooing revitalisant est formulé pour nourrir les cheveux en profondeur et les laisser doux et soyeux. Il contient des ingrédients comme l'huile d'argan et le beurre de karité pour aider à réparer et renforcer les cheveux.",
+            "description": "Ce shampooing revitalisant est formulé pour nourrir les cheveux en profondeur et les laisser doux et soyeux. Il contient des ingrédients comme l'huile d'argan et le beurre de karité pour aider à réparer et renforcer les cheveux.",  # noqa: E501
             "category": 6,
             "created_at": str(
                 timezone.now()
@@ -845,7 +845,7 @@ products_data = [
             "slug": "brosse-a-dents-electrique",
             "price": "90",
             "stock": 200,
-            "description": "Cette brosse à dents électrique est conçue pour nettoyer en profondeur les dents et les gencives tout en étant douce pour l'émail. Elle est équipée d'une tête de brosse interchangeable pour un nettoyage personnalisé.",
+            "description": "Cette brosse à dents électrique est conçue pour nettoyer en profondeur les dents et les gencives tout en étant douce pour l'émail. Elle est équipée d'une tête de brosse interchangeable pour un nettoyage personnalisé.",  # noqa: E501
             "category": 6,
             "created_at": str(
                 timezone.now()
@@ -872,7 +872,7 @@ products_data = [
             "slug": "biberons-anti-coliques",
             "price": "90",
             "stock": 200,
-            "description": "Les biberons anti-coliques sont spécialement conçus pour réduire l'ingestion d'air, ce qui peut aider à prévenir les coliques et les reflux.",
+            "description": "Les biberons anti-coliques sont spécialement conçus pour réduire l'ingestion d'air, ce qui peut aider à prévenir les coliques et les reflux.",  # noqa: E501
             "category": 7,
             "created_at": str(
                 timezone.now()
@@ -899,7 +899,7 @@ products_data = [
             "slug": "couches-jetables",
             "price": "90",
             "stock": 200,
-            "description": "Les couches jetables sont pratiques et faciles à utiliser, et sont disponibles dans une variété de tailles pour s'adapter à la croissance de votre bébé.",
+            "description": "Les couches jetables sont pratiques et faciles à utiliser, et sont disponibles dans une variété de tailles pour s'adapter à la croissance de votre bébé.",  # noqa: E501
             "category": 7,
             "created_at": str(
                 timezone.now()
@@ -926,7 +926,7 @@ products_data = [
             "slug": "tapis-d-eveil",
             "price": "130",
             "stock": 170,
-            "description": "Un tapis d'éveil coloré et stimulant est parfait pour encourager le développement moteur et cognitif de votre bébé.",
+            "description": "Un tapis d'éveil coloré et stimulant est parfait pour encourager le développement moteur et cognitif de votre bébé.",  # noqa: E501
             "category": 7,
             "created_at": str(
                 timezone.now()
@@ -953,7 +953,7 @@ products_data = [
             "slug": "detergent-a-lessive",
             "price": "40",
             "stock": 200,
-            "description": "Un détergent à lessive efficace peut aider à éliminer la saleté et les taches des vêtements. Il existe des détergents en poudre, liquides ou en capsules, chacun offrant une formule différente pour répondre à vos besoins de lavage.",
+            "description": "Un détergent à lessive efficace peut aider à éliminer la saleté et les taches des vêtements. Il existe des détergents en poudre, liquides ou en capsules, chacun offrant une formule différente pour répondre à vos besoins de lavage.",  # noqa: E501
             "category": 8,
             "created_at": str(
                 timezone.now()
@@ -980,7 +980,7 @@ products_data = [
             "slug": "nettoyant-multi-surfaces",
             "price": "60",
             "stock": 200,
-            "description": "Un nettoyant multi-surfaces est un produit polyvalent qui peut être utilisé pour nettoyer différents types de surfaces, y compris les comptoirs de cuisine, les planchers et les murs. Ils sont généralement disponibles sous forme de spray ou de lingettes.",
+            "description": "Un nettoyant multi-surfaces est un produit polyvalent qui peut être utilisé pour nettoyer différents types de surfaces, y compris les comptoirs de cuisine, les planchers et les murs. Ils sont généralement disponibles sous forme de spray ou de lingettes.",  # noqa: E501
             "category": 8,
             "created_at": str(
                 timezone.now()
@@ -1007,7 +1007,7 @@ products_data = [
             "slug": "nettoyant-pour-vitres",
             "price": "90",
             "stock": 200,
-            "description": "Un produit nettoyant pour vitres est un produit conçu pour éliminer les taches et les saletés des vitres sans laisser de traces. Ils sont généralement disponibles sous forme de spray ou de lingettes.",
+            "description": "Un produit nettoyant pour vitres est un produit conçu pour éliminer les taches et les saletés des vitres sans laisser de traces. Ils sont généralement disponibles sous forme de spray ou de lingettes.",  # noqa: E501
             "category": 8,
             "created_at": str(
                 timezone.now()
