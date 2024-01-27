@@ -1,6 +1,7 @@
 {% extends 'admin/base.html' %}
 {% load static %}
 {% load i18n %}
+{% load i18n utils %}
 
 
 {% block extrahead %}
@@ -8,15 +9,17 @@
 <link rel="shortcut icon" href="{% static 'global/images/favicon.png' %}" type="image/x-icon">
 
 <style>
-  html[data-theme="light"], html[data-theme="dark"], :root {
+  /* html[data-theme="light"],
+  html[data-theme="dark"],
+  :root {
     --primary: #460613;
     --secondary: #8c0520;
     --accent: #FFF;
     --primary-fg: #FFF;
     --header-color: #FFF;
     --selected-row: #9d1933;
-    /* --darkened-bg: #8b8888; */
-  }
+    --darkened-bg: #8b8888;
+  } */
 </style>
 {% endblock %}
 
@@ -26,7 +29,166 @@
 {{ block.super }}
 {% get_available_languages as LANGUAGES %}
 {% get_language_info_list for LANGUAGES as languages %}
-{% for language in languages %}
-<a class="dropdown-item" href="/{{language.code}}/admin/">/ {{ language.name_local }}</a>
-{% endfor %}
-{% endblock userlinks %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_language_info for LANGUAGE_CODE as CURRENT_LANGUAGE %}
+<style>
+  #container #header {
+    overflow: visible !important;
+  }
+
+  .dorpdown-lang {
+    margin-left: 4px;
+    position: relative;
+    display: inline-block;
+    min-width: 120px;
+  }
+
+  .dorpdown-lang * {
+    box-sizing: border-box;
+  }
+
+  .dorpdown-lang .select-lang {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* border: 1px solid var(--primary-fg); */
+    border-radius: 8px;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .dorpdown-lang .select-clicked {
+    border: 1px solid var(--blue);
+    box-shadow: 0 3px 6px var(--blue);
+  }
+
+  .dorpdown-lang .select-lang:hover {
+    background-color: var(--primary);
+    color: var(--primary-fg);
+  }
+  .dorpdown-lang .select-lang .selected {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 8px;
+  }
+  .dorpdown-lang .select-lang .selected img {
+    width: 13px;
+    height: 13px;
+  }
+
+  .dorpdown-lang .select-lang .caret {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--primary-fg);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .dorpdown-lang .select-lang .caret-rotate {
+    transform: rotate(180deg);
+  }
+
+  .dorpdown-lang .dropdown-menu-lang {
+    list-style: none;
+    padding: 4px 6px;
+    background-color: var(--primary-fg);
+    border-radius: 8px;
+    box-shadow: 0 3px 6px var(--primary-fg);
+    position: absolute;
+    color: black;
+    top: 2.5em;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+    opacity: 0;
+    display: none;
+    transition: all 0.2s ease-in-out;
+    z-index: 99999;
+  }
+
+  .dorpdown-lang .dropdown-menu-lang li {
+    list-style: none;
+    padding: 4px 6px;
+    margin: 3px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    color: black !important;
+    text-align: left;
+  }
+  
+  .dorpdown-lang .dropdown-menu-lang li a {
+    color: black !important;
+    text-align: left;
+    text-decoration: none !important;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 8px;
+  }
+  .dorpdown-lang .dropdown-menu-lang li a img {
+    width: 13px;
+    height: 13px;
+  }
+
+  .dorpdown-lang .dropdown-menu-lang li:hover {
+    background-color: var(--secondary);
+  }
+
+  .dorpdown-lang .dropdown-menu-lang li:hover a {
+    color: var(--primary-fg) !important;
+  }
+
+  .dorpdown-lang .dropdown-menu-lang li.active {
+    background-color: var(--primary);
+  }
+
+  .dorpdown-lang .dropdown-menu-lang li.active a {
+    color: var(--accent) !important;
+  }
+
+  .dorpdown-lang .menu-open {
+    display: block;
+    opacity: 1;
+  }
+</style>
+<div class="dorpdown-lang">
+  <div class="select-lang">
+    <span class="selected">
+        <img src="{% static 'global/svg/' %}{{CURRENT_LANGUAGE.code}}.svg" alt="{{ CURRENT_LANGUAGE.name_local }}">
+      {{ CURRENT_LANGUAGE.name_local }}
+    </span>
+    <div class="caret"></div>
+  </div>
+  <ul class="dropdown-menu-lang">
+    {% for language in languages %}
+    <li class="{% if language.code == LANGUAGE_CODE %} active {% endif %}">
+      <a href="{% translate_url language.code %}">
+          <img src="{% static 'global/svg/' %}{{language.code}}.svg" alt="{{ language.name_local }}">
+        {{ language.name_local }}
+      </a>
+    </li>
+    {% endfor %}
+</div>
+
+<script>
+  const dropdownLang = document.getElementsByClassName("dorpdown-lang");
+  const selectLang = dropdownLang[0].getElementsByClassName("select-lang");
+  const caret = selectLang[0].getElementsByClassName("caret");
+  const dropdownMenuLang = dropdownLang[0].getElementsByClassName("dropdown-menu-lang");
+  const optionsLang = dropdownLang[0].querySelectorAll(".dropdown-menu-lang li");
+  const selectedLang = selectLang[0].getElementsByClassName("selected");
+
+  console.log(optionsLang);
+
+  selectLang[0].addEventListener("click", () => {
+    selectLang[0].classList.toggle("select-clicked");
+    caret[0].classList.toggle("caret-rotate");
+    dropdownMenuLang[0].classList.toggle("menu-open");
+  })
+</script>
+{% endblock userlinks %}  

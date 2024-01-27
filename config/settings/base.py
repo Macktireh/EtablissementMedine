@@ -16,6 +16,8 @@ ADMINS = [tuple(map(str.strip, i.split("/"))) for i in get_env_variable("ADMINS"
 # Application definition
 THIRD_PARTY_APPS_BEFORE_DJANGO_APPS = [
     "modeltranslation",
+    # "admin_interface",
+    "colorfield",
 ]
 
 DJANGO_APPS = [
@@ -24,18 +26,20 @@ DJANGO_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles",
+    # "django.contrib.staticfiles",
+    "django_components.safer_staticfiles",
     "django.contrib.admindocs",
 ]
 
 THIRD_PARTY_APPS = [
+    "django_components",
     "corsheaders",
     "rest_framework",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
     "drf_yasg",
-    "django_components",
-    "colorfield",
+    "render_block",
+    "django_htmx",
 ]
 
 LOCAL_APPS = [
@@ -52,6 +56,9 @@ LOCAL_APPS = [
 INSTALLED_APPS = THIRD_PARTY_APPS_BEFORE_DJANGO_APPS + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 
+X_FRAME_OPTIONS = "SAMEORIGIN"
+SILENCED_SYSTEM_CHECKS = ["security.W019"]
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",  # Whitenoise Middleware
@@ -64,6 +71,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.contrib.admindocs.middleware.XViewMiddleware",  # django admin docs middleware
+    "django_htmx.middleware.HtmxMiddleware",  # django_htmx middleware
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -73,6 +81,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             os.path.join(BASE_DIR, "templates"),
+            os.path.join(BASE_DIR, "components"),
         ],
         # "APP_DIRS": True,
         "OPTIONS": {
@@ -197,9 +206,9 @@ CLICKSEND_FROM = "EtabMedine"
 
 
 # the list of origins authorized to make HTTP requests
-CORS_ALLOWED_ORIGINS = get_env_variable(
-    "CORS_ALLOWED_ORIGINS", "http://localhost:3000 http://127.0.0.1:3000"
-).split(" ")
+CORS_ALLOWED_ORIGINS = get_env_variable("CORS_ALLOWED_ORIGINS", "http://localhost:3000 http://127.0.0.1:3000").split(
+    " "
+)
 
 DOMAIN_FRONTEND = get_env_variable("DOMAIN_FRONTEND", raise_error=False)
 
@@ -214,3 +223,6 @@ DJANGORESIZED_DEFAULT_SIZE = [400, 400]
 DJANGORESIZED_DEFAULT_QUALITY = 90
 DJANGORESIZED_DEFAULT_FORCE_FORMAT = "JPEG"
 DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {"JPEG": ".jpg"}
+
+EXPORT_EMAILS_ORDER_BY = ["name", "email"]
+EXPORT_EMAILS_FIELDS = ["name", "email"]

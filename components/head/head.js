@@ -74,7 +74,7 @@ buttonThemeToggle.addEventListener("click", toggleThme);
 /** -------------------------------------------  box shadow bottom ------------------------------------------- */
 // Access HTML elements
 hearder = document.querySelector(".header");
-console.log(hearder.innerHTML);
+// console.log(hearder.innerHTML);
 
 window.addEventListener("scroll", () => {
   if (window.scrollY > 15) hearder.classList.add("shadow");

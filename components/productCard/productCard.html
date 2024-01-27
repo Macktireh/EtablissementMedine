@@ -1,0 +1,32 @@
+{% load static %}
+
+
+<div class="product-card swiper-slide">
+  <div class="product-card-head">
+    <span class="discount">50% OFF</span>
+    <button class="add-to-favorite">
+      {% include 'svg/heart.html' %}
+    </button>
+  </div>
+  <a class="product-card-image" href="#">
+    <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}">
+  </a>
+  <div class="product-card-detail">
+    <a href="#"><h3>{{ product.name }}</h3></a>
+    <p>{{ product.description }}</p>
+    <div class="box">
+      <div class="stars">
+        {% for ch in '012' %}
+        {% include 'svg/star.html' %}
+        {% endfor %}
+        {% include 'svg/star-half.html' %}
+        {% include 'svg/star-empty.html' %}
+      </div>
+      <strong>${{ product.price }}</strong>
+    </div>
+  </div>
+  <!-- <div class="button">
+    <div class="button-layer"></div>
+    <button>Add To Cart</button>
+  </div> -->
+</div>

@@ -6,7 +6,7 @@ from config.settings.utils import BASE_DIR, get_env_variable
 
 logger = logging.getLogger(__name__)
 LOG_LEVEL = "INFO"
-FILE_LOGGER = True if get_env_variable("FILE_LOGGER", "False") == "True" else False
+FILE_LOGGER = get_env_variable("FILE_LOGGER", "False") == "True"
 LOG_FILE_PATH = os.path.join(BASE_DIR, "logs/logs.log")
 
 

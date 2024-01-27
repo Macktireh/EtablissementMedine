@@ -31,9 +31,7 @@ class TestAddressModel(TestCase):
 
     def tearDown(self) -> None:
         # Reconnect the signal after tests
-        post_save.connect(
-            sender=User, receiver=create_user_profile_signal, dispatch_uid="create_user_profile_signal"
-        )
+        post_save.connect(sender=User, receiver=create_user_profile_signal, dispatch_uid="create_user_profile_signal")
 
     def test_create_address(self) -> None:
         address, created = Address.objects.get_or_create(user=self.user, defaults=self.address_data)

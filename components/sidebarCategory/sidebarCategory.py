@@ -2,8 +2,6 @@ from typing import Any
 
 from django_components import component
 
-from apps.products.models import Category
-
 
 @component.register("sidebarCategory")
 class SidebarCategory(component.Component):

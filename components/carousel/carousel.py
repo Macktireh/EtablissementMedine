@@ -9,9 +9,9 @@ from apps.products.models import ProductAdvertising
 class Carousel(component.Component):
     template_name = "carousel/carousel.html"
 
+    class Media:
+        js = "carousel/carousel.js"
+
     def get_context_data(self) -> dict[str, Any]:
         categories = ProductAdvertising.objects.all()
         return {"categories": categories}
-
-    class Media:
-        js = "carousel/carousel.js"

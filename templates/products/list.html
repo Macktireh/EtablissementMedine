@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %} All Products {% endblock title %}
+
+
+{% block style %} {% endblock style %}
+
+
+{% block header %}
+  {% component 'head' %}
+{% endblock header %}
+
+
+{% block menu %}
+  {% component 'menu' %}
+{% endblock menu %}
+
+
+{% block content %}
+
+  <section class="">
+    {% for product in products %}
+      {% component 'productCard' product %}
+    {% endfor %}
+  </section>
+{% endblock content %}
+
+
+{% block footer %} {% endblock footer %}
+
+
+{% block js %}
+  <!-- <script src="{% static 'global/js/script.js' %}"></script> -->
+  {% component_js_dependencies %}
+{% endblock js %}

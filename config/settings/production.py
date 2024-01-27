@@ -25,7 +25,7 @@ CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         # "LOCATION": "redis://username:password@127.0.0.1:6379",
-        "LOCATION": f"redis://:{get_env_variable('REDIS_PASSWORD')}@{get_env_variable('REDIS_HOST')}:{get_env_variable('REDIS_PORT')}/0",
+        "LOCATION": f"redis://:{get_env_variable('REDIS_PASSWORD')}@{get_env_variable('REDIS_HOST')}:{get_env_variable('REDIS_PORT')}/0",  # noqa: E501
     }
 }
 

@@ -4,11 +4,11 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from apps.core.models import AbstractPublicIdMixin
+from apps.core.models import PublicIdModel
 from apps.users.managers import UserManager
 
 
-class User(AbstractPublicIdMixin, AbstractUser):
+class User(PublicIdModel, AbstractUser):
     username = None
     first_name = None
     last_name = None
@@ -26,7 +26,7 @@ class User(AbstractPublicIdMixin, AbstractUser):
 
     objects = UserManager()
 
-    class Meta(AbstractUser.Meta, AbstractPublicIdMixin.Meta):
+    class Meta(AbstractUser.Meta, PublicIdModel.Meta):
         db_table = "user"
 
     def save(self, *args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> None:

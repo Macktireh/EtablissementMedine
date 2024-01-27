@@ -1,19 +1,17 @@
-<section class="menu-section">
-  <ul>
-    <li>
-      <a href="{% url 'home:index' %}">Accueil</a>
-    </li>
-    <li>
-      <a href="{% url 'home:index' %}">Produits</a>
-    </li>
-    <li>
-      <a href="{% url 'home:index' %}">Nouveautés</a>
-    </li>
-    <li>
-      <a href="{% url 'home:index' %}">Mes Commandes</a>
-    </li>
-    <li>
-      <a href="{% url 'admin:index' %}">Contact</a>
-    </li>
-  </ul>
-</section>
+<ul class="menu-navigation">
+  <li>
+    <a href="{% url 'home:index' %}">Accueil</a>
+  </li>
+  <li>
+    <a href="{% url 'products:list' %}">Produits</a>
+  </li>
+  <li>
+    <a href="{% url 'home:index' %}">Nouveautés</a>
+  </li>
+  <li>
+    <a href="{% url 'home:index' %}">Mes Commandes</a>
+  </li>
+  <li>
+    <a href="{% url 'admin:index' %}">Contact</a>
+  </li>
+</ul>

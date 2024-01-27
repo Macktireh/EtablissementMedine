@@ -44,9 +44,7 @@ class TestUserModel(TestCase):
         self.assertEqual(User.objects.count(), count_of_users + 1)
 
         with self.assertRaises(ValueError):
-            User.objects.create_superuser(
-                email="superuser@example.com", password="password", is_superuser=False
-            )
+            User.objects.create_superuser(email="superuser@example.com", password="password", is_superuser=False)
 
     def test_user_str_representation(self) -> None:
         user = User.objects.create_user(**self.user_data)

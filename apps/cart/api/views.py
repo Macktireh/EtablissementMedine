@@ -51,9 +51,7 @@ class AddToCartView(APIView):
         """
         serializer = serializers.AddToCartSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        CartService.add_to_cart(
-            request=request, product_public_id=serializer.validated_data["productPublicId"]
-        )
+        CartService.add_to_cart(request=request, product_public_id=serializer.validated_data["productPublicId"])
 
         return Response(
             {

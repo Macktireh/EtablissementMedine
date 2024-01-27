@@ -5,7 +5,7 @@ from apps.cart.models import Cart, OrderItem
 from apps.products.models import Product
 
 
-class CartService(object):
+class CartService:
     @staticmethod
     def add_to_cart(request: HttpRequest, product_public_id: str) -> None:
         """

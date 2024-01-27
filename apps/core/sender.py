@@ -18,10 +18,10 @@ User = get_user_model()
 def sendAsyncEmail(eamil: EmailMessage) -> None:
     try:
         eamil.send()
-    except ConnectionRefusedError:
-        raise ValueError(failMsg["THE_EMAIL_SERVER_IS_NOT_WORKING"])
-    except TemplateDoesNotExist:
-        raise TemplateDoesNotExist(failMsg["THE_TEMPLATE_EMAIL_HAS_NOT_BEEN_FOUND"])
+    except ConnectionRefusedError as e:
+        raise ValueError(failMsg["THE_EMAIL_SERVER_IS_NOT_WORKING"]) from e
+    except TemplateDoesNotExist as e:
+        raise TemplateDoesNotExist(failMsg["THE_TEMPLATE_EMAIL_HAS_NOT_BEEN_FOUND"]) from e
 
 
 def send_email(
@@ -45,8 +45,8 @@ def send_email(
         if ext == "html":
             email.content_subtype = "html"
         Thread(target=sendAsyncEmail, args=(email,)).start()
-    except TemplateDoesNotExist:
-        raise TemplateDoesNotExist(failMsg["THE_TEMPLATE_EMAIL_HAS_NOT_BEEN_FOUND"])
+    except TemplateDoesNotExist as e:
+        raise TemplateDoesNotExist(failMsg["THE_TEMPLATE_EMAIL_HAS_NOT_BEEN_FOUND"]) from e
 
 
 class SmsService:
