@@ -8,7 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-django = "^4.2.9"
+django = "^4.2.26"
 django-cloudinary-storage = "^0.3.0"
 django-colorfield = "^0.9.0"
 django-components = "^0.28.1"
